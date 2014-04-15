@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		95E6FDD87F684E718961F6A7 /* libPods-LifePics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F33B5ACC9F04B3585BDF564 /* libPods-LifePics.a */; };
+		AF1696A318FC65B90020AE7D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1696A218FC65B90020AE7D /* HomeViewController.m */; };
+		AF1696A718FC6DAB0020AE7D /* Foto.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1696A618FC6DAB0020AE7D /* Foto.m */; };
+		AF1696AA18FC6F9A0020AE7D /* Moldura.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1696A918FC6F9A0020AE7D /* Moldura.m */; };
+		AF1696AE18FC96990020AE7D /* MolduraView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1696AD18FC96990020AE7D /* MolduraView.m */; };
 		AFBE9A3F18FB22AC0001C35E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFBE9A3E18FB22AC0001C35E /* Foundation.framework */; };
 		AFBE9A4118FB22AC0001C35E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFBE9A4018FB22AC0001C35E /* CoreGraphics.framework */; };
 		AFBE9A4318FB22AC0001C35E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFBE9A4218FB22AC0001C35E /* UIKit.framework */; };
@@ -15,13 +19,21 @@
 		AFBE9A4B18FB22AC0001C35E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBE9A4A18FB22AC0001C35E /* main.m */; };
 		AFBE9A4F18FB22AC0001C35E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBE9A4E18FB22AC0001C35E /* AppDelegate.m */; };
 		AFBE9A5218FB22AC0001C35E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFBE9A5018FB22AC0001C35E /* Main.storyboard */; };
-		AFBE9A5518FB22AC0001C35E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBE9A5418FB22AC0001C35E /* ViewController.m */; };
+		AFBE9A5518FB22AC0001C35E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBE9A5418FB22AC0001C35E /* LoginViewController.m */; };
 		AFBE9A5718FB22AC0001C35E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFBE9A5618FB22AC0001C35E /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4F33B5ACC9F04B3585BDF564 /* libPods-LifePics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LifePics.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91FED1E67E45434788613BD7 /* Pods-LifePics.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifePics.xcconfig"; path = "Pods/Pods-LifePics.xcconfig"; sourceTree = "<group>"; };
+		AF1696A118FC65B80020AE7D /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		AF1696A218FC65B90020AE7D /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		AF1696A518FC6DAB0020AE7D /* Foto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Foto.h; sourceTree = "<group>"; };
+		AF1696A618FC6DAB0020AE7D /* Foto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Foto.m; sourceTree = "<group>"; };
+		AF1696A818FC6F9A0020AE7D /* Moldura.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Moldura.h; sourceTree = "<group>"; };
+		AF1696A918FC6F9A0020AE7D /* Moldura.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Moldura.m; sourceTree = "<group>"; };
+		AF1696AC18FC96990020AE7D /* MolduraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MolduraView.h; sourceTree = "<group>"; };
+		AF1696AD18FC96990020AE7D /* MolduraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MolduraView.m; sourceTree = "<group>"; };
 		AFBE9A3B18FB22AC0001C35E /* LifePics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifePics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFBE9A3E18FB22AC0001C35E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AFBE9A4018FB22AC0001C35E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -32,8 +44,8 @@
 		AFBE9A4D18FB22AC0001C35E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AFBE9A4E18FB22AC0001C35E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AFBE9A5118FB22AC0001C35E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		AFBE9A5318FB22AC0001C35E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		AFBE9A5418FB22AC0001C35E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		AFBE9A5318FB22AC0001C35E /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		AFBE9A5418FB22AC0001C35E /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		AFBE9A5618FB22AC0001C35E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AFBE9A7318FB83FA0001C35E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,6 +65,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF1696A418FC6D8C0020AE7D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AF1696A518FC6DAB0020AE7D /* Foto.h */,
+				AF1696A618FC6DAB0020AE7D /* Foto.m */,
+				AF1696A818FC6F9A0020AE7D /* Moldura.h */,
+				AF1696A918FC6F9A0020AE7D /* Moldura.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		AF1696AB18FC960F0020AE7D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				AF1696AC18FC96990020AE7D /* MolduraView.h */,
+				AF1696AD18FC96990020AE7D /* MolduraView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		AFBE9A3218FB22AC0001C35E = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +117,8 @@
 		AFBE9A4418FB22AC0001C35E /* LifePics */ = {
 			isa = PBXGroup;
 			children = (
+				AF1696A418FC6D8C0020AE7D /* Model */,
+				AF1696AB18FC960F0020AE7D /* View */,
 				AFBE9A7418FB844E0001C35E /* Controller */,
 				AFBE9A4D18FB22AC0001C35E /* AppDelegate.h */,
 				AFBE9A4E18FB22AC0001C35E /* AppDelegate.m */,
@@ -109,8 +143,10 @@
 		AFBE9A7418FB844E0001C35E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				AFBE9A5318FB22AC0001C35E /* ViewController.h */,
-				AFBE9A5418FB22AC0001C35E /* ViewController.m */,
+				AFBE9A5318FB22AC0001C35E /* LoginViewController.h */,
+				AFBE9A5418FB22AC0001C35E /* LoginViewController.m */,
+				AF1696A118FC65B80020AE7D /* HomeViewController.h */,
+				AF1696A218FC65B90020AE7D /* HomeViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -221,9 +257,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFBE9A5518FB22AC0001C35E /* ViewController.m in Sources */,
+				AF1696AA18FC6F9A0020AE7D /* Moldura.m in Sources */,
+				AF1696A718FC6DAB0020AE7D /* Foto.m in Sources */,
+				AFBE9A5518FB22AC0001C35E /* LoginViewController.m in Sources */,
+				AF1696AE18FC96990020AE7D /* MolduraView.m in Sources */,
 				AFBE9A4F18FB22AC0001C35E /* AppDelegate.m in Sources */,
 				AFBE9A4B18FB22AC0001C35E /* main.m in Sources */,
+				AF1696A318FC65B90020AE7D /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,12 +8,15 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
-
+#import "Foto.h"
+#import "Moldura.h"
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [Foto registerSubclass];
+    [Moldura registerSubclass];
     [Parse setApplicationId:@"Qtku8mihBi4W1RUrlpHfTgpT4tLXcWjQMoCSQctH"
                   clientKey:@"hCakOFPtlsE5Nuo3xd5eW1rKCkyYnKu9c8386VBb"];
     
