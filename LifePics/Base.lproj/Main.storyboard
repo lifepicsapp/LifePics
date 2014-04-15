@@ -17,8 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="balao640x1136" translatesAutoresizingMaskIntoConstraints="NO" id="Jnh-aD-br2">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUr-hM-fLt">
-                                <rect key="frame" x="85" y="262" width="151" height="43"/>
+                                <rect key="frame" x="85" y="370" width="151" height="43"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Entrar" backgroundImage="login-button-small">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -28,9 +32,25 @@
                                     <action selector="loginButtonTouchHandler:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="D06-U2-QDG"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LifePics" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="mTy-Eg-UdW">
+                                <rect key="frame" x="20" y="450" width="280" height="98"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="80"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Jnh-aD-br2" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="FCa-Ru-xeC"/>
+                            <constraint firstAttribute="trailing" secondItem="Jnh-aD-br2" secondAttribute="trailing" id="bqA-Wa-QIp"/>
+                            <constraint firstItem="Jnh-aD-br2" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="bsc-g3-99A"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Jnh-aD-br2" secondAttribute="bottom" id="hd1-k5-MDj"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <segue destination="ybJ-Zl-kkY" kind="modal" identifier="sgHome" modalTransitionStyle="crossDissolve" id="46i-jl-V0Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
@@ -126,6 +146,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="balao640x1136" width="640" height="1136"/>
         <image name="login-button-small" width="151" height="43"/>
         <image name="login-button-small-pressed" width="151" height="43"/>
         <image name="polaroid-empty" width="210" height="252"/>

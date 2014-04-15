@@ -14,4 +14,6 @@
 @property (retain) NSString* titulo;
 @property (retain) NSString* legenda;
 
++ (NSString *)parseClassName;
+
 @end

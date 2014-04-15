@@ -10,7 +10,7 @@
 
 @implementation Moldura
 
-@dynamic legenda;
+@dynamic titulo, legenda;
 
 +(NSString *)parseClassName
 {

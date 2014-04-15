@@ -12,9 +12,10 @@
 
 @interface Foto : PFObject <PFSubclassing>
 
-+(NSString *)parseClassName;
-
+@property (retain) PFFile* arquivo;
 @property (retain) PFUser* usuario;
 @property (retain) Moldura* moldura;
+
++ (NSString *)parseClassName;
 
 @end

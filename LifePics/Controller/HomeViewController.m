@@ -8,7 +8,7 @@
 
 #import "HomeViewController.h"
 #import <Parse/Parse.h>
-#import "Moldura.h"
+#import "Foto.h"
 #import "MolduraView.h"
 #import "CropViewController.h"
 
@@ -27,6 +27,15 @@
         if (!error) {
             self.arrMolduras = objects;
             [self.collectionView reloadData];
+            
+            PFQuery* query = [Foto query];
+            [query whereKey:@"usuario" equalTo:[PFUser currentUser]];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (!error) {
+                    self.arrFotos = objects;
+                    [self.collectionView reloadData];
+                }
+            }];
         }
     }];
 }
@@ -49,6 +58,22 @@
     MolduraView* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CellMoldura" forIndexPath:indexPath];
     Moldura* moldura = [self.arrMolduras objectAtIndex:indexPath.item];
     
+    if (self.arrFotos)
+    {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"moldura.objectId == %@", moldura.objectId];
+        NSArray *filteredArray = [self.arrFotos filteredArrayUsingPredicate:predicate];
+        
+        if ([filteredArray count] > 0)
+        {
+            Foto* foto = [filteredArray objectAtIndex:0];
+            [foto.arquivo getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                if (!error) {
+                    cell.imgFoto.image = [UIImage imageWithData:data];
+                }
+            }];
+        }
+    }
+    
     cell.lblTitulo.text = moldura.titulo;
     
     return cell;
@@ -58,11 +83,18 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"Escolher foto" delegate:self cancelButtonTitle:@"Cancelar" destructiveButtonTitle:nil otherButtonTitles:@"Biblioteca", @"Câmera", nil];
-    [actionSheet showInView:self.view];
+    self.moldura = [self.arrMolduras objectAtIndex:indexPath.item];
+    
+    MolduraView* cell = (MolduraView*)[self.collectionView cellForItemAtIndexPath:indexPath];
+    
+    if (!cell.imgFoto.image)
+    {
+        UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"Escolher foto" delegate:self cancelButtonTitle:@"Cancelar" destructiveButtonTitle:nil otherButtonTitles:@"Biblioteca", @"Câmera", nil];
+        [actionSheet showInView:self.view];
+    }
 }
 
-#pragma mark - Metodos ActionSheet Delegat
+#pragma mark - Metodos ActionSheet Delegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex != 2)
@@ -102,11 +134,14 @@
         
         imageEditor.doneCallback = ^(UIImage *editedImage, BOOL canceled){
             
-            MolduraView* cell = (MolduraView*)[self.collectionView cellForItemAtIndexPath: [self.collectionView indexPathsForSelectedItems][0]];
-            cell.imgFoto.image = editedImage;
-            
-            if (self.newMedia)
-                UIImageWriteToSavedPhotosAlbum(editedImage, self, @selector(image:finishedSavingWithError:contextInfo:), nil);
+            if (!canceled)
+            {
+                NSData *imageData = UIImageJPEGRepresentation(editedImage, 0.05f);
+                [self uploadImage:imageData];
+                
+                if (self.newMedia)
+                    UIImageWriteToSavedPhotosAlbum(editedImage, self, @selector(image:finishedSavingWithError:contextInfo:), nil);
+            }
             
             [picker dismissViewControllerAnimated:YES completion:^{
                 [self dismissViewControllerAnimated:YES completion:nil];
@@ -117,6 +152,64 @@
         [picker pushViewController:imageEditor animated:YES];
         [picker setNavigationBarHidden:YES animated:NO];
     }
+}
+
+-(void)uploadImage:(NSData*)imageData
+{
+    PFFile *imageFile = [PFFile fileWithName:[self.moldura.titulo stringByAppendingString:@".jpg"] data:imageData];
+    
+    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:self.HUD];
+    
+    self.HUD.delegate = self;
+    self.HUD.mode = MBProgressHUDModeDeterminate;
+    self.HUD.labelText = @"Carregando";
+    
+    [self.HUD show:YES];
+
+    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            
+            [self.HUD hide:YES];
+            
+            self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
+            [self.view addSubview:self.HUD];
+            
+            self.HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
+            self.HUD.mode = MBProgressHUDModeCustomView;
+            
+            self.HUD.delegate = self;
+
+            Foto *foto = [Foto object];
+            foto.arquivo = imageFile;
+            
+            PFUser *user = [PFUser currentUser];
+            
+            foto.ACL = [PFACL ACLWithUser:user];
+            foto.usuario = user;
+            NSIndexPath* indexPath = [self.collectionView indexPathsForSelectedItems][0];
+            foto.moldura = [self.arrMolduras objectAtIndex:indexPath.item];
+            
+            [foto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!error)
+                {
+                    NSLog(@"Foto salva com sucesso!");
+                }
+                else
+                {
+                    NSLog(@"Error: %@ %@", error, [error userInfo]);
+                }
+            }];
+        }
+        else
+        {
+            [self.HUD hide:YES];
+            
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    } progressBlock:^(int percentDone) {
+        self.HUD.progress = (float)percentDone/100;
+    }];
 }
 
 -(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
@@ -130,6 +223,13 @@
                               otherButtonTitles:nil];
         [alert show];
     }
+}
+
+#pragma mark - Metodos HUD Delegate
+
+- (void)hudWasHidden:(MBProgressHUD *)hud {
+    [self.HUD removeFromSuperview];
+    self.HUD = nil;
 }
 
 @end

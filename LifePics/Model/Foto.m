@@ -10,7 +10,7 @@
 
 @implementation Foto
 
-@dynamic usuario, moldura;
+@dynamic arquivo, usuario, moldura;
 
 +(NSString *)parseClassName
 {
