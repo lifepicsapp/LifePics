@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "Moldura.h"
 #import "MolduraView.h"
+#import "CropViewController.h"
 
 @interface HomeViewController ()
 
@@ -46,7 +47,6 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     MolduraView* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CellMoldura" forIndexPath:indexPath];
-    
     Moldura* moldura = [self.arrMolduras objectAtIndex:indexPath.item];
     
     cell.lblTitulo.text = moldura.titulo;
@@ -58,82 +58,78 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([UIImagePickerController isSourceTypeAvailable:
-         UIImagePickerControllerSourceTypeCamera])
+    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"Escolher foto" delegate:self cancelButtonTitle:@"Cancelar" destructiveButtonTitle:nil otherButtonTitles:@"Biblioteca", @"Câmera", nil];
+    [actionSheet showInView:self.view];
+}
+
+#pragma mark - Metodos ActionSheet Delegat
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex != 2)
     {
-        UIImagePickerController *imagePicker =
-        [[UIImagePickerController alloc] init];
-        imagePicker.delegate = self;
-        imagePicker.sourceType =
-        UIImagePickerControllerSourceTypeCamera;
+        UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.mediaTypes = @[(NSString *) kUTTypeImage];
+        imagePicker.delegate = self;
         imagePicker.allowsEditing = NO;
-        [self presentViewController:imagePicker
-                           animated:YES completion:nil];
-        self.newMedia = YES;
+        
+        if (buttonIndex == 0)
+        {
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        }
+        else if (buttonIndex == 1)
+        {
+            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            self.newMedia = YES;
+        }
+        
+        [self presentViewController:imagePicker animated:YES completion:nil];
     }
 }
 
 #pragma mark UIImagePickerControllerDelegate
 
--(void)imagePickerController:(UIImagePickerController *)picker
-didFinishPickingMediaWithInfo:(NSDictionary *)info
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     NSString *mediaType = info[UIImagePickerControllerMediaType];
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
     
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
         UIImage *image = info[UIImagePickerControllerOriginalImage];
         
-        MolduraView* cell = (MolduraView*)[self.collectionView cellForItemAtIndexPath: [self.collectionView indexPathsForSelectedItems][0]];
-        cell.imgFoto.image = image;
-        if (self.newMedia)
-            UIImageWriteToSavedPhotosAlbum(image,
-                                           self,
-                                           @selector(image:finishedSavingWithError:contextInfo:),
-                                           nil);
-    }
-    else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
-    {
-        // Code here to support video if enabled
+        CropViewController *imageEditor = [[CropViewController alloc] initWithNibName:@"CropView" bundle:nil];
+        imageEditor.sourceImage = image;
+        imageEditor.checkBounds = YES;
+        imageEditor.rotateEnabled = YES;
+        
+        imageEditor.doneCallback = ^(UIImage *editedImage, BOOL canceled){
+            
+            MolduraView* cell = (MolduraView*)[self.collectionView cellForItemAtIndexPath: [self.collectionView indexPathsForSelectedItems][0]];
+            cell.imgFoto.image = editedImage;
+            
+            if (self.newMedia)
+                UIImageWriteToSavedPhotosAlbum(editedImage, self, @selector(image:finishedSavingWithError:contextInfo:), nil);
+            
+            [picker dismissViewControllerAnimated:YES completion:^{
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }];
+            [picker setNavigationBarHidden:NO animated:YES];
+        };
+        
+        [picker pushViewController:imageEditor animated:YES];
+        [picker setNavigationBarHidden:YES animated:NO];
     }
 }
 
--(void)image:(UIImage *)image
-finishedSavingWithError:(NSError *)error
- contextInfo:(void *)contextInfo
+-(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error) {
         UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle: @"Save failed"
-                              message: @"Failed to save image"
+                              initWithTitle: @"Erro"
+                              message: @"Falha ao salvar imagem no albúm"
                               delegate: nil
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil];
         [alert show];
     }
 }
-//
-//#pragma mark - DBCameraViewControllerDelegate
-//
-//- (void) captureImageDidFinish:(UIImage *)image withMetadata:(NSDictionary *)metadata
-//{
-//   
-//    MolduraView* cell = (MolduraView*)[self.collectionView cellForItemAtIndexPath: [self.collectionView indexPathsForSelectedItems][0]];
-//    cell.imgFoto.image = image;
-//    [self.presentedViewController dismissViewControllerAnimated:YES completion:nil];
-//}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

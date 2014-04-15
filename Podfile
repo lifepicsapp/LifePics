@@ -4,6 +4,7 @@
 target "LifePics" do
 
 pod 'Parse-iOS-SDK'
+pod 'ios-image-editor'
 
 end
 

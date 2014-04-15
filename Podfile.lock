@@ -1,13 +1,16 @@
 PODS:
   - Facebook-iOS-SDK (3.13.1)
+  - ios-image-editor (1.1.3)
   - Parse-iOS-SDK (1.2.18):
     - Facebook-iOS-SDK (~> 3.7)
 
 DEPENDENCIES:
+  - ios-image-editor
   - Parse-iOS-SDK
 
 SPEC CHECKSUMS:
   Facebook-iOS-SDK: 0d121e16437981fabff9379e07bf646bd5ab245c
+  ios-image-editor: 001717135e5a92b234a7465347cdcfb435418959
   Parse-iOS-SDK: 48bfd538a107b6e1f29eebe59fa80c0f0b844dd1
 
 COCOAPODS: 0.31.1

@@ -10,8 +10,7 @@
 
 @import MobileCoreServices;
 
-@interface HomeViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate,UIImagePickerControllerDelegate,
-UINavigationControllerDelegate>
+@interface HomeViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate>
 
 @property (strong, nonatomic) NSArray* arrMolduras;
 @property (assign) BOOL newMedia;

@@ -21,6 +21,8 @@
 		AFBE9A5218FB22AC0001C35E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFBE9A5018FB22AC0001C35E /* Main.storyboard */; };
 		AFBE9A5518FB22AC0001C35E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBE9A5418FB22AC0001C35E /* LoginViewController.m */; };
 		AFBE9A5718FB22AC0001C35E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFBE9A5618FB22AC0001C35E /* Images.xcassets */; };
+		AFDDF39418FD828900EFC010 /* CropView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDDF39318FD828900EFC010 /* CropView.xib */; };
+		AFDDF39718FD85C900EFC010 /* CropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDDF39618FD85C900EFC010 /* CropViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,9 @@
 		AFBE9A5418FB22AC0001C35E /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		AFBE9A5618FB22AC0001C35E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AFBE9A7318FB83FA0001C35E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AFDDF39318FD828900EFC010 /* CropView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CropView.xib; sourceTree = "<group>"; };
+		AFDDF39518FD85C900EFC010 /* CropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropViewController.h; sourceTree = "<group>"; };
+		AFDDF39618FD85C900EFC010 /* CropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +84,7 @@
 		AF1696AB18FC960F0020AE7D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				AFDDF39318FD828900EFC010 /* CropView.xib */,
 				AF1696AC18FC96990020AE7D /* MolduraView.h */,
 				AF1696AD18FC96990020AE7D /* MolduraView.m */,
 			);
@@ -143,6 +149,8 @@
 		AFBE9A7418FB844E0001C35E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AFDDF39518FD85C900EFC010 /* CropViewController.h */,
+				AFDDF39618FD85C900EFC010 /* CropViewController.m */,
 				AFBE9A5318FB22AC0001C35E /* LoginViewController.h */,
 				AFBE9A5418FB22AC0001C35E /* LoginViewController.m */,
 				AF1696A118FC65B80020AE7D /* HomeViewController.h */,
@@ -214,6 +222,7 @@
 				AFBE9A5718FB22AC0001C35E /* Images.xcassets in Resources */,
 				AFBE9A4918FB22AC0001C35E /* InfoPlist.strings in Resources */,
 				AFBE9A5218FB22AC0001C35E /* Main.storyboard in Resources */,
+				AFDDF39418FD828900EFC010 /* CropView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +269,7 @@
 				AF1696AA18FC6F9A0020AE7D /* Moldura.m in Sources */,
 				AF1696A718FC6DAB0020AE7D /* Foto.m in Sources */,
 				AFBE9A5518FB22AC0001C35E /* LoginViewController.m in Sources */,
+				AFDDF39718FD85C900EFC010 /* CropViewController.m in Sources */,
 				AF1696AE18FC96990020AE7D /* MolduraView.m in Sources */,
 				AFBE9A4F18FB22AC0001C35E /* AppDelegate.m in Sources */,
 				AFBE9A4B18FB22AC0001C35E /* main.m in Sources */,
