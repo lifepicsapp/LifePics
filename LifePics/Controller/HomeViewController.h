@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomeViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate>
+@import MobileCoreServices;
+
+@interface HomeViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate,UIImagePickerControllerDelegate,
+UINavigationControllerDelegate>
 
 @property (strong, nonatomic) NSArray* arrMolduras;
+@property (assign) BOOL newMedia;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 

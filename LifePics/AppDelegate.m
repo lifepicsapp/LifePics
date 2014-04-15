@@ -24,6 +24,11 @@
     
     [PFFacebookUtils initializeFacebook];
     
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"Home"];
+    }
+    
     return YES;
 }
 							

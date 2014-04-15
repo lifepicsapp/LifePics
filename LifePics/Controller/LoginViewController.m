@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
+#import "HomeViewController.h"
 
 @interface LoginViewController ()
 
@@ -19,10 +20,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
-    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
-        [self performSegueWithIdentifier:@"sgHome" sender:nil];
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -33,7 +30,7 @@
 
 - (IBAction)loginButtonTouchHandler:(id)sender  {
     // The permissions requested from the user
-    NSArray *permissionsArray = @[ @"user_about_me", @"user_birthday"];
+    NSArray *permissionsArray = @[@"user_about_me", @"user_birthday"];
     
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
 //        [_activityIndicator stopAnimating]; // Hide loading indicator
