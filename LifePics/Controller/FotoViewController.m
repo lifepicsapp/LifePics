@@ -186,9 +186,8 @@
     [self.HUD show:YES];
     
     [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        [self.HUD hide:YES];
         if (!error) {
-            
-            [self.HUD hide:YES];
             
             self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
             [self.view addSubview:self.HUD];
@@ -197,6 +196,7 @@
             self.HUD.mode = MBProgressHUDModeCustomView;
             
             self.HUD.delegate = self;
+            [self.HUD show:YES];
             
             Foto *foto = [Foto object];
             foto.arquivo = imageFile;
@@ -208,10 +208,18 @@
             foto.moldura = self.moldura;
             
             [foto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                [self.HUD hide:YES];
                 if (!error)
                 {
-                    [self.HUD show:YES];
-                    NSLog(@"Foto salva com sucesso!");
+                    [((HomeViewController*)self.navigationController.viewControllers[0]) carrega];
+                    [self.navigationController popViewControllerAnimated:YES];
+                    UIAlertView *alert = [[UIAlertView alloc]
+                                          initWithTitle: @"Sucesso"
+                                          message: @"Foto postada com sucesso!"
+                                          delegate: nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+                    [alert show];
                 }
                 else
                 {
@@ -221,7 +229,6 @@
         }
         else
         {
-            [self.HUD hide:YES];
             
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }

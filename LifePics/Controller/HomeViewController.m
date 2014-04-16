@@ -56,8 +56,8 @@
     
     [[Moldura query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(atualiza:)];
-        if (!error) {
-            
+        if (!error)
+        {
             [AppUtil adicionaLoad:self];
             self.arrMolduras = objects;
             [self.collectionView reloadData];
@@ -107,14 +107,14 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString* CellIdentifier;
+    NSString* cellIdentifier;
     
     if (self.fotosGrandes)
-        CellIdentifier = @"CellMolduraGrande";
+        cellIdentifier = @"CellMolduraGrande";
     else
-        CellIdentifier = @"CellMoldura";
+        cellIdentifier = @"CellMoldura";
     
-    MolduraView* cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    MolduraView* cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     Moldura* moldura = [self.arrMolduras objectAtIndex:indexPath.item];
     
     cell.imgFoto.image = nil;
@@ -146,13 +146,10 @@
         }
     }
     
-    NSString* titulo;
     if (self.fotosGrandes)
-        titulo = moldura.legenda;
+        cell.lblTitulo.text = moldura.legenda;
     else
-        titulo = moldura.titulo;
-    
-    cell.lblTitulo.text = titulo;
+        cell.lblTitulo.text = moldura.titulo;
     
     return cell;
 }
@@ -167,13 +164,9 @@
     NSArray *filteredArray = [self.arrFotos filteredArrayUsingPredicate:predicate];
     
     if ([filteredArray count] > 0)
-    {
         self.foto = [filteredArray objectAtIndex:0];
-    }
     else
-    {
         self.foto = nil;
-    }
 
     [self performSegueWithIdentifier:@"sgFoto" sender:nil];
 }
