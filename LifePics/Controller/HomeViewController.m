@@ -8,9 +8,9 @@
 
 #import "HomeViewController.h"
 #import <Parse/Parse.h>
-#import "Foto.h"
 #import "MolduraView.h"
-#import "CropViewController.h"
+#import "FotoViewController.h"
+#import "AppUtil.h"
 
 @interface HomeViewController ()
 
@@ -23,15 +23,51 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.cacheFotos = [[NSCache alloc] init];
+    [AppUtil removeTextoBotaoVoltar:self];
+    
+    UINib *nib = [UINib nibWithNibName:@"MolduraViewGrande" bundle: nil];
+    [self.collectionView registerNib:nib forCellWithReuseIdentifier:@"CellMolduraGrande"];
+    
+    [self carrega];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"sgFoto"]) {
+        FotoViewController* controller = (FotoViewController*)segue.destinationViewController;
+        controller.imagem = [self.cacheFotos objectForKey:self.foto.objectId];
+        controller.foto = self.foto;
+        controller.moldura = self.moldura;
+    }
+}
+
+#pragma mark - Metodos de Classe
+
+- (void)carrega
+{
+    [AppUtil adicionaLoad:self];
+    
     [[Moldura query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(atualiza:)];
         if (!error) {
+            
+            [AppUtil adicionaLoad:self];
             self.arrMolduras = objects;
             [self.collectionView reloadData];
             
             PFQuery* query = [Foto query];
             [query whereKey:@"usuario" equalTo:[PFUser currentUser]];
             [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (!error) {
+                self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(atualiza:)];
+                if (!error)
+                {
                     self.arrFotos = objects;
                     [self.collectionView reloadData];
                 }
@@ -39,11 +75,27 @@
         }
     }];
 }
+#pragma mark - Metodos IBAction
 
-- (void)didReceiveMemoryWarning
+- (IBAction)mudaTamanho:(UIBarButtonItem *)sender {
+    self.fotosGrandes = !self.fotosGrandes;
+    [self.collectionView reloadData];
+}
+
+- (IBAction)atualiza:(UIBarButtonItem *)sender
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [self carrega];
+}
+
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGSize size;
+    if (self.fotosGrandes)
+        size = CGSizeMake(320, 384);
+    else
+        size = CGSizeMake(105, 126);
+    
+    return size;
 }
 
 #pragma mark - Metodos CollectionView Datasource
@@ -55,8 +107,17 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    MolduraView* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CellMoldura" forIndexPath:indexPath];
+    NSString* CellIdentifier;
+    
+    if (self.fotosGrandes)
+        CellIdentifier = @"CellMolduraGrande";
+    else
+        CellIdentifier = @"CellMoldura";
+    
+    MolduraView* cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     Moldura* moldura = [self.arrMolduras objectAtIndex:indexPath.item];
+    
+    cell.imgFoto.image = nil;
     
     if (self.arrFotos)
     {
@@ -66,15 +127,32 @@
         if ([filteredArray count] > 0)
         {
             Foto* foto = [filteredArray objectAtIndex:0];
-            [foto.arquivo getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                if (!error) {
-                    cell.imgFoto.image = [UIImage imageWithData:data];
-                }
-            }];
+            [foto fetchIfNeeded];
+            
+            UIImage* cacheImage = [self.cacheFotos objectForKey:foto.objectId];
+            if (cacheImage) {
+                cell.imgFoto.image = cacheImage;
+            }
+            else
+            {
+                [foto.arquivo getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                    if (!error) {
+                        UIImage* image = [UIImage imageWithData:data];
+                        [self.cacheFotos setObject:image forKey:foto.objectId];
+                        cell.imgFoto.image = image;
+                    }
+                }];
+            }
         }
     }
     
-    cell.lblTitulo.text = moldura.titulo;
+    NSString* titulo;
+    if (self.fotosGrandes)
+        titulo = moldura.legenda;
+    else
+        titulo = moldura.titulo;
+    
+    cell.lblTitulo.text = titulo;
     
     return cell;
 }
@@ -85,151 +163,19 @@
 {
     self.moldura = [self.arrMolduras objectAtIndex:indexPath.item];
     
-    MolduraView* cell = (MolduraView*)[self.collectionView cellForItemAtIndexPath:indexPath];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"moldura.objectId == %@", self.moldura.objectId];
+    NSArray *filteredArray = [self.arrFotos filteredArrayUsingPredicate:predicate];
     
-    if (!cell.imgFoto.image)
+    if ([filteredArray count] > 0)
     {
-        UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"Escolher foto" delegate:self cancelButtonTitle:@"Cancelar" destructiveButtonTitle:nil otherButtonTitles:@"Biblioteca", @"Câmera", nil];
-        [actionSheet showInView:self.view];
+        self.foto = [filteredArray objectAtIndex:0];
     }
-}
-
-#pragma mark - Metodos ActionSheet Delegate
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex != 2)
+    else
     {
-        UIImagePickerController* imagePicker = [[UIImagePickerController alloc] init];
-        imagePicker.mediaTypes = @[(NSString *) kUTTypeImage];
-        imagePicker.delegate = self;
-        imagePicker.allowsEditing = NO;
-        
-        if (buttonIndex == 0)
-        {
-            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        }
-        else if (buttonIndex == 1)
-        {
-            imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-            self.newMedia = YES;
-        }
-        
-        [self presentViewController:imagePicker animated:YES completion:nil];
+        self.foto = nil;
     }
-}
 
-#pragma mark UIImagePickerControllerDelegate
-
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    NSString *mediaType = info[UIImagePickerControllerMediaType];
-    
-    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-        UIImage *image = info[UIImagePickerControllerOriginalImage];
-        
-        CropViewController *imageEditor = [[CropViewController alloc] initWithNibName:@"CropView" bundle:nil];
-        imageEditor.sourceImage = image;
-        imageEditor.checkBounds = YES;
-        imageEditor.rotateEnabled = YES;
-        
-        imageEditor.doneCallback = ^(UIImage *editedImage, BOOL canceled){
-            
-            if (!canceled)
-            {
-                NSData *imageData = UIImageJPEGRepresentation(editedImage, 0.05f);
-                [self uploadImage:imageData];
-                
-                if (self.newMedia)
-                    UIImageWriteToSavedPhotosAlbum(editedImage, self, @selector(image:finishedSavingWithError:contextInfo:), nil);
-            }
-            
-            [picker dismissViewControllerAnimated:YES completion:^{
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }];
-            [picker setNavigationBarHidden:NO animated:YES];
-        };
-        
-        [picker pushViewController:imageEditor animated:YES];
-        [picker setNavigationBarHidden:YES animated:NO];
-    }
-}
-
--(void)uploadImage:(NSData*)imageData
-{
-    PFFile *imageFile = [PFFile fileWithName:[self.moldura.titulo stringByAppendingString:@".jpg"] data:imageData];
-    
-    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:self.HUD];
-    
-    self.HUD.delegate = self;
-    self.HUD.mode = MBProgressHUDModeDeterminate;
-    self.HUD.labelText = @"Carregando";
-    
-    [self.HUD show:YES];
-
-    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error) {
-            
-            [self.HUD hide:YES];
-            
-            self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
-            [self.view addSubview:self.HUD];
-            
-            self.HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-            self.HUD.mode = MBProgressHUDModeCustomView;
-            
-            self.HUD.delegate = self;
-
-            Foto *foto = [Foto object];
-            foto.arquivo = imageFile;
-            
-            PFUser *user = [PFUser currentUser];
-            
-            foto.ACL = [PFACL ACLWithUser:user];
-            foto.usuario = user;
-            NSIndexPath* indexPath = [self.collectionView indexPathsForSelectedItems][0];
-            foto.moldura = [self.arrMolduras objectAtIndex:indexPath.item];
-            
-            [foto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (!error)
-                {
-                    NSLog(@"Foto salva com sucesso!");
-                }
-                else
-                {
-                    NSLog(@"Error: %@ %@", error, [error userInfo]);
-                }
-            }];
-        }
-        else
-        {
-            [self.HUD hide:YES];
-            
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    } progressBlock:^(int percentDone) {
-        self.HUD.progress = (float)percentDone/100;
-    }];
-}
-
--(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-    if (error) {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle: @"Erro"
-                              message: @"Falha ao salvar imagem no albúm"
-                              delegate: nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
-        [alert show];
-    }
-}
-
-#pragma mark - Metodos HUD Delegate
-
-- (void)hudWasHidden:(MBProgressHUD *)hud {
-    [self.HUD removeFromSuperview];
-    self.HUD = nil;
+    [self performSegueWithIdentifier:@"sgFoto" sender:nil];
 }
 
 @end

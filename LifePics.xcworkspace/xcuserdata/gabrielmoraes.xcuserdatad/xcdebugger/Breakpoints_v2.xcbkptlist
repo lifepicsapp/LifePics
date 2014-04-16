@@ -106,12 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "LifePics/Controller/HomeViewController.m"
-            timestampString = "419282412.616129"
+            timestampString = "419305432.182893"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "-collectionView:cellForItemAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -121,13 +121,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LifePics/Controller/HomeViewController.m"
-            timestampString = "419282431.448469"
+            filePath = "LifePics/Controller/FotoViewController.m"
+            timestampString = "419306053.870815"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "-compartilha:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

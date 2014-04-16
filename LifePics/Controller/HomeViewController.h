@@ -7,19 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MBProgressHUD.h"
 #import "Moldura.h"
+#import "Foto.h"
 
-@import MobileCoreServices;
-
-@interface HomeViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, MBProgressHUDDelegate>
+@interface HomeViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate,
+    UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) NSArray* arrMolduras;
 @property (strong, nonatomic) NSArray* arrFotos;
-@property (assign) BOOL newMedia;
-@property (strong, nonatomic) MBProgressHUD *HUD;
+@property (strong, nonatomic) NSCache* cacheFotos;
 @property (strong, nonatomic) Moldura *moldura;
+@property (strong, nonatomic) Foto *foto;
+@property (assign) BOOL fotosGrandes;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+
+- (void)carrega;
 
 @end

@@ -3,11 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "polaroid-empty.png"
+      "filename" : "polaroid.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x"
+      "scale" : "2x",
+      "filename" : "polaroid@2x.png"
     }
   ],
   "info" : {

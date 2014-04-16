@@ -28,13 +28,12 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Metodos IBAction
+
 - (IBAction)loginButtonTouchHandler:(id)sender  {
-    // The permissions requested from the user
-    NSArray *permissionsArray = @[@"user_about_me", @"user_birthday"];
+    NSArray *permissionsArray = @[@"user_about_me", @"user_birthday", @"publish_actions"];
     
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-//        [_activityIndicator stopAnimating]; // Hide loading indicator
-        
         if (!user) {
             if (!error) {
                 NSLog(@"Uh oh. The user cancelled the Facebook login.");
