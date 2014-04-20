@@ -19,6 +19,7 @@
     [Moldura registerSubclass];
     [Parse setApplicationId:@"Qtku8mihBi4W1RUrlpHfTgpT4tLXcWjQMoCSQctH"
                   clientKey:@"hCakOFPtlsE5Nuo3xd5eW1rKCkyYnKu9c8386VBb"];
+    [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound];
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
@@ -61,13 +62,35 @@
     [[PFFacebookUtils session] close];
 }
 
-#pragma mark - Facebook
+#pragma mark - Metodos Facebook SDK
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     return [FBAppCall handleOpenURL:url
                   sourceApplication:sourceApplication
                         withSession:[PFFacebookUtils session]];
+}
+
+#pragma mark - Metodos Parse Framework
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
+    // Store the deviceToken in the current installation and save it to Parse.
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    NSLog(@"%@", currentInstallation.deviceToken);
+    if (!currentInstallation.deviceToken)
+    {
+        [currentInstallation setDeviceTokenFromData:newDeviceToken];
+        [currentInstallation saveInBackground];
+    }
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+	NSLog(@"Failed to get token, error: %@", error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
 }
 
 @end

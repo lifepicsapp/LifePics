@@ -96,16 +96,15 @@
             self.countOperacao++;
             if (i==0)
                 [self compartilhaFacebook];
-            //                            else if (i==1)
-            //
-            //                            else
-            //
+            else if (i==1)
+                NSLog(@"");
+            else
+                NSLog(@"");
         }
     }
-    
-    if (self.onlyShare)
+    if (!self.countOperacao)
     {
-        if (!self.countOperacao)
+        if (self.onlyShare)
         {
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle: @"Erro"
@@ -118,11 +117,11 @@
             self.btnFinaliza.enabled = YES;
             self.navigationItem.rightBarButtonItem = nil;
         }
-    }
-    else
-    {
-        [((HomeViewController*)self.navigationController.viewControllers[0]) carrega];
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        else
+        {
+            [((HomeViewController*)self.navigationController.viewControllers[0]) carrega];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
     }
 }
 
@@ -170,17 +169,22 @@
             self.HUD.delegate = self;
             [self.HUD show:YES];
             
-            Foto *foto = [Foto object];
-            foto.arquivo = imageFile;
+            if (!self.foto)
+            {
+                self.foto = [Foto object];
+                self.foto.arquivo = imageFile;
+                
+                PFUser *user = [PFUser currentUser];
+                
+                self.foto.ACL = [PFACL ACLWithUser:user];
+                self.foto.usuario = user;
+                self.foto.moldura = self.moldura;
+            }
+            else
+                [((HomeViewController*)self.navigationController.viewControllers[0]).cacheFotos removeObjectForKey:self.foto.objectId];
             
-            PFUser *user = [PFUser currentUser];
-            
-            foto.ACL = [PFACL ACLWithUser:user];
-            foto.usuario = user;
-            foto.moldura = self.moldura;
-            
-            [foto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                self.btnFinaliza.enabled = YES;
+            self.foto.arquivo = imageFile;
+            [self.foto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 [self.HUD hide:YES];
                 if (!error)
                 {
@@ -188,6 +192,7 @@
                 }
                 else
                 {
+                    self.btnFinaliza.enabled = YES;
                     NSLog(@"Error: %@ %@", error, [error userInfo]);
                 }
             }];

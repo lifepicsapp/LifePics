@@ -285,7 +285,7 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DxY-IR-cPU">
-                                <rect key="frame" x="115" y="84" width="90" height="90"/>
+                                <rect key="frame" x="114" y="84" width="90" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="5Z2-o3-HPM"/>
@@ -343,6 +343,9 @@
                                                         <constraint firstAttribute="height" constant="31" id="9hl-P9-iv1"/>
                                                     </constraints>
                                                     <color key="onTintColor" red="0.050980392156862744" green="0.56862745098039214" blue="0.52156862745098043" alpha="0.80000000000000004" colorSpace="deviceRGB"/>
+                                                    <connections>
+                                                        <action selector="switchChange:" destination="sTX-oU-0Z8" eventType="valueChanged" id="BbW-c1-UvX"/>
+                                                    </connections>
                                                 </switch>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -373,7 +376,7 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="eQM-9H-VC5" firstAttribute="top" secondItem="iWx-dy-LeL" secondAttribute="bottom" constant="14" id="0fB-Fj-fDL"/>
-                            <constraint firstAttribute="centerX" secondItem="DxY-IR-cPU" secondAttribute="centerX" id="3vY-dI-Ff9"/>
+                            <constraint firstAttribute="centerX" secondItem="DxY-IR-cPU" secondAttribute="centerX" constant="1" id="3vY-dI-Ff9"/>
                             <constraint firstItem="vvz-Xo-v8Y" firstAttribute="top" secondItem="eQM-9H-VC5" secondAttribute="bottom" constant="8" id="4yP-BE-Ctn"/>
                             <constraint firstItem="vvz-Xo-v8Y" firstAttribute="leading" secondItem="s2r-1S-Ty2" secondAttribute="leading" constant="20" id="B2p-4E-ChA"/>
                             <constraint firstAttribute="trailing" secondItem="3IM-zw-YU4" secondAttribute="trailing" constant="20" id="MeI-kW-BSs"/>
