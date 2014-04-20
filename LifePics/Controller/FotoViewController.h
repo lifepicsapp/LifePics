@@ -7,19 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MBProgressHUD.h"
 #import "Foto.h"
 #import "Moldura.h"
 
 @import MobileCoreServices;
 
-@interface FotoViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, MBProgressHUDDelegate>
+@interface FotoViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) Foto *foto;
 @property (strong, nonatomic) Moldura *moldura;
 @property (strong, nonatomic) UIImage *imagem;
-@property (strong, nonatomic) MBProgressHUD *HUD;
 @property (assign) BOOL newMedia;
+@property (assign) BOOL onlyShare;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgFoto;
 @property (weak, nonatomic) IBOutlet UILabel *lblLegenda;

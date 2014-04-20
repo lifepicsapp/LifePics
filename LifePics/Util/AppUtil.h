@@ -15,3 +15,5 @@
 +(void)adicionaLoad:(UIViewController*)context;
 
 @end
+
+#define URL_SHARE @"%@ http://goo.gl/GgII7K"

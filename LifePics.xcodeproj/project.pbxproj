@@ -12,6 +12,10 @@
 		AF1696A718FC6DAB0020AE7D /* Foto.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1696A618FC6DAB0020AE7D /* Foto.m */; };
 		AF1696AA18FC6F9A0020AE7D /* Moldura.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1696A918FC6F9A0020AE7D /* Moldura.m */; };
 		AF1696AE18FC96990020AE7D /* MolduraView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1696AD18FC96990020AE7D /* MolduraView.m */; };
+		AFB4E81119031D7100AB8D1E /* CompartilhaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB4E81019031D7100AB8D1E /* CompartilhaViewController.m */; };
+		AFB4E8141903297E00AB8D1E /* SocialView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB4E8131903297E00AB8D1E /* SocialView.m */; };
+		AFB4E81719033CDF00AB8D1E /* Social.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB4E81619033CDF00AB8D1E /* Social.m */; };
+		AFB4E81A19036EF600AB8D1E /* UIViewController+QuedaConexao.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB4E81919036EF600AB8D1E /* UIViewController+QuedaConexao.m */; };
 		AFBE9A3F18FB22AC0001C35E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFBE9A3E18FB22AC0001C35E /* Foundation.framework */; };
 		AFBE9A4118FB22AC0001C35E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFBE9A4018FB22AC0001C35E /* CoreGraphics.framework */; };
 		AFBE9A4318FB22AC0001C35E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFBE9A4218FB22AC0001C35E /* UIKit.framework */; };
@@ -40,6 +44,14 @@
 		AF1696A918FC6F9A0020AE7D /* Moldura.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Moldura.m; sourceTree = "<group>"; };
 		AF1696AC18FC96990020AE7D /* MolduraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MolduraView.h; sourceTree = "<group>"; };
 		AF1696AD18FC96990020AE7D /* MolduraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MolduraView.m; sourceTree = "<group>"; };
+		AFB4E80F19031D7100AB8D1E /* CompartilhaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompartilhaViewController.h; sourceTree = "<group>"; };
+		AFB4E81019031D7100AB8D1E /* CompartilhaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompartilhaViewController.m; sourceTree = "<group>"; };
+		AFB4E8121903297E00AB8D1E /* SocialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialView.h; sourceTree = "<group>"; };
+		AFB4E8131903297E00AB8D1E /* SocialView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialView.m; sourceTree = "<group>"; };
+		AFB4E81519033CDF00AB8D1E /* Social.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Social.h; sourceTree = "<group>"; };
+		AFB4E81619033CDF00AB8D1E /* Social.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Social.m; sourceTree = "<group>"; };
+		AFB4E81819036EF600AB8D1E /* UIViewController+QuedaConexao.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+QuedaConexao.h"; sourceTree = "<group>"; };
+		AFB4E81919036EF600AB8D1E /* UIViewController+QuedaConexao.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+QuedaConexao.m"; sourceTree = "<group>"; };
 		AFBE9A3B18FB22AC0001C35E /* LifePics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifePics.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFBE9A3E18FB22AC0001C35E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AFBE9A4018FB22AC0001C35E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -88,6 +100,8 @@
 				AF1696A618FC6DAB0020AE7D /* Foto.m */,
 				AF1696A818FC6F9A0020AE7D /* Moldura.h */,
 				AF1696A918FC6F9A0020AE7D /* Moldura.m */,
+				AFB4E81519033CDF00AB8D1E /* Social.h */,
+				AFB4E81619033CDF00AB8D1E /* Social.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -95,10 +109,12 @@
 		AF1696AB18FC960F0020AE7D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AFDDF39318FD828900EFC010 /* CropView.xib */,
+				AFB4E8121903297E00AB8D1E /* SocialView.h */,
+				AFB4E8131903297E00AB8D1E /* SocialView.m */,
 				AF1696AC18FC96990020AE7D /* MolduraView.h */,
 				AF1696AD18FC96990020AE7D /* MolduraView.m */,
 				AFDDF39C18FDE08000EFC010 /* MolduraViewGrande.xib */,
+				AFDDF39318FD828900EFC010 /* CropView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -135,13 +151,13 @@
 		AFBE9A4418FB22AC0001C35E /* LifePics */ = {
 			isa = PBXGroup;
 			children = (
+				AFBE9A4D18FB22AC0001C35E /* AppDelegate.h */,
+				AFBE9A4E18FB22AC0001C35E /* AppDelegate.m */,
+				AFBE9A5018FB22AC0001C35E /* Main.storyboard */,
 				AFDDF39818FDC62800EFC010 /* Util */,
 				AF1696A418FC6D8C0020AE7D /* Model */,
 				AF1696AB18FC960F0020AE7D /* View */,
 				AFBE9A7418FB844E0001C35E /* Controller */,
-				AFBE9A4D18FB22AC0001C35E /* AppDelegate.h */,
-				AFBE9A4E18FB22AC0001C35E /* AppDelegate.m */,
-				AFBE9A5018FB22AC0001C35E /* Main.storyboard */,
 				AFBE9A5618FB22AC0001C35E /* Images.xcassets */,
 				AFBE9A4518FB22AC0001C35E /* Supporting Files */,
 			);
@@ -172,6 +188,8 @@
 				AF1696A218FC65B90020AE7D /* HomeViewController.m */,
 				AFDDF39E18FDE9A500EFC010 /* FotoViewController.h */,
 				AFDDF39F18FDE9A500EFC010 /* FotoViewController.m */,
+				AFB4E80F19031D7100AB8D1E /* CompartilhaViewController.h */,
+				AFB4E81019031D7100AB8D1E /* CompartilhaViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -181,6 +199,8 @@
 			children = (
 				AFDDF39918FDC63D00EFC010 /* AppUtil.h */,
 				AFDDF39A18FDC63D00EFC010 /* AppUtil.m */,
+				AFB4E81819036EF600AB8D1E /* UIViewController+QuedaConexao.h */,
+				AFB4E81919036EF600AB8D1E /* UIViewController+QuedaConexao.m */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -298,11 +318,15 @@
 				AF1696A718FC6DAB0020AE7D /* Foto.m in Sources */,
 				AFBE9A5518FB22AC0001C35E /* LoginViewController.m in Sources */,
 				AFDDF39718FD85C900EFC010 /* CropViewController.m in Sources */,
+				AFB4E81119031D7100AB8D1E /* CompartilhaViewController.m in Sources */,
+				AFB4E81A19036EF600AB8D1E /* UIViewController+QuedaConexao.m in Sources */,
 				AFDDF3A318FDFDEE00EFC010 /* CustomNavigationController.m in Sources */,
 				AF1696AE18FC96990020AE7D /* MolduraView.m in Sources */,
+				AFB4E81719033CDF00AB8D1E /* Social.m in Sources */,
 				AFBE9A4F18FB22AC0001C35E /* AppDelegate.m in Sources */,
 				AFBE9A4B18FB22AC0001C35E /* main.m in Sources */,
 				AFDDF3A018FDE9A500EFC010 /* FotoViewController.m in Sources */,
+				AFB4E8141903297E00AB8D1E /* SocialView.m in Sources */,
 				AF1696A318FC65B90020AE7D /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,7 +385,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -393,7 +417,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -409,7 +433,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LifePics/LifePics-Prefix.pch";
 				INFOPLIST_FILE = "LifePics/LifePics-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -425,7 +449,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "LifePics/LifePics-Prefix.pch";
 				INFOPLIST_FILE = "LifePics/LifePics-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

@@ -87,6 +87,8 @@
     [self carrega];
 }
 
+#pragma mark - Metodos CollectionView FlowLayout
+
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CGSize size;
