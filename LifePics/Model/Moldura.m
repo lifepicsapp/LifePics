@@ -7,6 +7,7 @@
 //
 
 #import "Moldura.h"
+#import <Parse/PFObject+Subclass.h>
 
 @implementation Moldura
 

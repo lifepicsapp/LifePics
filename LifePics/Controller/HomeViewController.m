@@ -87,6 +87,11 @@
     [self carrega];
 }
 
+- (IBAction)desloga:(UIBarButtonItem *)sender {
+    [PFUser logOut];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - Metodos CollectionView FlowLayout
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath

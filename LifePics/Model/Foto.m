@@ -7,6 +7,7 @@
 //
 
 #import "Foto.h"
+#import <Parse/PFObject+Subclass.h>
 
 @implementation Foto
 

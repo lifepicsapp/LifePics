@@ -57,6 +57,7 @@
         controller.imagem = self.imagem;
         controller.foto = self.foto;
         controller.onlyShare = self.onlyShare;
+        self.onlyShare = NO;
     }
 }
 
@@ -174,6 +175,12 @@
         [picker pushViewController:imageEditor animated:YES];
         [picker setNavigationBarHidden:YES animated:NO];
     }
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    self.newMedia = NO;
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo

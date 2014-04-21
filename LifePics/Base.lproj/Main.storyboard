@@ -167,6 +167,11 @@
                         </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="LifePics" id="fOv-oA-npG">
+                        <barButtonItem key="leftBarButtonItem" image="exit" id="xAg-R7-Vj1">
+                            <connections>
+                                <action selector="desloga:" destination="1jz-CO-aQt" id="EZE-Ll-b6c"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="J3k-K8-Qik">
                             <connections>
                                 <action selector="atualiza:" destination="1jz-CO-aQt" id="Uz7-rb-eXK"/>
@@ -412,6 +417,7 @@
     </scenes>
     <resources>
         <image name="balao640x1136" width="640" height="1136"/>
+        <image name="exit" width="22" height="22"/>
         <image name="login-button-small" width="151" height="43"/>
         <image name="login-button-small-pressed" width="151" height="43"/>
         <image name="pollaroid" width="320" height="384"/>
