@@ -181,6 +181,7 @@
                     <connections>
                         <outlet property="collectionView" destination="N9V-ou-DaE" id="g9A-LQ-UZ7"/>
                         <segue destination="N7o-Ry-7CE" kind="push" identifier="sgFoto" id="5Bc-8N-uxA"/>
+                        <segue destination="vXZ-lx-hvc" kind="modal" identifier="sgLogin" modalTransitionStyle="crossDissolve" id="Q1l-ec-GE7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7f4-El-XsV" userLabel="First Responder" sceneMemberID="firstResponder"/>

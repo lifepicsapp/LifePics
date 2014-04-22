@@ -7,21 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MBProgressHUD.h"
 #import "Foto.h"
 #import "Moldura.h"
 
-@interface CompartilhaViewController : UIViewController <MBProgressHUDDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface CompartilhaViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) NSMutableArray *arrSocial;
 @property (strong, nonatomic) Foto *foto;
 @property (strong, nonatomic) Moldura *moldura;
-@property (strong, nonatomic) MBProgressHUD *HUD;
 @property (strong, nonatomic) UIImage *imagem;
 @property (assign) BOOL onlyShare;
-@property (assign) NSInteger countOperacao;
-@property (assign) NSInteger countFim;
-@property (assign) NSInteger countFalha;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UIImageView *imgFoto;

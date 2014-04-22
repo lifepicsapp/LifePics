@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIViewController+FotoBar.h"
 #import "Moldura.h"
 #import "Foto.h"
 
@@ -19,6 +20,7 @@
 @property (strong, nonatomic) Moldura *moldura;
 @property (strong, nonatomic) Foto *foto;
 @property (assign) BOOL fotosGrandes;
+@property (assign) BOOL abriuLogado;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 

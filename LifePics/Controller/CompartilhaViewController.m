@@ -49,62 +49,24 @@
 #pragma mark - Metodos IBAction
 
 - (IBAction)finaliza:(UIBarButtonItem *)sender {
-    self.btnFinaliza.enabled = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(encerraOperacoes:) name:@"OperacoesConcluidas" object:nil];
-    if (self.onlyShare)
-        [self compartilha];
-    else
-        [self uploadImage:UIImageJPEGRepresentation(self.imagem, 0.05f)];
-}
-
-#pragma mark - Metodos de Classe
-
-- (void)encerraOperacoes:(NSNotification *)notification
-{
-    self.countFim++;
-    if (self.countFim == self.countOperacao)
-    {
-        if (self.countFalha == self.countOperacao)
-            [self adicionaAviso];
-        else
-        {
-            [((HomeViewController*)self.navigationController.viewControllers[0]) carrega];
-            [self.navigationController popToRootViewControllerAnimated:YES];
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle: @"Sucesso"
-                                  message: @"Foto compartilhada com sucesso!"
-                                  delegate: nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-            [alert show];
-        }
-        
-        self.countFim = 0;
-        self.countFalha = 0;
-        self.countOperacao = 0;
-        [[NSNotificationCenter defaultCenter] removeObserver:self];
-    }
-}
-
-- (void)compartilha
-{
-    [AppUtil adicionaLoad:self];
+    NSMutableArray* arrOptions = [NSMutableArray array];
+    
     for (int i = 0; i < self.arrSocial.count; i++) {
         SocialView* cell = (SocialView *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
         if (cell.swtAtivo.on)
         {
-            self.countOperacao++;
             if (i==0)
-                [self compartilhaFacebook];
+                [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionFacebook]];
             else if (i==1)
-                NSLog(@"");
+                [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionTwitter]];
             else
-                NSLog(@"");
+                [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionInstagram]];
         }
     }
-    if (!self.countOperacao)
+    
+    if (self.onlyShare)
     {
-        if (self.onlyShare)
+        if (!arrOptions.count)
         {
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle: @"Erro"
@@ -113,98 +75,18 @@
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
             [alert show];
-            
-            self.btnFinaliza.enabled = YES;
-            self.navigationItem.rightBarButtonItem = nil;
-        }
-        else
-        {
-            [((HomeViewController*)self.navigationController.viewControllers[0]) carrega];
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            return;
         }
     }
-}
-
-- (void)compartilhaFacebook
-{
-    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
-    [params setObject:[NSString stringWithFormat:URL_SHARE, self.moldura.legenda] forKey:@"message"];
-    [params setObject:UIImageJPEGRepresentation(self.imagem, 90) forKey:@"source"];
+    else
+        [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionUpload]];
     
-    [FBRequestConnection startWithGraphPath:@"me/photos"
-                                 parameters:params
-                                 HTTPMethod:@"POST"
-                          completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"OperacoesConcluidas" object:nil];
-         if (error)
-         {
-             self.countFalha++;
-         }
-     }];
-}
-
--(void)uploadImage:(NSData*)imageData
-{
-    PFFile *imageFile = [PFFile fileWithName:[[AppUtil escapeString:self.moldura.titulo] stringByAppendingString:@".jpg"] data:imageData];
+    if (!self.foto)
+        self.foto = [Foto object];
     
-    self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:self.HUD];
+    [((HomeViewController*)self.navigationController.viewControllers[0]) salvaImagem:self.imagem objeto:self.foto moldura:self.moldura comOpcoes:arrOptions];
     
-    self.HUD.delegate = self;
-    self.HUD.mode = MBProgressHUDModeDeterminate;
-    self.HUD.labelText = @"Carregando";
-    
-    [self.HUD show:YES];
-    
-    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        [self.HUD hide:YES];
-        if (!error) {
-            
-            self.HUD = [[MBProgressHUD alloc] initWithView:self.view];
-            [self.view addSubview:self.HUD];
-            
-            self.HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"37x-Checkmark.png"]];
-            self.HUD.mode = MBProgressHUDModeCustomView;
-            
-            self.HUD.delegate = self;
-            [self.HUD show:YES];
-            
-            if (!self.foto)
-            {
-                self.foto = [Foto object];
-                self.foto.arquivo = imageFile;
-                
-                PFUser *user = [PFUser currentUser];
-                
-                self.foto.ACL = [PFACL ACLWithUser:user];
-                self.foto.usuario = user;
-                self.foto.moldura = self.moldura;
-            }
-            else
-                [((HomeViewController*)self.navigationController.viewControllers[0]).cacheFotos removeObjectForKey:self.foto.objectId];
-            
-            self.foto.arquivo = imageFile;
-            [self.foto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                [self.HUD hide:YES];
-                if (!error)
-                {
-                    [self compartilha];
-                }
-                else
-                {
-                    self.btnFinaliza.enabled = YES;
-                    NSLog(@"Error: %@ %@", error, [error userInfo]);
-                }
-            }];
-        }
-        else
-        {
-            self.btnFinaliza.enabled = YES;
-            NSLog(@"Error: %@ %@", error, [error userInfo]);
-        }
-    } progressBlock:^(int percentDone) {
-        self.HUD.progress = (float)percentDone/100;
-    }];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - Metodos CollectionView FlowLayout
@@ -227,13 +109,6 @@
     cell.social = [self.arrSocial objectAtIndex:indexPath.item];
     
     return cell;
-}
-
-#pragma mark - Metodos HUD Delegate
-
-- (void)hudWasHidden:(MBProgressHUD *)hud {
-    [self.HUD removeFromSuperview];
-    self.HUD = nil;
 }
 
 @end

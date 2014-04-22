@@ -14,7 +14,7 @@
 {
     [super viewDidLoad];
     
-    [self setNeedsStatusBarAppearanceUpdate];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     UIColor* color = [UIColor colorWithRed:13/255.0 green:145/255.0 blue:133/255.0 alpha:0.1];
     UIColor* colorItems = [UIColor whiteColor];
@@ -32,10 +32,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-}
-
--(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
 }
 
 @end

@@ -22,7 +22,6 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     self.cacheFotos = [[NSCache alloc] init];
     [AppUtil removeTextoBotaoVoltar:self];
     
@@ -54,7 +53,9 @@
 {
     [AppUtil adicionaLoad:self];
     
-    [[Moldura query] findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    PFQuery* query = [Moldura query];
+    [query whereKey:@"tipo" equalTo:@"free"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(atualiza:)];
         if (!error)
         {
@@ -62,9 +63,9 @@
             self.arrMolduras = objects;
             [self.collectionView reloadData];
             
-            PFQuery* query = [Foto query];
-            [query whereKey:@"usuario" equalTo:[PFUser currentUser]];
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            PFQuery* queryFoto = [Foto query];
+            [queryFoto whereKey:@"usuario" equalTo:[PFUser currentUser]];
+            [queryFoto findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                 self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(atualiza:)];
                 if (!error)
                 {
@@ -89,7 +90,10 @@
 
 - (IBAction)desloga:(UIBarButtonItem *)sender {
     [PFUser logOut];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (!self.abriuLogado)
+        [self dismissViewControllerAnimated:YES completion:nil];
+    else
+        [self performSegueWithIdentifier:@"sgLogin" sender:nil];
 }
 
 #pragma mark - Metodos CollectionView FlowLayout

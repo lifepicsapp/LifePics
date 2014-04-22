@@ -139,6 +139,7 @@
                                                                              nil];
     
     viewController.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 #pragma mark UIImagePickerControllerDelegate
