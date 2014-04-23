@@ -57,6 +57,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btnFacebook" destination="YUr-hM-fLt" id="Kyu-2K-XRT"/>
                         <segue destination="ybJ-Zl-kkY" kind="modal" identifier="sgHome" modalTransitionStyle="crossDissolve" id="46i-jl-V0Q"/>
                     </connections>
                 </viewController>
@@ -160,14 +161,16 @@
                         </constraints>
                     </view>
                     <toolbarItems>
-                        <barButtonItem title="Tamanho" id="GQt-YA-LhH">
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="dfP-ow-pcd"/>
+                        <barButtonItem image="icon-polaroid" id="GQt-YA-LhH">
                             <connections>
                                 <action selector="mudaTamanho:" destination="1jz-CO-aQt" id="fF5-6a-Bb9"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="LzM-0u-Bit"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="LifePics" id="fOv-oA-npG">
-                        <barButtonItem key="leftBarButtonItem" image="exit" id="xAg-R7-Vj1">
+                        <barButtonItem key="leftBarButtonItem" image="logout" id="xAg-R7-Vj1">
                             <connections>
                                 <action selector="desloga:" destination="1jz-CO-aQt" id="EZE-Ll-b6c"/>
                             </connections>
@@ -396,7 +399,7 @@
                     </view>
                     <toolbarItems>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="mau-bM-i6P"/>
-                        <barButtonItem title="Finalizar" id="Mpu-at-sMb">
+                        <barButtonItem image="checkmark" id="Mpu-at-sMb">
                             <connections>
                                 <action selector="finaliza:" destination="ggh-v7-KRZ" id="TCl-fG-wPm"/>
                             </connections>
@@ -418,9 +421,11 @@
     </scenes>
     <resources>
         <image name="balao640x1136" width="640" height="1136"/>
-        <image name="exit" width="22" height="22"/>
+        <image name="checkmark" width="22" height="22"/>
+        <image name="icon-polaroid" width="22" height="22"/>
         <image name="login-button-small" width="151" height="43"/>
         <image name="login-button-small-pressed" width="151" height="43"/>
+        <image name="logout" width="22" height="22"/>
         <image name="pollaroid" width="320" height="384"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

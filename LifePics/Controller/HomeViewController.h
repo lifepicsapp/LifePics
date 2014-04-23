@@ -8,12 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "UIViewController+FotoBar.h"
+#import "UIViewController+QuedaConexao.h"
+#import <Accounts/Accounts.h>
 #import "Moldura.h"
 #import "Foto.h"
 
 @interface HomeViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate,
-    UICollectionViewDelegateFlowLayout>
+    UICollectionViewDelegateFlowLayout, UIAlertViewDelegate>
 
+@property (strong, nonatomic) ACAccountStore* accountStore;
 @property (strong, nonatomic) NSArray* arrMolduras;
 @property (strong, nonatomic) NSArray* arrFotos;
 @property (strong, nonatomic) NSCache* cacheFotos;

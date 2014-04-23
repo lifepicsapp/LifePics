@@ -8,14 +8,13 @@
 
 #import "SocialView.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "CompartilhaViewController.h"
 
 @implementation SocialView
 
 -(void)setSocial:(Social *)social {
     _social = social;
-    if ([_social.nome isEqualToString:@"facebook"])
-        self.swtAtivo.on = YES;
-    else
+    if ([_social.nome isEqualToString:@"instagram"])
         self.swtAtivo.enabled = NO;
         
     self.lblNome.text = [_social.nome capitalizedString];
@@ -31,7 +30,14 @@
             {
                 sender.on = NO;
                 [FBSession.activeSession requestNewPublishPermissions:@[@"publish_actions"] defaultAudience:FBSessionDefaultAudienceOnlyMe completionHandler:^(FBSession *session, NSError *error) {
-                    sender.on = YES;
+                    if (!error)
+                    {
+                        sender.on = YES;
+                    }
+                    else
+                    {
+                        [((CompartilhaViewController*)self) adicionaAviso:@"Erro ao autorizar Facebook."];
+                    }
                 }];
             }
         }

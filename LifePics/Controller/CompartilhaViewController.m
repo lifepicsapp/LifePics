@@ -36,7 +36,7 @@
     self.arrSocial = [NSMutableArray arrayWithObjects:
                       [Social social:@"facebook"],
                       [Social social:@"twitter"],
-                      [Social social:@"instagram"],
+//                      [Social social:@"instagram"],
                       nil];
 }
 
@@ -69,8 +69,8 @@
         if (!arrOptions.count)
         {
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle: @"Erro"
-                                  message: @"Selecione ao menos um meio de compartilhamento!"
+                                  initWithTitle: @"Verificar"
+                                  message: @"Selecione, ao menos, um meio de compartilhamento!"
                                   delegate: nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];

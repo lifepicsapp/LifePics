@@ -24,35 +24,26 @@ static char const * const ObjectTagKey = "BarraAviso";
     objc_setAssociatedObject(self, ObjectTagKey, newObjectTag, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
--(void)adicionaAviso
+-(void)adicionaAviso:(NSString*)mensagem
 {
     if (!self.barraAviso)
     {
-        self.barraAviso = [[UIView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 30)];
+        [self.navigationController setToolbarHidden:YES];
+        self.barraAviso = [[[NSBundle mainBundle] loadNibNamed:@"ConexaoView" owner:self options:nil] lastObject];
         self.barraAviso.alpha = 0.0;
-        self.barraAviso.backgroundColor = [UIColor colorWithRed:255/255.f green:0/255.f blue:0/255.f alpha:0.7];
+        self.barraAviso.frame = CGRectMake(0, self.view.frame.size.height - 44, 320, 44);
         [self.view addSubview:self.barraAviso];
         
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
         [self.barraAviso addGestureRecognizer:tap];
         
-        UIImageView* imagem = [[UIImageView alloc] initWithFrame:CGRectMake(10, 2, 26, 26)];
-        imagem.image = [UIImage imageNamed:@"alert"];
-        [self.barraAviso addSubview:imagem];
-        
-        UILabel* mensagem = [[UILabel alloc] initWithFrame:CGRectMake(imagem.frame.size.width + 20, 0, self.view.frame.size.width - (imagem.frame.size.width + 30), self.barraAviso.frame.size.height)];
-        mensagem.text = @"Verique sua conexão com a internet e tente novamente";
-        mensagem.textColor = [UIColor whiteColor];
-        mensagem.adjustsFontSizeToFitWidth = YES;
-        mensagem.minimumScaleFactor = 9.0/[UIFont labelFontSize];
-        mensagem.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
-        
-        [self.barraAviso addSubview:mensagem];
-        
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.5 delay:1.5 options:UIViewAnimationOptionCurveLinear animations:^{
             self.barraAviso.alpha = 1.0;
+        } completion:^(BOOL finished) {
+            
         }];
     }
+    self.barraAviso.lblMensagem.text = mensagem;
 }
 
 -(void)removeAviso
@@ -64,6 +55,7 @@ static char const * const ObjectTagKey = "BarraAviso";
         } completion:^(BOOL finished) {
             [self.barraAviso removeFromSuperview];
             self.barraAviso = nil;
+            [self.navigationController setToolbarHidden:NO];
         }];
     }
 }

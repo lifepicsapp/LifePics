@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIViewController+QuedaConexao.h"
 #import "Foto.h"
 #import "Moldura.h"
 

@@ -187,13 +187,7 @@
 -(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error) {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle: @"Erro"
-                              message: @"Falha ao salvar imagem no albúm"
-                              delegate: nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
-        [alert show];
+        [self adicionaAviso:@"Erro ao salvar imagem no Albúm."];
     }
 }
 

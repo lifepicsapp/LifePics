@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ConexaoView.h"
 
 @interface UIViewController (QuedaConexao)
 
-@property (nonatomic, retain) UIView* barraAviso;
+@property (nonatomic, retain) ConexaoView* barraAviso;
 
--(void)adicionaAviso;
+-(void)adicionaAviso:(NSString*)mensagem;
 -(void)removeAviso;
 
 @end

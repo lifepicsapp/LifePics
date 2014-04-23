@@ -23,6 +23,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.cacheFotos = [[NSCache alloc] init];
+    self.accountStore = [[ACAccountStore alloc] init];
     [AppUtil removeTextoBotaoVoltar:self];
     
     UINib *nib = [UINib nibWithNibName:@"MolduraViewGrande" bundle: nil];
@@ -72,7 +73,15 @@
                     self.arrFotos = objects;
                     [self.collectionView reloadData];
                 }
+                else
+                {
+                    [self adicionaAviso:@"Erro ao baixar Fotos."];
+                }
             }];
+        }
+        else
+        {
+            [self adicionaAviso:@"Erro ao carregar Molduras."];
         }
     }];
 }
@@ -80,6 +89,11 @@
 
 - (IBAction)mudaTamanho:(UIBarButtonItem *)sender {
     self.fotosGrandes = !self.fotosGrandes;
+    if (self.fotosGrandes)
+        sender.image = [UIImage imageNamed:@"grid"];
+    else
+        sender.image = [UIImage imageNamed:@"icon-polaroid"];
+    
     [self.collectionView reloadData];
 }
 
@@ -89,11 +103,27 @@
 }
 
 - (IBAction)desloga:(UIBarButtonItem *)sender {
-    [PFUser logOut];
-    if (!self.abriuLogado)
-        [self dismissViewControllerAnimated:YES completion:nil];
-    else
-        [self performSegueWithIdentifier:@"sgLogin" sender:nil];
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle: @"Atenção"
+                          message: @"Deseja realmente sair?"
+                          delegate: self
+                          cancelButtonTitle:@"Cancelar"
+                          otherButtonTitles:@"Sim", nil];
+    [alert show];
+}
+
+#pragma mark - Metodos AlertView Delegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex)
+    {
+        [PFUser logOut];
+        if (!self.abriuLogado)
+            [self dismissViewControllerAnimated:YES completion:nil];
+        else
+            [self performSegueWithIdentifier:@"sgLogin" sender:nil];
+    }
 }
 
 #pragma mark - Metodos CollectionView FlowLayout
@@ -151,6 +181,10 @@
                         UIImage* image = [UIImage imageWithData:data];
                         [self.cacheFotos setObject:image forKey:foto.objectId];
                         cell.imgFoto.image = image;
+                    }
+                    else
+                    {
+                        [self adicionaAviso:[NSString stringWithFormat:@"Erro ao carregar imagem da Moldura '%@'", moldura.titulo]];
                     }
                 }];
             }

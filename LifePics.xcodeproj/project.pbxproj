@@ -15,6 +15,8 @@
 		AF292ADB1906C98C000FE080 /* FotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF292ADA1906C98C000FE080 /* FotoView.xib */; };
 		AF292AE11906D7C9000FE080 /* FotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF292AE01906D7C9000FE080 /* FotoView.m */; };
 		AF292AEA1906DB0F000FE080 /* UIViewController+FotoBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AF292AE91906DB0F000FE080 /* UIViewController+FotoBar.m */; };
+		AFA090DB19076405009518FE /* ConexaoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFA090DA19076405009518FE /* ConexaoView.xib */; };
+		AFA090DE1907655D009518FE /* ConexaoView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFA090DD1907655D009518FE /* ConexaoView.m */; };
 		AFB4E81119031D7100AB8D1E /* CompartilhaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB4E81019031D7100AB8D1E /* CompartilhaViewController.m */; };
 		AFB4E8141903297E00AB8D1E /* SocialView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB4E8131903297E00AB8D1E /* SocialView.m */; };
 		AFB4E81719033CDF00AB8D1E /* Social.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB4E81619033CDF00AB8D1E /* Social.m */; };
@@ -52,6 +54,9 @@
 		AF292AE01906D7C9000FE080 /* FotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FotoView.m; sourceTree = "<group>"; };
 		AF292AE81906DB0F000FE080 /* UIViewController+FotoBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+FotoBar.h"; sourceTree = "<group>"; };
 		AF292AE91906DB0F000FE080 /* UIViewController+FotoBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+FotoBar.m"; sourceTree = "<group>"; };
+		AFA090DA19076405009518FE /* ConexaoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConexaoView.xib; sourceTree = "<group>"; };
+		AFA090DC1907655D009518FE /* ConexaoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConexaoView.h; sourceTree = "<group>"; };
+		AFA090DD1907655D009518FE /* ConexaoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConexaoView.m; sourceTree = "<group>"; };
 		AFB4E80F19031D7100AB8D1E /* CompartilhaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompartilhaViewController.h; sourceTree = "<group>"; };
 		AFB4E81019031D7100AB8D1E /* CompartilhaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompartilhaViewController.m; sourceTree = "<group>"; };
 		AFB4E8121903297E00AB8D1E /* SocialView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialView.h; sourceTree = "<group>"; };
@@ -123,9 +128,12 @@
 				AF1696AD18FC96990020AE7D /* MolduraView.m */,
 				AF292ADF1906D7C9000FE080 /* FotoView.h */,
 				AF292AE01906D7C9000FE080 /* FotoView.m */,
+				AFA090DC1907655D009518FE /* ConexaoView.h */,
+				AFA090DD1907655D009518FE /* ConexaoView.m */,
 				AFDDF39C18FDE08000EFC010 /* MolduraViewGrande.xib */,
 				AFDDF39318FD828900EFC010 /* CropView.xib */,
 				AF292ADA1906C98C000FE080 /* FotoView.xib */,
+				AFA090DA19076405009518FE /* ConexaoView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -282,6 +290,7 @@
 				AFDDF39D18FDE08000EFC010 /* MolduraViewGrande.xib in Resources */,
 				AFBE9A4918FB22AC0001C35E /* InfoPlist.strings in Resources */,
 				AFBE9A5218FB22AC0001C35E /* Main.storyboard in Resources */,
+				AFA090DB19076405009518FE /* ConexaoView.xib in Resources */,
 				AFDDF39418FD828900EFC010 /* CropView.xib in Resources */,
 				AF292ADB1906C98C000FE080 /* FotoView.xib in Resources */,
 			);
@@ -339,6 +348,7 @@
 				AF1696AE18FC96990020AE7D /* MolduraView.m in Sources */,
 				AFB4E81719033CDF00AB8D1E /* Social.m in Sources */,
 				AFBE9A4F18FB22AC0001C35E /* AppDelegate.m in Sources */,
+				AFA090DE1907655D009518FE /* ConexaoView.m in Sources */,
 				AFBE9A4B18FB22AC0001C35E /* main.m in Sources */,
 				AFDDF3A018FDE9A500EFC010 /* FotoViewController.m in Sources */,
 				AFB4E8141903297E00AB8D1E /* SocialView.m in Sources */,

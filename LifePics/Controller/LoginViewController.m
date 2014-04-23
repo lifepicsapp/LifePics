@@ -32,14 +32,22 @@
 
 - (IBAction)loginButtonTouchHandler:(id)sender  {
     NSArray *permissionsArray = @[@"user_about_me", @"user_birthday", @"publish_actions"];
-    
+    self.btnFacebook.enabled = NO;
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+        self.btnFacebook.enabled = YES;
         if (!user) {
             if (!error) {
                 NSLog(@"Uh oh. The user cancelled the Facebook login.");
             } else {
                 NSLog(@"Uh oh. An error occurred: %@", error);
             }
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle: @"Erro"
+                                  message: @"Não foi possível efetuar o login."
+                                  delegate: nil
+                                  cancelButtonTitle:@"Cancelar"
+                                  otherButtonTitles: nil];
+            [alert show];
         } else if (user.isNew) {
             NSLog(@"User with facebook signed up and logged in!");
             [self performSegueWithIdentifier:@"sgHome" sender:nil];

@@ -13,8 +13,7 @@
 @property (nonatomic, strong) IBOutlet UILabel* lblStatus;
 @property (nonatomic, strong) IBOutlet UIImageView* imgFoto;
 @property (nonatomic, strong) IBOutlet UIImageView* imgOK;
-@property (nonatomic, strong) IBOutlet UIProgressView
-* pvUpload;
+@property (nonatomic, strong) IBOutlet UIProgressView * pvUpload;
 @property (nonatomic, strong) IBOutlet UIActivityIndicatorView* aiCarregando;
 
 typedef enum
