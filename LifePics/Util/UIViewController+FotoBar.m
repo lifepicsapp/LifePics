@@ -64,17 +64,19 @@ static char const * const OptionsTagKey = "Options";
         [self.view addSubview:self.fotoBar];
         
         NSData* imageData = UIImageJPEGRepresentation(image, 0.05f);
+        NSString* legenda = [NSString stringWithFormat:URL_SHARE, moldura.legenda];
+        
         if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionUpload]])
         {
             [self uploadImage:imageData foto:foto moldura:moldura];
         }
         else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionFacebook]])
         {
-            [self compartilhaFacebook:imageData legenda:moldura.legenda];
+            [self compartilhaFacebook:imageData legenda:legenda];
         }
         else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionTwitter]])
         {
-            [self compartilhaTwitter:imageData legenda:moldura.legenda];
+            [self compartilhaTwitter:imageData legenda:legenda];
         }
         else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionInstagram]]){}
     }
@@ -146,7 +148,7 @@ static char const * const OptionsTagKey = "Options";
     HomeViewController* controller = ((HomeViewController*)self);
     self.fotoBar.lblStatus.text = @"Compartilhando Facebook...";
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
-    [params setObject:[NSString stringWithFormat:URL_SHARE, legenda] forKey:@"message"];
+    [params setObject:legenda forKey:@"message"];
     [params setObject:imageData forKey:@"source"];
     
     [FBRequestConnection startWithGraphPath:@"me/photos" parameters:params HTTPMethod:@"POST" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
