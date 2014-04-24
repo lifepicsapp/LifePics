@@ -22,6 +22,13 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0,0,85,35)];
+    view.backgroundColor = [UIColor clearColor];
+    UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,85,35)];
+    iv.image = [UIImage imageNamed:@"logo-titulo"];
+    [view addSubview:iv];
+    self.navigationItem.titleView = view;
+    
     self.cacheFotos = [[NSCache alloc] init];
     self.accountStore = [[ACAccountStore alloc] init];
     [AppUtil removeTextoBotaoVoltar:self];

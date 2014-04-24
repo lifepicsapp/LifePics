@@ -45,7 +45,7 @@
                                   initWithTitle: @"Erro"
                                   message: @"Não foi possível efetuar o login."
                                   delegate: nil
-                                  cancelButtonTitle:@"Cancelar"
+                                  cancelButtonTitle:@"OK"
                                   otherButtonTitles: nil];
             [alert show];
         } else if (user.isNew) {

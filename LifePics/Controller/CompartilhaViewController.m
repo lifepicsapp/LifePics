@@ -70,7 +70,7 @@
         {
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle: @"Verificar"
-                                  message: @"Selecione, ao menos, um meio de compartilhamento!"
+                                  message: @"Selecione um meio de compartilhamento!"
                                   delegate: nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];

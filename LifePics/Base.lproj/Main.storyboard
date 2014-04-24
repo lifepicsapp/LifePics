@@ -14,33 +14,43 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="balao640x1136" translatesAutoresizingMaskIntoConstraints="NO" id="Jnh-aD-br2">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUr-hM-fLt">
-                                <rect key="frame" x="85" y="328" width="151" height="43"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUr-hM-fLt">
+                                <rect key="frame" x="20" y="419" width="280" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Entrar" backgroundImage="login-button-small">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="aqe-Ba-O4q"/>
+                                    <constraint firstAttribute="width" constant="280" id="vIZ-7b-qPC"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="  Cadastre-se com o Facebook" image="facebook"/>
+                                <state key="disabled">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <state key="highlighted" backgroundImage="login-button-small-pressed"/>
+                                <state key="highlighted" image="facebook">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
                                 <connections>
                                     <action selector="loginButtonTouchHandler:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="D06-U2-QDG"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LifePics" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="mTy-Eg-UdW">
-                                <rect key="frame" x="20" y="60" width="280" height="98"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="MyQ-be-SjH">
+                                <rect key="frame" x="47" y="58" width="220" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="SnellRoundhand-Bold" family="Snell Roundhand" pointSize="80"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="YUr-hM-fLt" secondAttribute="centerX" id="ROD-X6-AUd"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="YUr-hM-fLt" secondAttribute="bottom" constant="17" id="Y0K-cc-FhJ"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="btnFacebook" destination="YUr-hM-fLt" id="Kyu-2K-XRT"/>
@@ -60,7 +70,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Qgm-rd-zY8">
-                        <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="436" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>
@@ -80,11 +90,11 @@
                         <viewControllerLayoutGuide type="bottom" id="WDS-aU-x51"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="aXK-gC-7O0">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <collectionView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="N9V-ou-DaE">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="6FB-I6-4vo">
@@ -105,10 +115,14 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="105" height="126"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="photofundo" translatesAutoresizingMaskIntoConstraints="NO" id="K8F-0S-KMS">
+                                                    <rect key="frame" x="26" y="26" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fCY-jj-jM7">
                                                     <rect key="frame" x="6" y="6" width="90" height="90"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <color key="backgroundColor" red="0.52094891062335758" green="0.70488016132656905" blue="0.92346938775510201" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Titulo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="7" preferredMaxLayoutWidth="90" translatesAutoresizingMaskIntoConstraints="NO" id="KCV-rD-Iw1">
                                                     <rect key="frame" x="6" y="97" width="90" height="21"/>
@@ -120,6 +134,7 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="mxc-Q7-FyR" firstAttribute="top" secondItem="eTX-XX-Zk3" secondAttribute="top" id="8L0-MX-j2p"/>
                                             <constraint firstAttribute="trailing" secondItem="mxc-Q7-FyR" secondAttribute="trailing" id="9aq-xW-POA"/>
@@ -186,11 +201,22 @@
                         <viewControllerLayoutGuide type="bottom" id="zPh-V9-Y1p"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ajf-9o-1Wc">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="center" lineBreakMode="middleTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ek4-nU-HhO">
+                                <rect key="frame" x="83" y="177" width="154" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="154" id="bCU-7z-hgB"/>
+                                    <constraint firstAttribute="height" constant="77" id="qsR-yq-Jrn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="60"/>
+                                <color key="textColor" red="0.050980392156862744" green="0.56862745098039214" blue="0.52156862745098043" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pollaroid" translatesAutoresizingMaskIntoConstraints="NO" id="7b5-PD-Sd5">
-                                <rect key="frame" x="8" y="108" width="309" height="370"/>
+                                <rect key="frame" x="8" y="64" width="309" height="370"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="309" id="DuQ-6y-lg3"/>
@@ -198,16 +224,16 @@
                                 </constraints>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7k3-0z-TXK">
-                                <rect key="frame" x="27" y="128" width="264" height="264"/>
+                                <rect key="frame" x="27" y="84" width="264" height="264"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.52094891060000004" green="0.70488016129999997" blue="0.92346938779999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="264" id="b57-EU-iKg"/>
                                     <constraint firstAttribute="width" constant="264" id="fi2-b6-lvg"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="274" translatesAutoresizingMaskIntoConstraints="NO" id="lwC-rG-xKW">
-                                <rect key="frame" x="20" y="400" width="274" height="57"/>
+                                <rect key="frame" x="20" y="356" width="274" height="57"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="274" id="4zN-Qf-A2F"/>
@@ -219,7 +245,9 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="centerY" secondItem="ek4-nU-HhO" secondAttribute="centerY" constant="24.5" id="B9N-YD-HdH"/>
                             <constraint firstItem="7b5-PD-Sd5" firstAttribute="centerX" secondItem="7k3-0z-TXK" secondAttribute="centerX" constant="3.5" id="Chq-k6-GJf"/>
+                            <constraint firstAttribute="centerX" secondItem="ek4-nU-HhO" secondAttribute="centerX" id="S0V-gL-cj6"/>
                             <constraint firstAttribute="centerY" secondItem="7b5-PD-Sd5" secondAttribute="centerY" constant="-9" id="S4r-32-AZF"/>
                             <constraint firstItem="7b5-PD-Sd5" firstAttribute="centerY" secondItem="7k3-0z-TXK" secondAttribute="centerY" constant="33" id="YEx-ME-toS"/>
                             <constraint firstItem="lwC-rG-xKW" firstAttribute="top" secondItem="7k3-0z-TXK" secondAttribute="bottom" constant="8" id="c7P-YG-OHg"/>
@@ -268,7 +296,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Jce-bp-YSt"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="s2r-1S-Ty2">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pollaroid" translatesAutoresizingMaskIntoConstraints="NO" id="eQM-9H-VC5">
@@ -299,7 +327,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3IM-zw-YU4">
-                                <rect key="frame" x="20" y="281" width="280" height="229"/>
+                                <rect key="frame" x="20" y="281" width="280" height="141"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Xyz-c8-Ovv">
@@ -337,7 +365,7 @@
                                                         <constraint firstAttribute="width" constant="49" id="0iX-gg-JDz"/>
                                                         <constraint firstAttribute="height" constant="31" id="9hl-P9-iv1"/>
                                                     </constraints>
-                                                    <color key="onTintColor" red="0.050980392156862744" green="0.56862745098039214" blue="0.52156862745098043" alpha="0.80000000000000004" colorSpace="deviceRGB"/>
+                                                    <color key="onTintColor" red="0.050980392156862744" green="0.56862745098039214" blue="0.52156862745098043" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
                                                     <connections>
                                                         <action selector="switchChange:" destination="sTX-oU-0Z8" eventType="valueChanged" id="BbW-c1-UvX"/>
                                                     </connections>
@@ -406,17 +434,18 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Logo" width="440" height="180"/>
         <image name="balao640x1136" width="640" height="1136"/>
         <image name="checkmark" width="22" height="22"/>
+        <image name="facebook" width="20" height="20"/>
         <image name="icon-polaroid" width="22" height="22"/>
-        <image name="login-button-small" width="151" height="43"/>
-        <image name="login-button-small-pressed" width="151" height="43"/>
         <image name="logout" width="22" height="22"/>
+        <image name="photofundo" width="128" height="128"/>
         <image name="pollaroid" width="320" height="384"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
 </document>
