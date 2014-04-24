@@ -27,6 +27,6 @@
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
-- (void)carrega;
+- (void)carrega:(float)delay;
 
 @end

@@ -13,7 +13,7 @@
 
 @property (nonatomic, retain) ConexaoView* barraAviso;
 
--(void)adicionaAviso:(NSString*)mensagem;
+-(void)adicionaAviso:(NSString*)mensagem delay:(float)delay;
 -(void)removeAviso;
 
 @end

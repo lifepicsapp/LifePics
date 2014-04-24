@@ -36,7 +36,7 @@
     UINib *nib = [UINib nibWithNibName:@"MolduraViewGrande" bundle: nil];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:@"CellMolduraGrande"];
     
-    [self carrega];
+    [self carrega:0.0];
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,7 +57,7 @@
 
 #pragma mark - Metodos de Classe
 
-- (void)carrega
+- (void)carrega:(float)delay
 {
     [AppUtil adicionaLoad:self];
     
@@ -82,13 +82,13 @@
                 }
                 else
                 {
-                    [self adicionaAviso:@"Erro ao baixar Fotos."];
+                    [self adicionaAviso:@"Erro ao baixar Fotos." delay:delay];
                 }
             }];
         }
         else
         {
-            [self adicionaAviso:@"Erro ao carregar Molduras."];
+            [self adicionaAviso:@"Erro ao carregar Molduras." delay:delay];
         }
     }];
 }
@@ -110,7 +110,7 @@
 
 - (IBAction)atualiza:(UIBarButtonItem *)sender
 {
-    [self carrega];
+    [self carrega:0.0];
 }
 
 - (IBAction)desloga:(UIBarButtonItem *)sender {
@@ -207,7 +207,7 @@
                     }
                     else
                     {
-                        [self adicionaAviso:[NSString stringWithFormat:@"Erro ao carregar imagem da Moldura '%@'", moldura.titulo]];
+                        [self adicionaAviso:[NSString stringWithFormat:@"Erro ao carregar imagem da Moldura '%@'", moldura.titulo] delay:0.0];
                     }
                 }];
             }

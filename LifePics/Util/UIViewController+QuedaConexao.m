@@ -24,7 +24,7 @@ static char const * const ObjectTagKey = "BarraAviso";
     objc_setAssociatedObject(self, ObjectTagKey, newObjectTag, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
--(void)adicionaAviso:(NSString*)mensagem
+-(void)adicionaAviso:(NSString*)mensagem delay:(float)delay
 {
     if (!self.barraAviso)
     {
@@ -37,7 +37,7 @@ static char const * const ObjectTagKey = "BarraAviso";
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
         [self.barraAviso addGestureRecognizer:tap];
         
-        [UIView animateWithDuration:0.5 delay:1.5 options:UIViewAnimationOptionCurveLinear animations:^{
+        [UIView animateWithDuration:0.5 delay:delay options:UIViewAnimationOptionCurveLinear animations:^{
             self.barraAviso.alpha = 1.0;
         } completion:^(BOOL finished) {
             

@@ -92,7 +92,7 @@
         [AppUtil adicionaLoad:self];
         [self.foto deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {
-                [((HomeViewController*)self.navigationController.viewControllers[0]) carrega];
+                [((HomeViewController*)self.navigationController.viewControllers[0]) carrega:0.0];
                 [self.navigationController popViewControllerAnimated:YES];
                 UIAlertView *alert = [[UIAlertView alloc]
                                       initWithTitle: @"Sucesso"
@@ -187,7 +187,7 @@
 -(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error) {
-        [self adicionaAviso:@"Erro ao salvar imagem no Albúm."];
+        [self adicionaAviso:@"Erro ao salvar imagem no Albúm." delay:0.0];
     }
 }
 

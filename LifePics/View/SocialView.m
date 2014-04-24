@@ -36,7 +36,7 @@
                     }
                     else
                     {
-                        [((CompartilhaViewController*)self) adicionaAviso:@"Erro ao autorizar Facebook."];
+                        [((CompartilhaViewController*)self) adicionaAviso:@"Erro ao autorizar Facebook." delay:0.0];
                     }
                 }];
             }

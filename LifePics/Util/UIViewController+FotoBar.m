@@ -127,7 +127,7 @@ static char const * const OptionsTagKey = "Options";
                 else
                 {
                     NSLog(@"Error: %@ %@", error, [error userInfo]);
-                    [controller adicionaAviso:@"Erro ao salvar foto."];
+                    [controller adicionaAviso:@"Erro ao salvar foto." delay:0.0];
                     [self removeBar:NO];
                 }
             }];
@@ -135,7 +135,7 @@ static char const * const OptionsTagKey = "Options";
         else
         {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
-            [controller adicionaAviso:@"Erro ao subir foto."];
+            [controller adicionaAviso:@"Erro ao subir foto." delay:0.0];
             [self removeBar:NO];
         }
     } progressBlock:^(int percentDone) {
@@ -166,7 +166,7 @@ static char const * const OptionsTagKey = "Options";
         }
         else
         {
-            [controller adicionaAviso:@"Erro ao compartilhar no Facebook."];
+            [controller adicionaAviso:@"Erro ao compartilhar no Facebook." delay:0.0];
             [self removeBar:NO];
         }
     }];
@@ -206,7 +206,7 @@ static char const * const OptionsTagKey = "Options";
                     else {
                         NSLog(@"[ERROR] Server responded: status code %ld %@", (long)statusCode, [NSHTTPURLResponse localizedStringForStatusCode:statusCode]);
                         dispatch_sync(dispatch_get_main_queue(), ^{
-                            [controller adicionaAviso:@"Erro ao compartilhar no Twitter."];
+                            [controller adicionaAviso:@"Erro ao compartilhar no Twitter." delay:0.0];
                             [self removeBar:NO];
                         });
                     }
@@ -214,7 +214,7 @@ static char const * const OptionsTagKey = "Options";
                 else {
                     NSLog(@"[ERROR] An error occurred while posting: %@", [error localizedDescription]);
                     dispatch_sync(dispatch_get_main_queue(), ^{
-                        [controller adicionaAviso:@"Erro ao compartilhar no Twitter."];
+                        [controller adicionaAviso:@"Erro ao compartilhar no Twitter." delay:0.0];
                         [self removeBar:NO];
                     });
                 }
@@ -223,7 +223,7 @@ static char const * const OptionsTagKey = "Options";
         else {
             NSLog(@"[ERROR] An error occurred while asking for user authorization: %@", [error localizedDescription]);
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [controller adicionaAviso:@"Erro ao autorizar Twitter."];
+                [controller adicionaAviso:@"Erro ao autorizar Twitter." delay:0.0];
                 [self removeBar:NO];
             });
         }
@@ -239,7 +239,7 @@ static char const * const OptionsTagKey = "Options";
     [self removeBar:YES];
     if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionUpload]])
     {
-        [((HomeViewController*)self) carrega];
+        [((HomeViewController*)self) carrega:1.5];
     }
 }
 
