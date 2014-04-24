@@ -91,8 +91,8 @@ static char const * const OptionsTagKey = "Options";
     PFFile *imageFile = [PFFile fileWithName:[[AppUtil escapeString:moldura.titulo] stringByAppendingString:@".jpg"] data:imageData];
     
     [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error) {
-            
+        if (!error)
+        {
             if (!foto.usuario)
             {
                 foto.arquivo = imageFile;
@@ -204,7 +204,7 @@ static char const * const OptionsTagKey = "Options";
                         }
                     }
                     else {
-                        NSLog(@"[ERROR] Server responded: status code %d %@", statusCode, [NSHTTPURLResponse localizedStringForStatusCode:statusCode]);
+                        NSLog(@"[ERROR] Server responded: status code %ld %@", (long)statusCode, [NSHTTPURLResponse localizedStringForStatusCode:statusCode]);
                         dispatch_sync(dispatch_get_main_queue(), ^{
                             [controller adicionaAviso:@"Erro ao compartilhar no Twitter."];
                             [self removeBar:NO];
@@ -238,7 +238,9 @@ static char const * const OptionsTagKey = "Options";
     self.fotoBar.imgOK.hidden = NO;
     [self removeBar:YES];
     if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionUpload]])
+    {
         [((HomeViewController*)self) carrega];
+    }
 }
 
 -(void)removeBar:(BOOL)success

@@ -27,7 +27,8 @@
     
     [PFFacebookUtils initializeFacebook];
     
-    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])
+    {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         UINavigationController* navigation = [storyboard instantiateViewControllerWithIdentifier:@"Home"];
         HomeViewController* controller = (HomeViewController*)navigation.viewControllers[0];

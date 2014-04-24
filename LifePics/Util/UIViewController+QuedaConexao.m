@@ -63,7 +63,9 @@ static char const * const ObjectTagKey = "BarraAviso";
 -(void)onTap:(UITapGestureRecognizer*)recognizer
 {
     if (recognizer.state == UIGestureRecognizerStateEnded)
+    {
         [self removeAviso];
+    }
 }
 
 @end

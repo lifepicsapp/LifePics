@@ -90,9 +90,13 @@
 - (IBAction)mudaTamanho:(UIBarButtonItem *)sender {
     self.fotosGrandes = !self.fotosGrandes;
     if (self.fotosGrandes)
+    {
         sender.image = [UIImage imageNamed:@"grid"];
+    }
     else
+    {
         sender.image = [UIImage imageNamed:@"icon-polaroid"];
+    }
     
     [self.collectionView reloadData];
 }
@@ -120,9 +124,13 @@
     {
         [PFUser logOut];
         if (!self.abriuLogado)
+        {
             [self dismissViewControllerAnimated:YES completion:nil];
+        }
         else
+        {
             [self performSegueWithIdentifier:@"sgLogin" sender:nil];
+        }
     }
 }
 
@@ -132,9 +140,13 @@
 {
     CGSize size;
     if (self.fotosGrandes)
+    {
         size = CGSizeMake(320, 384);
+    }
     else
+    {
         size = CGSizeMake(105, 126);
+    }
     
     return size;
 }
@@ -151,9 +163,13 @@
     NSString* cellIdentifier;
     
     if (self.fotosGrandes)
+    {
         cellIdentifier = @"CellMolduraGrande";
+    }
     else
+    {
         cellIdentifier = @"CellMoldura";
+    }
     
     MolduraView* cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
     Moldura* moldura = [self.arrMolduras objectAtIndex:indexPath.item];
@@ -192,9 +208,13 @@
     }
     
     if (self.fotosGrandes)
+    {
         cell.lblTitulo.text = moldura.legenda;
+    }
     else
+    {
         cell.lblTitulo.text = moldura.titulo;
+    }
     
     return cell;
 }
@@ -209,9 +229,13 @@
     NSArray *filteredArray = [self.arrFotos filteredArrayUsingPredicate:predicate];
     
     if ([filteredArray count] > 0)
+    {
         self.foto = [filteredArray objectAtIndex:0];
+    }
     else
+    {
         self.foto = nil;
+    }
 
     [self performSegueWithIdentifier:@"sgFoto" sender:nil];
 }
