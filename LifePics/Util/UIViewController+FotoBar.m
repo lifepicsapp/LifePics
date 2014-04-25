@@ -84,6 +84,7 @@ static char const * const OptionsTagKey = "Options";
 
 -(void)uploadImage:(NSData*)imageData foto:(Foto*)foto moldura:(Moldura*)moldura
 {
+    NSString* legenda = [NSString stringWithFormat:URL_SHARE, moldura.legenda];
     HomeViewController* controller = ((HomeViewController*)self);
     self.fotoBar.lblStatus.text = @"Salvando foto...";
     self.fotoBar.pvUpload.hidden = NO;
@@ -112,11 +113,11 @@ static char const * const OptionsTagKey = "Options";
                 {
                     if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionFacebook]])
                     {
-                        [self compartilhaFacebook:imageData legenda:moldura.legenda];
+                        [self compartilhaFacebook:imageData legenda:legenda];
                     }
                     else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionTwitter]])
                     {
-                        [self compartilhaTwitter:imageData legenda:moldura.legenda];
+                        [self compartilhaTwitter:imageData legenda:legenda];
                     }
                     else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionInstagram]]){}
                     else
