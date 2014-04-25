@@ -28,6 +28,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Metodos de Classe
+
+- (void)logadoSucesso {
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
+    [currentInstallation saveEventually];
+    [self performSegueWithIdentifier:@"sgHome" sender:nil];
+}
+
 #pragma mark - Metodos IBAction
 
 - (IBAction)loginButtonTouchHandler:(id)sender  {
@@ -50,10 +59,10 @@
             [alert show];
         } else if (user.isNew) {
             NSLog(@"User with facebook signed up and logged in!");
-            [self performSegueWithIdentifier:@"sgHome" sender:nil];
+            [self logadoSucesso];
         } else {
             NSLog(@"User with facebook logged in!");
-            [self performSegueWithIdentifier:@"sgHome" sender:nil];
+            [self logadoSucesso];
         }
     }];
 }
