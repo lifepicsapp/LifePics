@@ -79,15 +79,12 @@
 
 #pragma mark - Metodos Parse Framework
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)newDeviceToken {
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
     // Store the deviceToken in the current installation and save it to Parse.
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    NSLog(@"%@", currentInstallation.deviceToken);
-    if (!currentInstallation.deviceToken)
-    {
-        [currentInstallation setDeviceTokenFromData:newDeviceToken];
-        [currentInstallation saveInBackground];
-    }
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
