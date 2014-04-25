@@ -10,6 +10,7 @@
 
 @interface LoginViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aiLogin;
 @property (weak, nonatomic) IBOutlet UIButton *btnFacebook;
 
 @end

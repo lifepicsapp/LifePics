@@ -42,7 +42,9 @@
 - (IBAction)loginButtonTouchHandler:(id)sender  {
     NSArray *permissionsArray = @[@"user_about_me", @"user_birthday", @"publish_actions"];
     self.btnFacebook.enabled = NO;
+    [self.aiLogin startAnimating];
     [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+        [self.aiLogin stopAnimating];
         self.btnFacebook.enabled = YES;
         if (!user) {
             if (!error) {

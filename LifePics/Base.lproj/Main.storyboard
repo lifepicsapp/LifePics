@@ -30,7 +30,7 @@
                                     <constraint firstAttribute="width" constant="280" id="vIZ-7b-qPC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="  Cadastre-se com o Facebook" image="facebook"/>
+                                <state key="normal" title="  Entrar com o Facebook" image="facebook"/>
                                 <state key="disabled">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -45,14 +45,26 @@
                                 <rect key="frame" x="47" y="58" width="220" height="90"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4nK-22-taL">
+                                <rect key="frame" x="270" y="519" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="HIu-1T-gSI"/>
+                                    <constraint firstAttribute="height" constant="20" id="fxj-kh-snt"/>
+                                </constraints>
+                                <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="4nK-22-taL" secondAttribute="trailing" constant="30" id="1lj-OA-CQs"/>
                             <constraint firstAttribute="centerX" secondItem="YUr-hM-fLt" secondAttribute="centerX" id="ROD-X6-AUd"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="YUr-hM-fLt" secondAttribute="bottom" constant="17" id="Y0K-cc-FhJ"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="4nK-22-taL" secondAttribute="bottom" constant="29" id="xmV-NR-ZVd"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="aiLogin" destination="4nK-22-taL" id="4NK-Wa-v4X"/>
                         <outlet property="btnFacebook" destination="YUr-hM-fLt" id="Kyu-2K-XRT"/>
                         <segue destination="ybJ-Zl-kkY" kind="modal" identifier="sgHome" modalTransitionStyle="crossDissolve" id="46i-jl-V0Q"/>
                     </connections>
