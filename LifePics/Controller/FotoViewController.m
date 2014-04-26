@@ -58,14 +58,21 @@
         controller.foto = self.foto;
         controller.onlyShare = self.onlyShare;
         self.onlyShare = NO;
+        self.newMedia = NO;
     }
+}
+
+#pragma mark - Metodos de Classe
+
+- (void)escolheFoto {
+    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"Escolher foto" delegate:self cancelButtonTitle:@"Cancelar" destructiveButtonTitle:nil otherButtonTitles:@"Biblioteca", @"Câmera", nil];
+    [actionSheet showInView:self.view];
 }
 
 #pragma mark - Metodos IBAction
 
 - (IBAction)sobe:(UIBarButtonItem *)sender {
-    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"Escolher foto" delegate:self cancelButtonTitle:@"Cancelar" destructiveButtonTitle:nil otherButtonTitles:@"Biblioteca", @"Câmera", nil];
-    [actionSheet showInView:self.view];
+    [self escolheFoto];
 }
 
 - (IBAction)remove:(UIBarButtonItem *)sender {
@@ -81,6 +88,10 @@
 - (IBAction)compartilha:(UIBarButtonItem *)sender {
     self.onlyShare = YES;
     [self performSegueWithIdentifier:@"sgCompartilha" sender:nil];
+}
+
+- (IBAction)tapImage:(UITapGestureRecognizer *)sender {
+    [self escolheFoto];
 }
 
 #pragma mark - Metodos AlertView Delegate
