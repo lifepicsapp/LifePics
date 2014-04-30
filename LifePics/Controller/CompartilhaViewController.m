@@ -84,7 +84,7 @@
     if (!self.foto)
         self.foto = [Foto object];
     
-    [((HomeViewController*)self.navigationController.viewControllers[0]) salvaImagem:self.imagem objeto:self.foto moldura:self.moldura comOpcoes:arrOptions];
+    [((HomeViewController*)self.navigationController.viewControllers[0]) salvaImagem:[AppUtil imageWithImage:self.imagem scaledToSize:CGSizeMake(256, 256)] objeto:self.foto moldura:self.moldura comOpcoes:arrOptions];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
