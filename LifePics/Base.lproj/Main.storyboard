@@ -211,7 +211,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="LzM-0u-Bit"/>
-                        <barButtonItem image="cache" id="o6i-e4-wdE">
+                        <barButtonItem enabled="NO" id="o6i-e4-wdE">
                             <connections>
                                 <action selector="zeraCache:" destination="1jz-CO-aQt" id="A2O-VE-4ht"/>
                             </connections>
@@ -492,7 +492,6 @@
     <resources>
         <image name="Logo" width="536" height="168"/>
         <image name="balloons" width="640" height="1136"/>
-        <image name="cache" width="22" height="22"/>
         <image name="checkmark" width="22" height="22"/>
         <image name="facebook" width="20" height="20"/>
         <image name="icon-polaroid" width="22" height="22"/>
