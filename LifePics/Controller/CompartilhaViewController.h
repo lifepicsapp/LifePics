@@ -11,7 +11,7 @@
 #import "Foto.h"
 #import "Moldura.h"
 
-@interface CompartilhaViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface CompartilhaViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *arrSocial;
 @property (strong, nonatomic) Foto *foto;

@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
 #import "HomeViewController.h"
+#import "AppUtil.h"
 
 @interface LoginViewController ()
 
@@ -28,30 +29,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Metodos de Classe
-
-- (void)logadoSucesso {
-    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-    [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
-    [currentInstallation saveEventually];
-    [self performSegueWithIdentifier:@"sgHome" sender:nil];
-}
-
 #pragma mark - Metodos IBAction
 
 - (IBAction)loginButtonTouchHandler:(id)sender  {
-    NSArray *permissionsArray = @[@"user_about_me", @"user_birthday", @"publish_actions"];
     self.btnFacebook.enabled = NO;
     [self.aiLogin startAnimating];
-    [PFFacebookUtils logInWithPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
+    [PFFacebookUtils logInWithPermissions:@[@"publish_actions"] block:^(PFUser *user, NSError *error) {
         [self.aiLogin stopAnimating];
         self.btnFacebook.enabled = YES;
-        if (!user) {
-            if (!error) {
-                NSLog(@"Uh oh. The user cancelled the Facebook login.");
-            } else {
-                NSLog(@"Uh oh. An error occurred: %@", error);
-            }
+        if (!user)
+        {
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle: @"Erro"
                                   message: @"Não foi possível efetuar o login."
@@ -59,12 +46,11 @@
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles: nil];
             [alert show];
-        } else if (user.isNew) {
-            NSLog(@"User with facebook signed up and logged in!");
-            [self logadoSucesso];
-        } else {
-            NSLog(@"User with facebook logged in!");
-            [self logadoSucesso];
+        }
+        else
+        {
+            [AppUtil logadoSucesso];
+            [self performSegueWithIdentifier:@"sgHome" sender:nil];
         }
     }];
 }

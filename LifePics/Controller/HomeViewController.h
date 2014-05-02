@@ -19,7 +19,7 @@
 @property (strong, nonatomic) ACAccountStore* accountStore;
 @property (strong, nonatomic) NSArray* arrMolduras;
 @property (strong, nonatomic) NSArray* arrFotos;
-@property (strong, nonatomic) NSCache* cacheFotos;
+@property (strong, nonatomic) NSMutableDictionary* cacheFotos;
 @property (strong, nonatomic) Moldura *moldura;
 @property (strong, nonatomic) Foto *foto;
 @property (assign) BOOL fotosGrandes;

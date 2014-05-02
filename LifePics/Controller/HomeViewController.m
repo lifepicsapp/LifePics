@@ -29,7 +29,7 @@
     [view addSubview:iv];
     self.navigationItem.titleView = view;
     
-    self.cacheFotos = [[NSCache alloc] init];
+    self.cacheFotos = [[NSMutableDictionary alloc] init];
     self.accountStore = [[ACAccountStore alloc] init];
     [AppUtil removeTextoBotaoVoltar:self];
     
@@ -67,24 +67,28 @@
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(atualiza:)];
         if (!error)
         {
-            [AppUtil adicionaLoad:self];
+            [self removeAviso];
             self.arrMolduras = objects;
             [self.collectionView reloadData];
-            
-            PFQuery* queryFoto = [Foto query];
-            [queryFoto whereKey:@"usuario" equalTo:[PFUser currentUser]];
-            [queryFoto findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(atualiza:)];
-                if (!error)
-                {
-                    self.arrFotos = objects;
-                    [self.collectionView reloadData];
-                }
-                else
-                {
-                    [self adicionaAviso:@"Erro ao baixar Fotos." delay:delay];
-                }
-            }];
+            if ([PFUser currentUser])
+            {
+                [AppUtil adicionaLoad:self];
+                PFQuery* queryFoto = [Foto query];
+                [queryFoto whereKey:@"usuario" equalTo:[PFUser currentUser]];
+                [queryFoto findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(atualiza:)];
+                    if (!error)
+                    {
+                        [self removeAviso];
+                        self.arrFotos = objects;
+                        [self.collectionView reloadData];
+                    }
+                    else
+                    {
+                        [self adicionaAviso:@"Erro ao baixar Fotos." delay:delay];
+                    }
+                }];
+            }
         }
         else
         {
@@ -123,20 +127,41 @@
     [alert show];
 }
 
+- (IBAction)zeraCache:(UIBarButtonItem *)sender {
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle: @"Atenção"
+                          message: @"Deseja zerar o cache de imagens?"
+                          delegate: self
+                          cancelButtonTitle:@"Cancelar"
+                          otherButtonTitles:@"Sim", nil];
+    [alert show];
+}
+
 #pragma mark - Metodos AlertView Delegate
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex)
+    if ([alertView.message isEqualToString:@"Deseja realmente sair?"])
     {
-        [PFUser logOut];
-        if (!self.abriuLogado)
+        if (buttonIndex)
         {
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [PFUser logOut];
+            if (!self.abriuLogado)
+            {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+            else
+            {
+                [self performSegueWithIdentifier:@"sgLogin" sender:nil];
+            }
         }
-        else
+    }
+    else
+    {
+        if (buttonIndex)
         {
-            [self performSegueWithIdentifier:@"sgLogin" sender:nil];
+            [self.cacheFotos removeAllObjects];
+            [self.collectionView reloadData];
         }
     }
 }

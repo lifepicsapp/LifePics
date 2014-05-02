@@ -7,7 +7,6 @@
 //
 
 #import "CompartilhaViewController.h"
-#import "UIViewController+QuedaConexao.h"
 #import "HomeViewController.h"
 #import "AppUtil.h"
 #import "SocialView.h"
@@ -46,47 +45,103 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - Metodos de Classe
+
+-(void)usuarioLogou
+{
+    [AppUtil logadoSucesso];
+    [self.collectionView reloadData];
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle: @"Parabéns!"
+                          message: @"Agora você já pode compartilhar os melhores momentos da sua vida"
+                          delegate: nil
+                          cancelButtonTitle:@"OK"
+                          otherButtonTitles: nil];
+    [alert show];
+}
+
 #pragma mark - Metodos IBAction
 
 - (IBAction)finaliza:(UIBarButtonItem *)sender {
-    NSMutableArray* arrOptions = [NSMutableArray array];
-    
-    for (int i = 0; i < self.arrSocial.count; i++) {
-        SocialView* cell = (SocialView *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
-        if (cell.swtAtivo.on)
-        {
-            if (i==0)
-                [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionFacebook]];
-            else if (i==1)
-                [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionTwitter]];
-            else
-                [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionInstagram]];
-        }
-    }
-    
-    if (self.onlyShare)
+    if ([PFUser currentUser])
     {
-        if (!arrOptions.count)
+        NSMutableArray* arrOptions = [NSMutableArray array];
+        
+        for (int i = 0; i < self.arrSocial.count; i++) {
+            SocialView* cell = (SocialView *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
+            if (cell.swtAtivo.on)
+            {
+                if (i==0)
+                    [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionFacebook]];
+                else if (i==1)
+                    [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionTwitter]];
+                else
+                    [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionInstagram]];
+            }
+        }
+        
+        if (self.onlyShare)
         {
-            UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle: @"Verificar"
-                                  message: @"Selecione um meio de compartilhamento!"
-                                  delegate: nil
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil];
-            [alert show];
-            return;
+            if (!arrOptions.count)
+            {
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle: @"Verificar"
+                                      message: @"Selecione um meio de compartilhamento!"
+                                      delegate: nil
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles:nil];
+                [alert show];
+                return;
+            }
+        }
+        else
+            [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionUpload]];
+        
+        if (!self.foto)
+        {
+            [AppUtil adicionaLoad:self];
+            PFQuery* query = [Foto query];
+            [query whereKey:@"moldura" equalTo:self.moldura];
+            [query whereKey:@"usuario" equalTo:[PFUser currentUser]];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                if (!error)
+                {
+                    if (objects.count)
+                    {
+                        self.foto = objects[0];
+                    }
+                    else
+                    {
+                        self.foto = [Foto object];
+                    }
+                    
+                    [((HomeViewController*)self.navigationController.viewControllers[0]) salvaImagem:[AppUtil imageWithImage:self.imagem scaledToSize:CGSizeMake(256, 256)] objeto:self.foto moldura:self.moldura comOpcoes:arrOptions];
+                    
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }
+                else
+                {
+                    [self adicionaAviso:@"Erro ao postar foto." delay:0.0];
+                }
+            }];
+        }
+        else
+        {
+            [((HomeViewController*)self.navigationController.viewControllers[0]) salvaImagem:[AppUtil imageWithImage:self.imagem scaledToSize:CGSizeMake(256, 256)] objeto:self.foto moldura:self.moldura comOpcoes:arrOptions];
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }
     }
     else
-        [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionUpload]];
-    
-    if (!self.foto)
-        self.foto = [Foto object];
-    
-    [((HomeViewController*)self.navigationController.viewControllers[0]) salvaImagem:[AppUtil imageWithImage:self.imagem scaledToSize:CGSizeMake(256, 256)] objeto:self.foto moldura:self.moldura comOpcoes:arrOptions];
-    
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Atenção"
+                              message: @"Para publicar uma foto é necessário estar logado."
+                              delegate: self
+                              cancelButtonTitle:@"Cancelar"
+                              otherButtonTitles: @"Logar", nil];
+        [alert show];
+    }
 }
 
 #pragma mark - Metodos CollectionView FlowLayout
@@ -107,8 +162,43 @@
 {
     SocialView* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CellSocial" forIndexPath:indexPath];
     cell.social = [self.arrSocial objectAtIndex:indexPath.item];
+    if (![PFUser currentUser])
+    {
+        cell.swtAtivo.enabled = NO;
+    }
+    else
+    {
+        cell.swtAtivo.enabled = YES;
+    }
     
     return cell;
+}
+
+#pragma mark - Metodos AlertView Delegate
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex)
+    {
+        [AppUtil adicionaLoad:self];
+        [PFFacebookUtils logInWithPermissions:@[@"publish_actions"] block:^(PFUser *user, NSError *error) {
+            self.navigationItem.rightBarButtonItem = nil;
+            if (!user)
+            {
+                UIAlertView *alert = [[UIAlertView alloc]
+                                      initWithTitle: @"Erro"
+                                      message: @"Não foi possível efetuar o login."
+                                      delegate: nil
+                                      cancelButtonTitle:@"OK"
+                                      otherButtonTitles: nil];
+                [alert show];
+            }
+            else
+            {
+                [self usuarioLogou];
+            }
+        }];
+    }
 }
 
 @end

@@ -44,9 +44,8 @@ static char const * const OptionsTagKey = "Options";
     
         if (!self.fotoBar)
         {
-            [self.navigationController setToolbarHidden:YES];
             self.fotoBar = [[[NSBundle mainBundle] loadNibNamed:@"FotoView" owner:self options:nil] lastObject];
-            self.fotoBar.frame = CGRectMake(0, self.view.frame.size.height - 44, 320, 44);
+            self.fotoBar.frame = CGRectMake(0, self.view.frame.size.height - 88, 320, 44);
         }
         else
         {
@@ -252,7 +251,9 @@ static char const * const OptionsTagKey = "Options";
         [self.fotoBar removeFromSuperview];
         self.fotoBar = nil;
         if (success)
-            [self.navigationController setToolbarHidden:NO];
+        {
+            //on Sucess
+        }
     }];
 }
 

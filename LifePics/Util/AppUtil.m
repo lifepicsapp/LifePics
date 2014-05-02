@@ -7,6 +7,7 @@
 //
 
 #import "AppUtil.h"
+#import <Parse/Parse.h>
 
 @implementation AppUtil
 
@@ -40,6 +41,13 @@
     UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     return newImage;
+}
+
++ (void)logadoSucesso
+{
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setObject:[PFUser currentUser] forKey:@"user"];
+    [currentInstallation saveEventually];
 }
 
 @end

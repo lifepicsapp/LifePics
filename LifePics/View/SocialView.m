@@ -8,6 +8,7 @@
 
 #import "SocialView.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "AppDelegate.h"
 #import "CompartilhaViewController.h"
 
 @implementation SocialView
@@ -30,18 +31,24 @@
             {
                 sender.on = NO;
                 [FBSession.activeSession requestNewPublishPermissions:@[@"publish_actions"] defaultAudience:FBSessionDefaultAudienceOnlyMe completionHandler:^(FBSession *session, NSError *error) {
-                    if (!error)
+                    if (!error && [FBSession.activeSession.permissions indexOfObject:@"publish_actions"] != NSNotFound)
                     {
                         sender.on = YES;
+                        [[self controller] removeAviso];
                     }
                     else
                     {
-                        [((CompartilhaViewController*)self) adicionaAviso:@"Erro ao autorizar Facebook." delay:0.0];
+                       [[self controller] adicionaAviso:@"Erro ao autorizar Facebook." delay:0.0];
                     }
                 }];
             }
         }
     }
+}
+
+-(CompartilhaViewController*)controller
+{
+    return (CompartilhaViewController*)((UINavigationController*)((AppDelegate*)[[UIApplication sharedApplication] delegate]).window.rootViewController).visibleViewController;
 }
 
 @end

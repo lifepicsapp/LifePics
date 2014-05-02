@@ -28,10 +28,9 @@ static char const * const ObjectTagKey = "BarraAviso";
 {
     if (!self.barraAviso)
     {
-        [self.navigationController setToolbarHidden:YES];
         self.barraAviso = [[[NSBundle mainBundle] loadNibNamed:@"ConexaoView" owner:self options:nil] lastObject];
         self.barraAviso.alpha = 0.0;
-        self.barraAviso.frame = CGRectMake(0, self.view.frame.size.height - 44, 320, 44);
+        self.barraAviso.frame = CGRectMake(0, self.view.frame.size.height - 88, 320, 44);
         [self.view addSubview:self.barraAviso];
         
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];
@@ -55,7 +54,6 @@ static char const * const ObjectTagKey = "BarraAviso";
         } completion:^(BOOL finished) {
             [self.barraAviso removeFromSuperview];
             self.barraAviso = nil;
-            [self.navigationController setToolbarHidden:NO];
         }];
     }
 }

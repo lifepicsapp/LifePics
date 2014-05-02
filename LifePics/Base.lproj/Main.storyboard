@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dC4-AR-eVV">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dC4-AR-eVV">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
@@ -29,45 +29,68 @@
                                         <rect key="frame" x="20" y="148" width="280" height="87"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUr-hM-fLt">
+                                        <rect key="frame" x="20" y="452" width="280" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="280" id="bot-iN-Yca"/>
+                                            <constraint firstAttribute="height" constant="44" id="yyI-U0-88T"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <state key="normal" title="  Entrar com o Facebook" image="facebook"/>
+                                        <state key="disabled">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" image="facebook">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="loginButtonTouchHandler:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="D06-U2-QDG"/>
+                                        </connections>
+                                    </button>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4nK-22-taL">
+                                        <rect key="frame" x="268" y="464" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="EjW-54-cAO"/>
+                                            <constraint firstAttribute="width" constant="20" id="FVC-VE-B3m"/>
+                                        </constraints>
+                                        <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    </activityIndicatorView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Y0-wy-WwY">
+                                        <rect key="frame" x="20" y="504" width="280" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="Rvb-8j-Eu5"/>
+                                            <constraint firstAttribute="width" constant="280" id="iQh-9O-x0n"/>
+                                        </constraints>
+                                        <state key="normal" title="Agora não">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="ybJ-Zl-kkY" kind="modal" modalTransitionStyle="crossDissolve" id="cyZ-wx-VjA"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.050980392156862744" green="0.56862745098039214" blue="0.52156862745098043" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="0Y0-wy-WwY" firstAttribute="top" secondItem="YUr-hM-fLt" secondAttribute="bottom" constant="8" id="EIa-p8-bJD"/>
+                                    <constraint firstItem="0Y0-wy-WwY" firstAttribute="centerX" secondItem="YUr-hM-fLt" secondAttribute="centerX" id="IlS-JM-7fs"/>
+                                    <constraint firstAttribute="bottom" secondItem="0Y0-wy-WwY" secondAttribute="bottom" constant="20" id="TNb-Xw-qrP"/>
+                                    <constraint firstAttribute="trailing" secondItem="4nK-22-taL" secondAttribute="trailing" constant="32" id="Wfb-d0-hUg"/>
+                                    <constraint firstItem="4nK-22-taL" firstAttribute="centerY" secondItem="YUr-hM-fLt" secondAttribute="centerY" id="nAp-VT-xXe"/>
+                                    <constraint firstAttribute="centerX" secondItem="0Y0-wy-WwY" secondAttribute="centerX" id="nY4-69-W0P"/>
+                                </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YUr-hM-fLt">
-                                <rect key="frame" x="20" y="507" width="280" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="aqe-Ba-O4q"/>
-                                    <constraint firstAttribute="width" constant="280" id="vIZ-7b-qPC"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="  Entrar com o Facebook" image="facebook"/>
-                                <state key="disabled">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted" image="facebook">
-                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="loginButtonTouchHandler:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="D06-U2-QDG"/>
-                                </connections>
-                            </button>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="4nK-22-taL">
-                                <rect key="frame" x="270" y="519" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="HIu-1T-gSI"/>
-                                    <constraint firstAttribute="height" constant="20" id="fxj-kh-snt"/>
-                                </constraints>
-                                <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="4nK-22-taL" secondAttribute="trailing" constant="30" id="1lj-OA-CQs"/>
-                            <constraint firstAttribute="centerX" secondItem="YUr-hM-fLt" secondAttribute="centerX" id="ROD-X6-AUd"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="YUr-hM-fLt" secondAttribute="bottom" constant="17" id="Y0K-cc-FhJ"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="4nK-22-taL" secondAttribute="bottom" constant="29" id="xmV-NR-ZVd"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="dC4-AR-eVV" secondAttribute="bottom" id="7g1-dQ-Om9"/>
+                            <constraint firstItem="dC4-AR-eVV" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Ihf-m7-1wt"/>
+                            <constraint firstItem="dC4-AR-eVV" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="RsJ-oy-k1s"/>
+                            <constraint firstAttribute="trailing" secondItem="dC4-AR-eVV" secondAttribute="trailing" id="o07-w9-xcP"/>
                         </constraints>
                     </view>
                     <connections>
@@ -188,6 +211,11 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="LzM-0u-Bit"/>
+                        <barButtonItem image="cache" id="o6i-e4-wdE">
+                            <connections>
+                                <action selector="zeraCache:" destination="1jz-CO-aQt" id="A2O-VE-4ht"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="LifePics" id="fOv-oA-npG">
                         <barButtonItem key="leftBarButtonItem" image="logout" id="xAg-R7-Vj1">
@@ -464,6 +492,7 @@
     <resources>
         <image name="Logo" width="536" height="168"/>
         <image name="balloons" width="640" height="1136"/>
+        <image name="cache" width="22" height="22"/>
         <image name="checkmark" width="22" height="22"/>
         <image name="facebook" width="20" height="20"/>
         <image name="icon-polaroid" width="22" height="22"/>
@@ -476,4 +505,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="cyZ-wx-VjA"/>
+    </inferredMetricsTieBreakers>
 </document>
