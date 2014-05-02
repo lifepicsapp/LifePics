@@ -181,7 +181,9 @@
     if (buttonIndex)
     {
         [AppUtil adicionaLoad:self];
+        self.btnFinaliza.enabled = NO;
         [PFFacebookUtils logInWithPermissions:@[@"publish_actions"] block:^(PFUser *user, NSError *error) {
+            self.btnFinaliza.enabled = YES;
             self.navigationItem.rightBarButtonItem = nil;
             if (!user)
             {
