@@ -414,7 +414,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "C1FB6E7F-D2A2-455D-8678-ACFACF7D54FD";
+				PROVISIONING_PROFILE = "3B041AC0-C9EA-4982-8CCC-0FB6DD534AB9";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -448,65 +448,13 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "C1FB6E7F-D2A2-455D-8678-ACFACF7D54FD";
+				PROVISIONING_PROFILE = "3B041AC0-C9EA-4982-8CCC-0FB6DD534AB9";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		AFBE9A6E18FB22AC0001C35E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 91FED1E67E45434788613BD7 /* Pods-LifePics.xcconfig */;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "LifePics/LifePics-Prefix.pch";
-				INFOPLIST_FILE = "LifePics/LifePics-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lsqlite3",
-					"-lz",
-					"-framework",
-					AudioToolbox,
-					"-framework",
-					CFNetwork,
-					"-framework",
-					CoreGraphics,
-					"-framework",
-					CoreLocation,
-					"-framework",
-					MobileCoreServices,
-					"-framework",
-					Parse,
-					"-framework",
-					QuartzCore,
-					"-framework",
-					Security,
-					"-framework",
-					StoreKit,
-					"-framework",
-					SystemConfiguration,
-					"-weak_framework",
-					Accounts,
-					"-weak_framework",
-					AdSupport,
-					"-weak_framework",
-					Security,
-					"-weak_framework",
-					Social,
-				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C1FB6E7F-D2A2-455D-8678-ACFACF7D54FD";
-				WRAPPER_EXTENSION = app;
-			};
-			name = Debug;
-		};
-		AFBE9A6F18FB22AC0001C35E /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 91FED1E67E45434788613BD7 /* Pods-LifePics.xcconfig */;
 			buildSettings = {
@@ -554,7 +502,60 @@
 					Social,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C1FB6E7F-D2A2-455D-8678-ACFACF7D54FD";
+				PROVISIONING_PROFILE = "3B041AC0-C9EA-4982-8CCC-0FB6DD534AB9";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AFBE9A6F18FB22AC0001C35E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 91FED1E67E45434788613BD7 /* Pods-LifePics.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LifePics/LifePics-Prefix.pch";
+				INFOPLIST_FILE = "LifePics/LifePics-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lsqlite3",
+					"-lz",
+					"-framework",
+					AudioToolbox,
+					"-framework",
+					CFNetwork,
+					"-framework",
+					CoreGraphics,
+					"-framework",
+					CoreLocation,
+					"-framework",
+					MobileCoreServices,
+					"-framework",
+					Parse,
+					"-framework",
+					QuartzCore,
+					"-framework",
+					Security,
+					"-framework",
+					StoreKit,
+					"-framework",
+					SystemConfiguration,
+					"-weak_framework",
+					Accounts,
+					"-weak_framework",
+					AdSupport,
+					"-weak_framework",
+					Security,
+					"-weak_framework",
+					Social,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3B041AC0-C9EA-4982-8CCC-0FB6DD534AB9";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
