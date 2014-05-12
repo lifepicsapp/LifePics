@@ -43,6 +43,16 @@
     return newImage;
 }
 
++ (NSData*) maskImage:(NSData *)imageData withMask:(UIImage *)maskImage {
+    UIImage* image = [UIImage imageWithData:imageData];
+    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
+    [maskImage drawInRect:CGRectMake(image.size.width - maskImage.size.width, image.size.height - maskImage.size.height, maskImage.size.width, maskImage.size.height)];
+    UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return UIImageJPEGRepresentation(result, 0.0f);
+}
+
 + (void)logadoSucesso
 {
     PFInstallation *currentInstallation = [PFInstallation currentInstallation];

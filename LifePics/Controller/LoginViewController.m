@@ -21,6 +21,8 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    [self.btnCadastrar setTitle:NSLocalizedString(@"btn_cadastrar", nil) forState:UIControlStateNormal];
+    [self.btnFacebook setTitle:NSLocalizedString(@"btn_facebook", nil) forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning
@@ -40,8 +42,8 @@
         if (!user)
         {
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle: @"Erro"
-                                  message: @"Não foi possível efetuar o login."
+                                  initWithTitle: NSLocalizedString(@"msg_erro", nil)
+                                  message: NSLocalizedString(@"msg_login", nil)
                                   delegate: nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles: nil];

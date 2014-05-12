@@ -50,8 +50,8 @@ static char const * const OptionsTagKey = "Options";
         else
         {
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle: @"Erro"
-                                  message: @"Aguarde a conclusão do processo em andamento!"
+                                  initWithTitle: NSLocalizedString(@"msg_erro", nil)
+                                  message: NSLocalizedString(@"msg_processo", nil)
                                   delegate: nil
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
@@ -62,12 +62,16 @@ static char const * const OptionsTagKey = "Options";
         [self.fotoBar.aiCarregando startAnimating];
         [self.view addSubview:self.fotoBar];
         
-        NSData* imageData = UIImageJPEGRepresentation(image, 0.05f);
+        NSData* imageData = UIImageJPEGRepresentation(image, 0.0f);
         NSString* legenda = [NSString stringWithFormat:URL_SHARE, moldura.legenda];
         
         if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionUpload]])
         {
             [self uploadImage:imageData foto:foto moldura:moldura];
+        }
+        else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionLifePics]])
+        {
+            [self compartilhaLifePics:imageData legenda:legenda];
         }
         else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionFacebook]])
         {
@@ -85,7 +89,7 @@ static char const * const OptionsTagKey = "Options";
 {
     NSString* legenda = [NSString stringWithFormat:URL_SHARE, moldura.legenda];
     HomeViewController* controller = ((HomeViewController*)self);
-    self.fotoBar.lblStatus.text = @"Salvando foto...";
+    self.fotoBar.lblStatus.text = NSLocalizedString(@"msg_salvando", nil);
     self.fotoBar.pvUpload.hidden = NO;
     
     PFFile *imageFile = [PFFile fileWithName:[[AppUtil escapeString:moldura.titulo] stringByAppendingString:@".jpg"] data:imageData];
@@ -110,7 +114,11 @@ static char const * const OptionsTagKey = "Options";
             [foto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error)
                 {
-                    if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionFacebook]])
+                    if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionLifePics]])
+                    {
+                        [self compartilhaLifePics:imageData legenda:legenda];
+                    }
+                    else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionFacebook]])
                     {
                         [self compartilhaFacebook:imageData legenda:legenda];
                     }
@@ -127,7 +135,7 @@ static char const * const OptionsTagKey = "Options";
                 else
                 {
                     NSLog(@"Error: %@ %@", error, [error userInfo]);
-                    [controller adicionaAviso:@"Erro ao salvar foto." delay:0.0];
+                    [controller adicionaAviso:NSLocalizedString(@"msg_salvar", nil) delay:0.0];
                     [self removeBar:NO];
                 }
             }];
@@ -135,7 +143,7 @@ static char const * const OptionsTagKey = "Options";
         else
         {
             NSLog(@"Error: %@ %@", error, [error userInfo]);
-            [controller adicionaAviso:@"Erro ao subir foto." delay:0.0];
+            [controller adicionaAviso:NSLocalizedString(@"msg_subir", nil) delay:0.0];
             [self removeBar:NO];
         }
     } progressBlock:^(int percentDone) {
@@ -143,10 +151,46 @@ static char const * const OptionsTagKey = "Options";
     }];
 }
 
+
+- (void)compartilhaLifePics:(NSData*)imageData legenda:(NSString*)legenda
+{
+    imageData = [AppUtil maskImage:imageData withMask:[UIImage imageNamed:@"logo-marca"]];
+    HomeViewController* controller = ((HomeViewController*)self);
+    self.fotoBar.lblStatus.text = NSLocalizedString(@"msg_lifepics", nil);
+    NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
+    [params setObject:legenda forKey:@"message"];
+    [params setObject:imageData forKey:@"source"];
+    
+    [FBRequestConnection startWithGraphPath:@"/518721901572885/feed" parameters:params HTTPMethod:@"POST" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        if (!error)
+        {
+            if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionFacebook]])
+            {
+                [self compartilhaFacebook:imageData legenda:legenda];
+            }
+            else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionTwitter]])
+            {
+                [self compartilhaTwitter:imageData legenda:legenda];
+            }
+            else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionInstagram]]){}
+            else
+            {
+                [self finalizaOk];
+            }
+        }
+        else
+        {
+            [controller adicionaAviso:NSLocalizedString(@"msg_erro_lifepics", nil) delay:0.0];
+            [self removeBar:NO];
+        }
+    }];
+}
+
 - (void)compartilhaFacebook:(NSData*)imageData legenda:(NSString*)legenda
 {
+    imageData = [AppUtil maskImage:imageData withMask:[UIImage imageNamed:@"logo-marca"]];
     HomeViewController* controller = ((HomeViewController*)self);
-    self.fotoBar.lblStatus.text = @"Compartilhando Facebook...";
+    self.fotoBar.lblStatus.text = NSLocalizedString(@"msg_facebook", nil);
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     [params setObject:legenda forKey:@"message"];
     [params setObject:imageData forKey:@"source"];
@@ -166,7 +210,7 @@ static char const * const OptionsTagKey = "Options";
         }
         else
         {
-            [controller adicionaAviso:@"Erro ao compartilhar no Facebook." delay:0.0];
+            [controller adicionaAviso:NSLocalizedString(@"msg_erro_facebook", nil) delay:0.0];
             [self removeBar:NO];
         }
     }];
@@ -174,7 +218,8 @@ static char const * const OptionsTagKey = "Options";
 
 -(void)compartilhaTwitter:(NSData*)imageData legenda:(NSString*)legenda
 {
-    self.fotoBar.lblStatus.text = @"Compartilhando Twitter...";
+    imageData = [AppUtil maskImage:imageData withMask:[UIImage imageNamed:@"logo-marca"]];
+    self.fotoBar.lblStatus.text = NSLocalizedString(@"msg_twitter", nil);
     
     HomeViewController* controller = ((HomeViewController*)self);
     ACAccountType *twitterType = [controller.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
@@ -206,7 +251,7 @@ static char const * const OptionsTagKey = "Options";
                     else {
                         NSLog(@"[ERROR] Server responded: status code %ld %@", (long)statusCode, [NSHTTPURLResponse localizedStringForStatusCode:statusCode]);
                         dispatch_sync(dispatch_get_main_queue(), ^{
-                            [controller adicionaAviso:@"Erro ao compartilhar no Twitter." delay:0.0];
+                            [controller adicionaAviso:NSLocalizedString(@"msg_erro_twitter", nil) delay:0.0];
                             [self removeBar:NO];
                         });
                     }
@@ -214,7 +259,7 @@ static char const * const OptionsTagKey = "Options";
                 else {
                     NSLog(@"[ERROR] An error occurred while posting: %@", [error localizedDescription]);
                     dispatch_sync(dispatch_get_main_queue(), ^{
-                        [controller adicionaAviso:@"Erro ao compartilhar no Twitter." delay:0.0];
+                        [controller adicionaAviso:NSLocalizedString(@"msg_erro_twitter", nil) delay:0.0];
                         [self removeBar:NO];
                     });
                 }
@@ -223,7 +268,7 @@ static char const * const OptionsTagKey = "Options";
         else {
             NSLog(@"[ERROR] An error occurred while asking for user authorization: %@", [error localizedDescription]);
             dispatch_sync(dispatch_get_main_queue(), ^{
-                [controller adicionaAviso:@"Erro ao autorizar Twitter." delay:0.0];
+                [controller adicionaAviso:NSLocalizedString(@"msg_autorizar_twitter", nil) delay:0.0];
                 [self removeBar:NO];
             });
         }
@@ -232,7 +277,7 @@ static char const * const OptionsTagKey = "Options";
 
 -(void)finalizaOk
 {
-    self.fotoBar.lblStatus.text = @"Finalizado!";
+    self.fotoBar.lblStatus.text = NSLocalizedString(@"msg_fim", nil);
     [self.fotoBar.aiCarregando stopAnimating];
     self.fotoBar.aiCarregando.hidden = YES;
     self.fotoBar.imgOK.hidden = NO;

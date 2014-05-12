@@ -12,5 +12,6 @@
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *aiLogin;
 @property (weak, nonatomic) IBOutlet UIButton *btnFacebook;
+@property (weak, nonatomic) IBOutlet UIButton *btnCadastrar;
 
 @end

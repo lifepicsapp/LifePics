@@ -1,0 +1,62 @@
+/* 
+  Localizable.strings
+  LifePics
+
+  Created by Gabriel Moraes on 11/05/14.
+  Copyright (c) 2014 Gabriel Moraes. All rights reserved.
+*/
+
+//Login
+
+"msg_erro" = "Error";
+"msg_login" = "Login Failed.";
+"btn_facebook" = "  Enter with Facebook";
+"btn_cadastrar" = "Register Later";
+
+//Inicio
+
+"msg_atencao" = "Atention";
+"msg_sair" = "Are you sure you want to Logoff?";
+"msg_sim" = "Yes";
+"msg_salvando" = "Saving picture...";
+"msg_lifepics" = "Sharing in LifePics...";
+"msg_facebook" = "Sharing on Facebook...";
+"msg_twitter" = "Sharing on Twitter...";
+"msg_fim" = "Done!";
+
+//Foto
+
+"msg_sucesso" = "Success";
+"msg_deletar" = "Are you sure you want to delete this picture?";
+"msg_escolher" = "Choose picture";
+"msg_deletada" = "Picture removed successfully!";
+"msg_album" = "Error while saving the picture in the Album.";
+"btn_biblioteca" = "Library";
+"btn_camera" = "Camera";
+"btn_cancelar" = "Cancel";
+
+//Salvar/Compartilhar
+
+"tit_compartilhar" = "Share";
+"tit_salvar" = "Save";
+"msg_verificar" = "Verify";
+"msg_selecione" = "Select at least one means of sharing.";
+"msg_publicar" = "You need to login to post your picture.";
+"msg_bem_vindo" = "Welcome!";
+"msg_momentos" = "Now you can share the best moments of your life.";
+"msg_postar" = "Error while posting the picture.";
+"btn_logar" = "Login";
+
+//Falhas
+
+"msg_processo" = "Wait for the ongoing proccess to finish.";
+"msg_salvar" = "Error while saving the picture.";
+"msg_subir" = "Error while uploading picture.";
+"msg_erro_lifepics" = "Error while sharing in LifePics.";
+"msg_erro_facebook" = "Error while sharing on Facebook.";
+"msg_erro_twitter" = "Error while sharing on Twitter.";
+"msg_autorizar_facebook" = "Error while allowing Facebook.";
+"msg_autorizar_twitter" = "Error while allowing Twitter.";
+"msg_moldura" = "Error while loading Moldings.";
+"msg_foto" = "Error while downloading Pictures.";
+"msg_foto_moldura" = "Error while loading Molding Picture";

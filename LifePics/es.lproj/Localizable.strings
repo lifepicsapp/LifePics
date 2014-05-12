@@ -1,0 +1,63 @@
+/* 
+  Localizable.strings
+  LifePics
+
+  Created by Gabriel Moraes on 11/05/14.
+  Copyright (c) 2014 Gabriel Moraes. All rights reserved.
+*/
+/*
+//Login
+
+"msg_erro" = "Erro";
+"msg_login" = "Não foi possível efetuar o login.";
+"btn_facebook" = "Entrar com o Facebook";
+"btn_cadastrar" = "Cadastrar mais tarde";
+
+//Inicio
+
+"msg_atencao" = "Atenção";
+"msg_sair" = "Deseja realmente sair?";
+"msg_sim" = "Sim";
+"msg_salvando" = "Salvando foto...";
+"msg_lifepics" = "Compartilhando em LifePics...";
+"msg_facebook" = "Compartilhando Facebook...";
+"msg_twitter" = "Compartilhando Twitter...";
+"msg_fim" = "Finalizado!";
+
+//Foto
+
+"msg_sucesso" = "Sucesso";
+"msg_deletar" = "Deseja realmente deletar essa imagem?";
+"msg_escolher" = "Escolher foto";
+"msg_deletada" = "Foto removida com sucesso!";
+"msg_album" = "Erro ao salvar imagem no Albúm.";
+"btn_biblioteca" = "Biblioteca";
+"btn_camera" = "Câmera";
+"btn_cancelar" = "Cancelar";
+
+//Salvar/Compartilhar
+
+"tit_compartilhar" = "Compartilhar";
+"tit_salvar" = "Salvar";
+"msg_verificar" = "Verificar";
+"msg_selecione" = "Selecione um meio de compartilhamento.";
+"msg_publicar" = "Para publicar uma foto é necessário estar logado.";
+"msg_bem_vindo" = "Bem-vindo!";
+"msg_momentos" = "Agora você já pode compartilhar os melhores momentos da sua vida.";
+"msg_postar" = "Erro ao postar foto.";
+"btn_logar" = "Logar";
+
+//Falhas
+
+"msg_processo" = "Aguarde a conclusão do processo em andamento.";
+"msg_salvar" = "Erro ao salvar foto.";
+"msg_subir" = "Erro ao subir foto.";
+"msg_erro_lifepics" = "Erro ao compartilhar em LifePics.";
+"msg_erro_facebook" = "Erro ao compartilhar no Facebook.";
+"msg_erro_twitter" = "Erro ao compartilhar no Twitter.";
+"msg_autorizar_facebook" = "Erro ao autorizar Facebook.";
+"msg_autorizar_twitter" = "Erro ao autorizar Twitter.";
+"msg_moldura" = "Erro ao caregar Molduras.";
+"msg_foto" = "Erro ao baixar Fotos.";
+"msg_foto_moldura" = "Erro ao carregar imagem da Moldura";
+/*

@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FotoView.h"
 
 @interface Social : NSObject
 
 @property (nonatomic, strong) NSString* nome;
+@property (assign) FotoBarOptions option;
 
-+(instancetype)social:(NSString*)nome;
++(instancetype)socialNome:(NSString*)nome option:(FotoBarOptions)option;
 
 @end

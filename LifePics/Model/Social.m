@@ -10,10 +10,11 @@
 
 @implementation Social
 
-+(instancetype)social:(NSString*)nome
++(instancetype)socialNome:(NSString*)nome option:(FotoBarOptions)option
 {
     Social* social = [[Social alloc] init];
     social.nome = nome;
+    social.option = option;
     return social;
 }
 

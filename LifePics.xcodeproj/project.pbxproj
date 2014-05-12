@@ -30,6 +30,7 @@
 		AFBE9A5218FB22AC0001C35E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFBE9A5018FB22AC0001C35E /* Main.storyboard */; };
 		AFBE9A5518FB22AC0001C35E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBE9A5418FB22AC0001C35E /* LoginViewController.m */; };
 		AFBE9A5718FB22AC0001C35E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFBE9A5618FB22AC0001C35E /* Images.xcassets */; };
+		AFD25FA9192065CA0075DD88 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFD25FA7192065CA0075DD88 /* Localizable.strings */; };
 		AFDDF39418FD828900EFC010 /* CropView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDDF39318FD828900EFC010 /* CropView.xib */; };
 		AFDDF39718FD85C900EFC010 /* CropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDDF39618FD85C900EFC010 /* CropViewController.m */; };
 		AFDDF39B18FDC63D00EFC010 /* AppUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDDF39A18FDC63D00EFC010 /* AppUtil.m */; };
@@ -69,9 +70,9 @@
 		AFBE9A3E18FB22AC0001C35E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AFBE9A4018FB22AC0001C35E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		AFBE9A4218FB22AC0001C35E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		AFBE9A4618FB22AC0001C35E /* LifePics-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LifePics-Info.plist"; sourceTree = "<group>"; };
-		AFBE9A4A18FB22AC0001C35E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		AFBE9A4C18FB22AC0001C35E /* LifePics-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LifePics-Prefix.pch"; sourceTree = "<group>"; };
+		AFBE9A4618FB22AC0001C35E /* LifePics-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "LifePics-Info.plist"; sourceTree = "<group>"; };
+		AFBE9A4A18FB22AC0001C35E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AFBE9A4C18FB22AC0001C35E /* LifePics-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "LifePics-Prefix.pch"; sourceTree = "<group>"; };
 		AFBE9A4D18FB22AC0001C35E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AFBE9A4E18FB22AC0001C35E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AFBE9A5118FB22AC0001C35E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -79,6 +80,11 @@
 		AFBE9A5418FB22AC0001C35E /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		AFBE9A5618FB22AC0001C35E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AFBE9A7318FB83FA0001C35E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AFD25FA8192065CA0075DD88 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AFD25FAA192065D90075DD88 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
+		AFDC76AE1920660F00AD57BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AFDC76AF1920661B00AD57BC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AFDC76B01920661B00AD57BC /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AFDDF39318FD828900EFC010 /* CropView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CropView.xib; sourceTree = "<group>"; };
 		AFDDF39518FD85C900EFC010 /* CropViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CropViewController.h; sourceTree = "<group>"; };
 		AFDDF39618FD85C900EFC010 /* CropViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CropViewController.m; sourceTree = "<group>"; };
@@ -186,6 +192,7 @@
 		AFBE9A4518FB22AC0001C35E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AFD25FA7192065CA0075DD88 /* Localizable.strings */,
 				AFBE9A4618FB22AC0001C35E /* LifePics-Info.plist */,
 				AFBE9A4718FB22AC0001C35E /* InfoPlist.strings */,
 				AFBE9A4A18FB22AC0001C35E /* main.m */,
@@ -270,6 +277,7 @@
 				en,
 				Base,
 				pt,
+				es,
 			);
 			mainGroup = AFBE9A3218FB22AC0001C35E;
 			productRefGroup = AFBE9A3C18FB22AC0001C35E /* Products */;
@@ -291,6 +299,7 @@
 				AFBE9A4918FB22AC0001C35E /* InfoPlist.strings in Resources */,
 				AFBE9A5218FB22AC0001C35E /* Main.storyboard in Resources */,
 				AFA090DB19076405009518FE /* ConexaoView.xib in Resources */,
+				AFD25FA9192065CA0075DD88 /* Localizable.strings in Resources */,
 				AFDDF39418FD828900EFC010 /* CropView.xib in Resources */,
 				AF292ADB1906C98C000FE080 /* FotoView.xib in Resources */,
 			);
@@ -364,6 +373,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				AFBE9A7318FB83FA0001C35E /* pt */,
+				AFDC76AE1920660F00AD57BC /* en */,
+				AFDC76AF1920661B00AD57BC /* es */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -374,6 +385,16 @@
 				AFBE9A5118FB22AC0001C35E /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AFD25FA7192065CA0075DD88 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AFD25FA8192065CA0075DD88 /* en */,
+				AFD25FAA192065D90075DD88 /* pt */,
+				AFDC76B01920661B00AD57BC /* es */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

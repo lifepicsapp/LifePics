@@ -15,8 +15,6 @@
 
 -(void)setSocial:(Social *)social {
     _social = social;
-    if ([_social.nome isEqualToString:@"instagram"])
-        self.swtAtivo.enabled = NO;
         
     self.lblNome.text = [_social.nome capitalizedString];
     self.imgIcone.image = [UIImage imageNamed:[NSString stringWithFormat:@"%@_circle", _social.nome]];
@@ -38,7 +36,7 @@
                     }
                     else
                     {
-                       [[self controller] adicionaAviso:@"Erro ao autorizar Facebook." delay:0.0];
+                       [[self controller] adicionaAviso:NSLocalizedString(@"msg_autorizar_facebook", nil) delay:0.0];
                     }
                 }];
             }

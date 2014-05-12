@@ -63,6 +63,9 @@
     
     PFQuery* query = [Moldura query];
     [query whereKey:@"tipo" equalTo:@"free"];
+    [query includeKey:@"foto"];
+    [query includeKey:@"tema"];
+    [query includeKey:@"frase"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(atualiza:)];
         if (!error)
@@ -85,14 +88,14 @@
                     }
                     else
                     {
-                        [self adicionaAviso:@"Erro ao baixar Fotos." delay:delay];
+                        [self adicionaAviso:NSLocalizedString(@"msg_foto", nil) delay:delay];
                     }
                 }];
             }
         }
         else
         {
-            [self adicionaAviso:@"Erro ao carregar Molduras." delay:delay];
+            [self adicionaAviso:NSLocalizedString(@"msg_moldura", nil) delay:delay];
         }
     }];
 }
@@ -119,11 +122,11 @@
 
 - (IBAction)desloga:(UIBarButtonItem *)sender {
     UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle: @"Atenção"
-                          message: @"Deseja realmente sair?"
+                          initWithTitle: NSLocalizedString(@"msg_atencao", nil)
+                          message: NSLocalizedString(@"msg_sair", nil)
                           delegate: self
-                          cancelButtonTitle:@"Cancelar"
-                          otherButtonTitles:@"Sim", nil];
+                          cancelButtonTitle:NSLocalizedString(@"btn_cancelar", nil)
+                          otherButtonTitles:NSLocalizedString(@"msg_sim", nil), nil];
     [alert show];
 }
 
@@ -141,7 +144,7 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if ([alertView.message isEqualToString:@"Deseja realmente sair?"])
+    if ([alertView.message isEqualToString:NSLocalizedString(@"msg_sair", nil)])
     {
         if (buttonIndex)
         {
@@ -216,7 +219,6 @@
         if ([filteredArray count] > 0)
         {
             Foto* foto = [filteredArray objectAtIndex:0];
-            [foto fetchIfNeeded];
             
             UIImage* cacheImage = [self.cacheFotos objectForKey:foto.objectId];
             if (cacheImage) {
@@ -232,7 +234,7 @@
                     }
                     else
                     {
-                        [self adicionaAviso:[NSString stringWithFormat:@"Erro ao carregar imagem da Moldura '%@'", moldura.titulo] delay:0.0];
+                        [self adicionaAviso:[NSString stringWithFormat:@"%@ '%@'",NSLocalizedString(@"msg_foto_moldura", nil), moldura.titulo] delay:0.0];
                     }
                 }];
             }

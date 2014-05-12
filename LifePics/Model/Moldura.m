@@ -11,11 +11,36 @@
 
 @implementation Moldura
 
-@dynamic titulo, legenda;
+@dynamic titulo, legenda, tema, frase;
 
 +(NSString *)parseClassName
 {
     return NSStringFromClass([self class]);
+}
+
+-(NSString *)titulo
+{
+    return [self getLocalized:self.tema];
+}
+
+-(NSString *)legenda
+{
+    return [self getLocalized:self.frase];
+}
+
+- (NSString*)getLocalized:(PFObject*)object
+{
+    NSString* retorno;
+    for (NSString* language in [NSLocale preferredLanguages])
+    {
+        retorno = [object valueForKey:language];
+        if (retorno)
+        {
+            goto stopLoop;
+        }
+    }
+    stopLoop:
+    return retorno;
 }
 
 @end

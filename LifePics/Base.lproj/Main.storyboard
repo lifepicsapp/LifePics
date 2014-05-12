@@ -95,7 +95,8 @@
                     </view>
                     <connections>
                         <outlet property="aiLogin" destination="4nK-22-taL" id="4NK-Wa-v4X"/>
-                        <outlet property="btnFacebook" destination="YUr-hM-fLt" id="Kyu-2K-XRT"/>
+                        <outlet property="btnCadastrar" destination="0Y0-wy-WwY" id="ddD-Iy-ZVV"/>
+                        <outlet property="btnFacebook" destination="YUr-hM-fLt" id="fTs-oB-m7Z"/>
                         <segue destination="ybJ-Zl-kkY" kind="modal" identifier="sgHome" modalTransitionStyle="crossDissolve" id="46i-jl-V0Q"/>
                     </connections>
                 </viewController>

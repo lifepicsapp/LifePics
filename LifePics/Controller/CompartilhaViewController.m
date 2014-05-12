@@ -23,19 +23,20 @@
     // Do any additional setup after loading the view.
     if (self.onlyShare)
     {
-        self.navigationItem.title = @"Compartilhar";
+        self.navigationItem.title = NSLocalizedString(@"tit_compartilhar", nil);
     }
     else
     {
-        self.navigationItem.title = @"Salvar";
+        self.navigationItem.title = NSLocalizedString(@"tit_salvar", nil);
     }
     self.imgFoto.image = self.imagem;
     self.lblLegenda.text = self.moldura.legenda;
     
     self.arrSocial = [NSMutableArray arrayWithObjects:
-                      [Social social:@"facebook"],
-                      [Social social:@"twitter"],
-//                      [Social social:@"instagram"],
+//                      [Social socialNome:@"lifepics" option:FotoBarOptionLifePics],
+                      [Social socialNome:@"facebook" option:FotoBarOptionFacebook],
+                      [Social socialNome:@"twitter" option:FotoBarOptionTwitter],
+//                      [Social socialNome:@"instagram" option:FotoBarOptionInstagram],
                       nil];
 }
 
@@ -52,8 +53,8 @@
     [AppUtil logadoSucesso];
     [self.collectionView reloadData];
     UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle: @"Parabéns!"
-                          message: @"Agora você já pode compartilhar os melhores momentos da sua vida"
+                          initWithTitle: NSLocalizedString(@"msg_bem_vindo", nil)
+                          message: NSLocalizedString(@"msg_momentos", nil)
                           delegate: nil
                           cancelButtonTitle:@"OK"
                           otherButtonTitles: nil];
@@ -71,12 +72,7 @@
             SocialView* cell = (SocialView *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
             if (cell.swtAtivo.on)
             {
-                if (i==0)
-                    [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionFacebook]];
-                else if (i==1)
-                    [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionTwitter]];
-                else
-                    [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionInstagram]];
+                [arrOptions addObject:[NSNumber numberWithInt:cell.social.option]];
             }
         }
         
@@ -85,8 +81,8 @@
             if (!arrOptions.count)
             {
                 UIAlertView *alert = [[UIAlertView alloc]
-                                      initWithTitle: @"Verificar"
-                                      message: @"Selecione um meio de compartilhamento!"
+                                      initWithTitle: NSLocalizedString(@"msg_verificar", nil)
+                                      message: NSLocalizedString(@"msg_selecione", nil)
                                       delegate: nil
                                       cancelButtonTitle:@"OK"
                                       otherButtonTitles:nil];
@@ -121,7 +117,7 @@
                 }
                 else
                 {
-                    [self adicionaAviso:@"Erro ao postar foto." delay:0.0];
+                    [self adicionaAviso:NSLocalizedString(@"msg_postar", nil) delay:0.0];
                 }
             }];
         }
@@ -135,11 +131,11 @@
     else
     {
         UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle: @"Atenção"
-                              message: @"Para publicar uma foto é necessário estar logado."
+                              initWithTitle: NSLocalizedString(@"msg_atencao", nil)
+                              message: NSLocalizedString(@"msg_publicar", nil)
                               delegate: self
-                              cancelButtonTitle:@"Cancelar"
-                              otherButtonTitles: @"Logar", nil];
+                              cancelButtonTitle:NSLocalizedString(@"btn_cancelar", nil)
+                              otherButtonTitles: NSLocalizedString(@"btn_logar", nil), nil];
         [alert show];
     }
 }
@@ -188,8 +184,8 @@
             if (!user)
             {
                 UIAlertView *alert = [[UIAlertView alloc]
-                                      initWithTitle: @"Erro"
-                                      message: @"Não foi possível efetuar o login."
+                                      initWithTitle: NSLocalizedString(@"msg_erro", nil)
+                                      message: NSLocalizedString(@"msg_login", nil)
                                       delegate: nil
                                       cancelButtonTitle:@"OK"
                                       otherButtonTitles: nil];

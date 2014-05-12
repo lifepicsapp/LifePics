@@ -19,6 +19,7 @@
 typedef enum
 {
     FotoBarOptionUpload,
+    FotoBarOptionLifePics,
     FotoBarOptionFacebook,
     FotoBarOptionTwitter,
     FotoBarOptionInstagram

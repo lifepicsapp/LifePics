@@ -65,7 +65,7 @@
 #pragma mark - Metodos de Classe
 
 - (void)escolheFoto {
-    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:@"Escolher foto" delegate:self cancelButtonTitle:@"Cancelar" destructiveButtonTitle:nil otherButtonTitles:@"Biblioteca", @"Câmera", nil];
+    UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"msg_escolher", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"btn_cancelar", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"btn_biblioteca", nil), NSLocalizedString(@"btn_camera", nil), nil];
     [actionSheet showInView:self.view];
 }
 
@@ -77,11 +77,11 @@
 
 - (IBAction)remove:(UIBarButtonItem *)sender {
     UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle: @"Atenção"
-                          message: @"Deseja realmente deletar essa imagem?"
+                          initWithTitle: NSLocalizedString(@"msg_atencao", nil)
+                          message: NSLocalizedString(@"msg_deletar", nil)
                           delegate: self
-                          cancelButtonTitle:@"Cancelar"
-                          otherButtonTitles:@"Sim", nil];
+                          cancelButtonTitle:NSLocalizedString(@"btn_cancelar", nil)
+                          otherButtonTitles:NSLocalizedString(@"msg_sim", nil), nil];
     [alert show];
 }
 
@@ -106,8 +106,8 @@
                 [((HomeViewController*)self.navigationController.viewControllers[0]) carrega:0.0];
                 [self.navigationController popViewControllerAnimated:YES];
                 UIAlertView *alert = [[UIAlertView alloc]
-                                      initWithTitle: @"Sucesso"
-                                      message: @"Foto removida com sucesso!"
+                                      initWithTitle: NSLocalizedString(@"msg_sucesso", nil)
+                                      message: NSLocalizedString(@"msg_deletada", nil)
                                       delegate: nil
                                       cancelButtonTitle:@"OK"
                                       otherButtonTitles:nil];
@@ -198,7 +198,7 @@
 -(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error) {
-        [self adicionaAviso:@"Erro ao salvar imagem no Albúm." delay:0.0];
+        [self adicionaAviso:NSLocalizedString(@"msg_album", nil) delay:0.0];
     }
 }
 
