@@ -14,9 +14,6 @@
 @property (retain) NSString* titulo;
 @property (retain) NSString* legenda;
 
-@property (retain) PFObject* tema;
-@property (retain) PFObject* frase;
-
 + (NSString *)parseClassName;
 
 @end

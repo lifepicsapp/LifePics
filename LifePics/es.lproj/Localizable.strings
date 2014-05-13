@@ -5,59 +5,58 @@
   Created by Gabriel Moraes on 11/05/14.
   Copyright (c) 2014 Gabriel Moraes. All rights reserved.
 */
-/*
+
 //Login
 
-"msg_erro" = "Erro";
-"msg_login" = "Não foi possível efetuar o login.";
-"btn_facebook" = "Entrar com o Facebook";
-"btn_cadastrar" = "Cadastrar mais tarde";
+"msg_erro" = "Error";
+"msg_login" = "No fue possible hacer el login.";
+"btn_facebook" = "  Ingresar con Facebook";
+"btn_cadastrar" = "Registrar más tarde";
 
 //Inicio
 
-"msg_atencao" = "Atenção";
-"msg_sair" = "Deseja realmente sair?";
-"msg_sim" = "Sim";
-"msg_salvando" = "Salvando foto...";
-"msg_lifepics" = "Compartilhando em LifePics...";
-"msg_facebook" = "Compartilhando Facebook...";
-"msg_twitter" = "Compartilhando Twitter...";
+"msg_atencao" = "Atención";
+"msg_sair" = "Quieres realmente salir?";
+"msg_sim" = "Sí";
+"msg_salvando" = "Guardando foto...";
+"msg_lifepics" = "Compartiendo en LifePics...";
+"msg_facebook" = "Compartiendo en el Facebook...";
+"msg_twitter" = "Compartiendo en el Twitter...";
 "msg_fim" = "Finalizado!";
 
 //Foto
 
-"msg_sucesso" = "Sucesso";
-"msg_deletar" = "Deseja realmente deletar essa imagem?";
-"msg_escolher" = "Escolher foto";
-"msg_deletada" = "Foto removida com sucesso!";
-"msg_album" = "Erro ao salvar imagem no Albúm.";
+"msg_sucesso" = "Éxito";
+"msg_deletar" = "Quieres realmente borrar esa imagen?";
+"msg_escolher" = "Elegir foto";
+"msg_deletada" = "Foto eliminada con ėxito!";
+"msg_album" = "Error al guardar imagen en el Albúm.";
 "btn_biblioteca" = "Biblioteca";
-"btn_camera" = "Câmera";
+"btn_camera" = "Cámara";
 "btn_cancelar" = "Cancelar";
 
 //Salvar/Compartilhar
 
-"tit_compartilhar" = "Compartilhar";
-"tit_salvar" = "Salvar";
-"msg_verificar" = "Verificar";
-"msg_selecione" = "Selecione um meio de compartilhamento.";
-"msg_publicar" = "Para publicar uma foto é necessário estar logado.";
-"msg_bem_vindo" = "Bem-vindo!";
-"msg_momentos" = "Agora você já pode compartilhar os melhores momentos da sua vida.";
-"msg_postar" = "Erro ao postar foto.";
-"btn_logar" = "Logar";
+"tit_compartilhar" = "Compartir";
+"tit_salvar" = "Guardar";
+"msg_verificar" = "Comprobar";
+"msg_selecione" = "Seleccione un medio de compartir.";
+"msg_publicar" = "Para publicar una foto es necesario hacer login.";
+"msg_bem_vindo" = "Bienvenido!";
+"msg_momentos" = "Ahora tu puedes compartir los mejores momentos de su vida.";
+"msg_postar" = "Error al publicar foto.";
+"btn_logar" = "Hacer Login";
 
 //Falhas
 
-"msg_processo" = "Aguarde a conclusão do processo em andamento.";
-"msg_salvar" = "Erro ao salvar foto.";
-"msg_subir" = "Erro ao subir foto.";
-"msg_erro_lifepics" = "Erro ao compartilhar em LifePics.";
-"msg_erro_facebook" = "Erro ao compartilhar no Facebook.";
-"msg_erro_twitter" = "Erro ao compartilhar no Twitter.";
-"msg_autorizar_facebook" = "Erro ao autorizar Facebook.";
-"msg_autorizar_twitter" = "Erro ao autorizar Twitter.";
-"msg_moldura" = "Erro ao caregar Molduras.";
-"msg_foto" = "Erro ao baixar Fotos.";
-"msg_foto_moldura" = "Erro ao carregar imagem da Moldura";
-/*
+"msg_processo" = "Espere el final del proceso corriente.";
+"msg_salvar" = "Error al gravar foto.";
+"msg_subir" = "Error al subir foto.";
+"msg_erro_lifepics" = "Error al compartir en LifePics.";
+"msg_erro_facebook" = "Error al compartir con Facebook.";
+"msg_erro_twitter" = "Error al compartir con Twitter.";
+"msg_autorizar_facebook" = "Error al autorizar Facebook.";
+"msg_autorizar_twitter" = "Error al autorizar Twitter.";
+"msg_moldura" = "Error al cargar Marcos.";
+"msg_foto" = "Error al descargar Fotos.";
+"msg_foto_moldura" = "Error al cargar imagen de los Marcos";
