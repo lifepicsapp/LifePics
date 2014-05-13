@@ -34,7 +34,7 @@
     for (NSString* language in [NSLocale preferredLanguages])
     {
         retorno = [object valueForKey:language];
-        if (retorno)
+        if (retorno && ![retorno isEqualToString:@""])
         {
             goto stopLoop;
         }
