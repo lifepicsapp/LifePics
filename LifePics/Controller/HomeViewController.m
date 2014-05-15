@@ -62,6 +62,7 @@
     [AppUtil adicionaLoad:self];
     
     PFQuery* query = [Moldura query];
+    query.cachePolicy = kPFCachePolicyNetworkElseCache;
     [query whereKey:@"tipo" equalTo:@"free"];
     [query includeKey:@"foto"];
     [query includeKey:@"tema"];
@@ -77,6 +78,7 @@
             {
                 [AppUtil adicionaLoad:self];
                 PFQuery* queryFoto = [Foto query];
+                queryFoto.cachePolicy = kPFCachePolicyNetworkElseCache;
                 [queryFoto whereKey:@"usuario" equalTo:[PFUser currentUser]];
                 [queryFoto findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(atualiza:)];

@@ -30,6 +30,7 @@
 "msg_deletar" = "Quieres realmente borrar esa imagen?";
 "msg_escolher" = "Elegir foto";
 "msg_deletada" = "Foto eliminada con ėxito!";
+"msg_erro_deletar" = "Error al eliminar la foto.";
 "msg_album" = "Error al guardar imagen en el Albúm.";
 "btn_biblioteca" = "Biblioteca";
 "btn_camera" = "Cámara";

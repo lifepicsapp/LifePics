@@ -30,6 +30,7 @@
 "msg_deletar" = "Are you sure you want to delete this picture?";
 "msg_escolher" = "Choose picture";
 "msg_deletada" = "Picture removed successfully!";
+"msg_erro_deletar" = "Error while deleting picture.";
 "msg_album" = "Error while saving the picture in the Album.";
 "btn_biblioteca" = "Library";
 "btn_camera" = "Camera";

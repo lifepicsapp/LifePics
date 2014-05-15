@@ -113,6 +113,11 @@
                                       otherButtonTitles:nil];
                 [alert show];
             }
+            else
+            {
+                self.navigationItem.rightBarButtonItem = nil;
+                [self adicionaAviso:NSLocalizedString(@"msg_erro_deletar", nil) delay:0.0];
+            }
         }];
     }
 }
