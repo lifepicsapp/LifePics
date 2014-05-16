@@ -29,8 +29,18 @@
     {
         self.navigationItem.title = NSLocalizedString(@"tit_salvar", nil);
     }
-    self.imgFoto.image = self.imagem;
-    self.lblLegenda.text = self.moldura.legenda;
+    
+    [self.foto.arquivo getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        if (!error)
+        {
+            self.imgFoto.image = [UIImage imageWithData:data];
+        }
+        else
+        {
+            [self adicionaAviso:[NSString stringWithFormat:@"%@ '%@'",NSLocalizedString(@"msg_foto_moldura", nil), self.foto.moldura.titulo] delay:0.0];
+        }
+    }];
+    self.lblLegenda.text = self.foto.moldura.legenda;
     
     self.arrSocial = [NSMutableArray arrayWithObjects:
 //                      [Social socialNome:@"lifepics" option:FotoBarOptionLifePics],
@@ -91,42 +101,14 @@
             }
         }
         else
+        {
             [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionUpload]];
+        }
         
-        if (!self.foto)
-        {
-            [AppUtil adicionaLoad:self];
-            PFQuery* query = [Foto query];
-            [query whereKey:@"moldura" equalTo:self.moldura];
-            [query whereKey:@"usuario" equalTo:[PFUser currentUser]];
-            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                if (!error)
-                {
-                    if (objects.count)
-                    {
-                        self.foto = objects[0];
-                    }
-                    else
-                    {
-                        self.foto = [Foto object];
-                    }
-                    
-                    [((HomeViewController*)self.navigationController.viewControllers[0]) salvaImagem:[AppUtil imageWithImage:self.imagem scaledToSize:CGSizeMake(256, 256)] objeto:self.foto moldura:self.moldura comOpcoes:arrOptions];
-                    
-                    [self.navigationController popToRootViewControllerAnimated:YES];
-                }
-                else
-                {
-                    [self adicionaAviso:NSLocalizedString(@"msg_postar", nil) delay:0.0];
-                }
-            }];
-        }
-        else
-        {
-            [((HomeViewController*)self.navigationController.viewControllers[0]) salvaImagem:[AppUtil imageWithImage:self.imagem scaledToSize:CGSizeMake(256, 256)] objeto:self.foto moldura:self.moldura comOpcoes:arrOptions];
+        HomeViewController* home = (HomeViewController*)self.navigationController.viewControllers[0];
+        [home salvaFoto:self.foto opcoes:arrOptions];
             
-            [self.navigationController popToRootViewControllerAnimated:YES];
-        }
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
     else
     {

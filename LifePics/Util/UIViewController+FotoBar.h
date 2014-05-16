@@ -16,6 +16,6 @@
 @property (nonatomic, strong) FotoView* fotoBar;
 @property (nonatomic, strong) NSArray* options;
 
--(void)salvaImagem:(UIImage*)image objeto:(Foto*)foto moldura:(Moldura*)moldura comOpcoes:(NSArray*)options;
+-(void)salvaFoto:(Foto*)foto opcoes:(NSArray*)options;
 
 @end

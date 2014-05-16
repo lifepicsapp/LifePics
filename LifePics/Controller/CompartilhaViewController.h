@@ -15,8 +15,6 @@
 
 @property (strong, nonatomic) NSMutableArray *arrSocial;
 @property (strong, nonatomic) Foto *foto;
-@property (strong, nonatomic) Moldura *moldura;
-@property (strong, nonatomic) UIImage *imagem;
 @property (assign) BOOL onlyShare;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;

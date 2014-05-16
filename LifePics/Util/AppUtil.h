@@ -13,6 +13,7 @@
 +(NSString*)escapeString:(NSString*)string;
 +(void)removeTextoBotaoVoltar:(UIViewController*)context;
 +(void)adicionaLoad:(UIViewController*)context;
++ (void)adicionaLogo:(UIViewController*)context;
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 + (NSData*) maskImage:(NSData *)imageData withMask:(UIImage *)maskImage;
 + (void)logadoSucesso;

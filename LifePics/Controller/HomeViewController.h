@@ -16,11 +16,10 @@
 @interface HomeViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate,
     UICollectionViewDelegateFlowLayout, UIAlertViewDelegate>
 
+@property (strong, nonatomic) NSMutableDictionary* dictImagens;
 @property (strong, nonatomic) ACAccountStore* accountStore;
 @property (strong, nonatomic) NSArray* arrMolduras;
 @property (strong, nonatomic) NSArray* arrFotos;
-@property (strong, nonatomic) NSMutableDictionary* cacheFotos;
-@property (strong, nonatomic) Moldura *moldura;
 @property (strong, nonatomic) Foto *foto;
 @property (assign) BOOL fotosGrandes;
 @property (assign) BOOL abriuLogado;

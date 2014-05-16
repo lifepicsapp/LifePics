@@ -36,7 +36,7 @@ static char const * const OptionsTagKey = "Options";
     objc_setAssociatedObject(self, OptionsTagKey, newObjectTag, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
--(void)salvaImagem:(UIImage*)image objeto:(Foto*)foto moldura:(Moldura*)moldura comOpcoes:(NSArray*)options
+-(void)salvaFoto:(Foto*)foto opcoes:(NSArray*)options
 {
     if (options)
     {
@@ -58,30 +58,39 @@ static char const * const OptionsTagKey = "Options";
             [alert show];
             return;
         }
-        self.fotoBar.imgFoto.image = image;
-        [self.fotoBar.aiCarregando startAnimating];
-        [self.view addSubview:self.fotoBar];
         
-        NSData* imageData = UIImageJPEGRepresentation(image, 0.0f);
-        NSString* legenda = [NSString stringWithFormat:URL_SHARE, moldura.legenda];
-        
-        if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionUpload]])
-        {
-            [self uploadImage:imageData foto:foto moldura:moldura];
-        }
-        else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionLifePics]])
-        {
-            [self compartilhaLifePics:imageData legenda:legenda];
-        }
-        else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionFacebook]])
-        {
-            [self compartilhaFacebook:imageData legenda:legenda];
-        }
-        else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionTwitter]])
-        {
-            [self compartilhaTwitter:imageData legenda:legenda];
-        }
-        else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionInstagram]]){}
+        [foto.arquivo getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            if (!error)
+            {
+                self.fotoBar.imgFoto.image = [UIImage imageWithData:data];
+                [self.fotoBar.aiCarregando startAnimating];
+                [self.view addSubview:self.fotoBar];
+                
+                NSString* legenda = [NSString stringWithFormat:URL_SHARE, foto.moldura.legenda];
+                
+                if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionUpload]])
+                {
+                    [self uploadImage:data foto:foto moldura:foto.moldura];
+                }
+                else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionLifePics]])
+                {
+                    [self compartilhaLifePics:data legenda:legenda];
+                }
+                else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionFacebook]])
+                {
+                    [self compartilhaFacebook:data legenda:legenda];
+                }
+                else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionTwitter]])
+                {
+                    [self compartilhaTwitter:data legenda:legenda];
+                }
+                else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionInstagram]]){}
+            }
+            else
+            {
+                [self adicionaAviso:[NSString stringWithFormat:@"%@ '%@'",NSLocalizedString(@"msg_foto_moldura", nil), foto.moldura.titulo] delay:0.0];
+            }
+        }];
     }
 }
 
@@ -92,25 +101,18 @@ static char const * const OptionsTagKey = "Options";
     self.fotoBar.lblStatus.text = NSLocalizedString(@"msg_salvando", nil);
     self.fotoBar.pvUpload.hidden = NO;
     
-    PFFile *imageFile = [PFFile fileWithName:[[AppUtil escapeString:moldura.titulo] stringByAppendingString:@".jpg"] data:imageData];
-    
-    [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    [foto.arquivo saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error)
         {
             if (!foto.usuario)
             {
-                foto.arquivo = imageFile;
-                
-                PFUser *user = [PFUser currentUser];
-                
-                foto.ACL = [PFACL ACLWithUser:user];
-                foto.usuario = user;
-                foto.moldura = moldura;
+                foto.usuario = [PFUser currentUser];
             }
             else
-                [((HomeViewController*)self).cacheFotos removeObjectForKey:foto.objectId];
+            {
+                [controller.dictImagens removeObjectForKey:foto.objectId];
+            }
             
-            foto.arquivo = imageFile;
             [foto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error)
                 {

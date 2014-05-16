@@ -15,8 +15,6 @@
 @interface FotoViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) Foto *foto;
-@property (strong, nonatomic) Moldura *moldura;
-@property (strong, nonatomic) UIImage *imagem;
 @property (assign) BOOL newMedia;
 @property (assign) BOOL onlyShare;
 

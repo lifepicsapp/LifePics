@@ -22,16 +22,11 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0,0,112,35)];
-    view.backgroundColor = [UIColor clearColor];
-    UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,112,35)];
-    iv.image = [UIImage imageNamed:@"logo-icon"];
-    [view addSubview:iv];
-    self.navigationItem.titleView = view;
-    
-    self.cacheFotos = [[NSMutableDictionary alloc] init];
-    self.accountStore = [[ACAccountStore alloc] init];
+    [AppUtil adicionaLogo:self];
     [AppUtil removeTextoBotaoVoltar:self];
+    
+    self.dictImagens = [NSMutableDictionary dictionary];
+    self.accountStore = [[ACAccountStore alloc] init];
     
     UINib *nib = [UINib nibWithNibName:@"MolduraViewGrande" bundle: nil];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:@"CellMolduraGrande"];
@@ -49,9 +44,7 @@
 {
     if ([segue.identifier isEqualToString:@"sgFoto"]) {
         FotoViewController* controller = (FotoViewController*)segue.destinationViewController;
-        controller.imagem = [self.cacheFotos objectForKey:self.foto.objectId];
         controller.foto = self.foto;
-        controller.moldura = self.moldura;
     }
 }
 
@@ -64,7 +57,6 @@
     PFQuery* query = [Moldura query];
     query.cachePolicy = kPFCachePolicyNetworkElseCache;
     [query whereKey:@"tipo" equalTo:@"free"];
-    [query includeKey:@"foto"];
     [query includeKey:@"tema"];
     [query includeKey:@"frase"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -73,26 +65,13 @@
         {
             [self removeAviso];
             self.arrMolduras = objects;
-            [self.collectionView reloadData];
             if ([PFUser currentUser])
             {
-                [AppUtil adicionaLoad:self];
-                PFQuery* queryFoto = [Foto query];
-                queryFoto.cachePolicy = kPFCachePolicyNetworkElseCache;
-                [queryFoto whereKey:@"usuario" equalTo:[PFUser currentUser]];
-                [queryFoto findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(atualiza:)];
-                    if (!error)
-                    {
-                        [self removeAviso];
-                        self.arrFotos = objects;
-                        [self.collectionView reloadData];
-                    }
-                    else
-                    {
-                        [self adicionaAviso:NSLocalizedString(@"msg_foto", nil) delay:delay];
-                    }
-                }];
+                [self carregaFotos:delay];
+            }
+            else
+            {
+                [self.collectionView reloadData];
             }
         }
         else
@@ -101,6 +80,31 @@
         }
     }];
 }
+
+- (void)carregaFotos:(float)delay
+{
+    [AppUtil adicionaLoad:self];
+    PFQuery* queryFoto = [Foto query];
+    queryFoto.cachePolicy = kPFCachePolicyNetworkElseCache;
+    [queryFoto whereKey:@"usuario" equalTo:[PFUser currentUser]];
+    [queryFoto includeKey:@"moldura"];
+    [queryFoto includeKey:@"moldura.tema"];
+    [queryFoto includeKey:@"moldura.frase"];
+    [queryFoto findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(atualiza:)];
+        if (!error)
+        {
+            [self removeAviso];
+            self.arrFotos = objects;
+        }
+        else
+        {
+            [self adicionaAviso:NSLocalizedString(@"msg_foto", nil) delay:delay];
+        }
+        [self.collectionView reloadData];
+    }];
+}
+
 #pragma mark - Metodos IBAction
 
 - (IBAction)mudaTamanho:(UIBarButtonItem *)sender {
@@ -132,41 +136,20 @@
     [alert show];
 }
 
-- (IBAction)zeraCache:(UIBarButtonItem *)sender {
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle: @"Atenção"
-                          message: @"Deseja zerar o cache de imagens?"
-                          delegate: self
-                          cancelButtonTitle:@"Cancelar"
-                          otherButtonTitles:@"Sim", nil];
-    [alert show];
-}
-
 #pragma mark - Metodos AlertView Delegate
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if ([alertView.message isEqualToString:NSLocalizedString(@"msg_sair", nil)])
+    if (buttonIndex)
     {
-        if (buttonIndex)
+        [PFUser logOut];
+        if (!self.abriuLogado)
         {
-            [PFUser logOut];
-            if (!self.abriuLogado)
-            {
-                [self dismissViewControllerAnimated:YES completion:nil];
-            }
-            else
-            {
-                [self performSegueWithIdentifier:@"sgLogin" sender:nil];
-            }
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
-    }
-    else
-    {
-        if (buttonIndex)
+        else
         {
-            [self.cacheFotos removeAllObjects];
-            [self.collectionView reloadData];
+            [self performSegueWithIdentifier:@"sgLogin" sender:nil];
         }
     }
 }
@@ -221,17 +204,19 @@
         if ([filteredArray count] > 0)
         {
             Foto* foto = [filteredArray objectAtIndex:0];
-            
-            UIImage* cacheImage = [self.cacheFotos objectForKey:foto.objectId];
-            if (cacheImage) {
-                cell.imgFoto.image = cacheImage;
+
+            UIImage* localImage = [self.dictImagens objectForKey:foto.objectId];
+            if (localImage)
+            {
+                cell.imgFoto.image = localImage;
             }
             else
             {
                 [foto.arquivo getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-                    if (!error) {
+                    if (!error)
+                    {
                         UIImage* image = [UIImage imageWithData:data];
-                        [self.cacheFotos setObject:image forKey:foto.objectId];
+                        [self.dictImagens setObject:image forKey:foto.objectId];
                         cell.imgFoto.image = image;
                     }
                     else
@@ -259,9 +244,9 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.moldura = [self.arrMolduras objectAtIndex:indexPath.item];
+    Moldura* moldura = [self.arrMolduras objectAtIndex:indexPath.item];
     
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"moldura.objectId == %@", self.moldura.objectId];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"moldura.objectId == %@", moldura.objectId];
     NSArray *filteredArray = [self.arrFotos filteredArrayUsingPredicate:predicate];
     
     if ([filteredArray count] > 0)
@@ -270,7 +255,9 @@
     }
     else
     {
-        self.foto = nil;
+        self.foto = [Foto object];
+        self.foto.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
+        self.foto.moldura = moldura;
     }
 
     [self performSegueWithIdentifier:@"sgFoto" sender:nil];

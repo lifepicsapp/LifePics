@@ -26,11 +26,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [AppUtil removeTextoBotaoVoltar:self];
-    self.navigationItem.title = self.moldura.titulo;
-    self.lblLegenda.text = self.moldura.legenda;
-    if (self.imagem)
+    self.navigationItem.title = self.foto.moldura.titulo;
+    self.lblLegenda.text = self.foto.moldura.legenda;
+    if (self.foto.arquivo)
     {
-        self.imgFoto.image = self.imagem;
+        [self.foto.arquivo getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            if (!error)
+            {
+                self.imgFoto.image = [UIImage imageWithData:data];
+            }
+            else
+            {
+                [self adicionaAviso:[NSString stringWithFormat:@"%@ '%@'",NSLocalizedString(@"msg_foto_moldura", nil), self.foto.moldura.titulo] delay:0.0];
+            }
+        }];
     }
     else
     {
@@ -53,8 +62,6 @@
     if ([segue.identifier isEqualToString:@"sgCompartilha"])
     {
         CompartilhaViewController* controller = (CompartilhaViewController*)segue.destinationViewController;
-        controller.moldura = self.moldura;
-        controller.imagem = self.imagem;
         controller.foto = self.foto;
         controller.onlyShare = self.onlyShare;
         self.onlyShare = NO;
@@ -103,7 +110,8 @@
         [AppUtil adicionaLoad:self];
         [self.foto deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {
-                [((HomeViewController*)self.navigationController.viewControllers[0]) carrega:0.0];
+                HomeViewController* home = (HomeViewController*)self.navigationController.viewControllers[0];
+                [home carrega:0.0];
                 [self.navigationController popViewControllerAnimated:YES];
                 UIAlertView *alert = [[UIAlertView alloc]
                                       initWithTitle: NSLocalizedString(@"msg_sucesso", nil)
@@ -176,10 +184,16 @@
             
             if (!canceled)
             {
-                self.imagem = editedImage;
+                UIImage* resizedImage = [AppUtil imageWithImage:editedImage scaledToSize:CGSizeMake(256, 256)];
+                NSData* imageData = UIImageJPEGRepresentation(resizedImage, 0.0f);
+                NSString* imageName = [[AppUtil escapeString:self.foto.moldura.titulo] stringByAppendingString:@".jpg"];
+                
+                self.foto.arquivo = [PFFile fileWithName:imageName data:imageData];
                 
                 if (self.newMedia)
+                {
                     UIImageWriteToSavedPhotosAlbum(editedImage, self, @selector(image:finishedSavingWithError:contextInfo:), nil);
+                }
             }
             
             [picker dismissViewControllerAnimated:YES completion:^{

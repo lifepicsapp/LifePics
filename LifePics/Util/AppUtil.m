@@ -27,6 +27,16 @@
     context.navigationItem.backBarButtonItem=backButton;
 }
 
++ (void)adicionaLogo:(UIViewController*)context
+{
+    UIView* view = [[UIView alloc] initWithFrame:CGRectMake(0,0,112,35)];
+    view.backgroundColor = [UIColor clearColor];
+    UIImageView *iv = [[UIImageView alloc] initWithFrame:CGRectMake(0,0,112,35)];
+    iv.image = [UIImage imageNamed:@"logo-icon"];
+    [view addSubview:iv];
+    context.navigationItem.titleView = view;
+}
+
 + (void)adicionaLoad:(UIViewController*)context
 {
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
