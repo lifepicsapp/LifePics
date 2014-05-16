@@ -70,4 +70,16 @@
     [currentInstallation saveEventually];
 }
 
++(NSString*)idiomaAtual
+{
+    for (NSString* language in [NSLocale preferredLanguages])
+    {
+        if ([@[@"pt", @"en", @"es"] containsObject:language])
+        {
+            return language;
+        }
+    }
+    return nil;
+}
+
 @end

@@ -17,6 +17,7 @@
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
 + (NSData*) maskImage:(NSData *)imageData withMask:(UIImage *)maskImage;
 + (void)logadoSucesso;
++(NSString*)idiomaAtual;
 
 @end
 
