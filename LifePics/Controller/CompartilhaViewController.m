@@ -140,14 +140,7 @@
 {
     SocialView* cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CellSocial" forIndexPath:indexPath];
     cell.social = [self.arrSocial objectAtIndex:indexPath.item];
-    if (![PFUser currentUser])
-    {
-        cell.swtAtivo.enabled = NO;
-    }
-    else
-    {
-        cell.swtAtivo.enabled = YES;
-    }
+    cell.swtAtivo.enabled = [PFUser currentUser] != nil;
     
     return cell;
 }
