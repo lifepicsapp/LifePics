@@ -46,7 +46,7 @@
 "msg_bem_vindo" = "Welcome!";
 "msg_momentos" = "Now you can share the best moments of your life.";
 "msg_postar" = "Error while posting the picture.";
-"msg_legenda" = "Write a caption...";
+"msg_legenda" = "Write a subtitle...";
 "btn_logar" = "Login";
 "btn_concluido" = "Done";
 
