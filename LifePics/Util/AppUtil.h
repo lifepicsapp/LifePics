@@ -15,6 +15,7 @@
 +(void)adicionaLoad:(UIViewController*)context;
 + (void)adicionaLogo:(UIViewController*)context;
 + (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize;
++ (UIImage *)imageWithView:(UIView *)view;
 + (NSData*) maskImage:(NSData *)imageData withMask:(UIImage *)maskImage;
 + (void)logadoSucesso;
 +(NSString*)idiomaAtual;

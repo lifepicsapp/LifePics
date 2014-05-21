@@ -36,11 +36,11 @@ static char const * const OptionsTagKey = "Options";
     objc_setAssociatedObject(self, OptionsTagKey, newObjectTag, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
--(void)salvaFoto:(Foto*)foto opcoes:(NSArray*)options
+-(void)salva:(Foto*)foto compartilha:(NSData*)polaroid opcoes:(NSArray*)options legenda:(NSString*)legenda
 {
     if (options)
     {
-        self.options = options;
+        self.options = [NSMutableArray arrayWithArray:options];
     
         if (!self.fotoBar)
         {
@@ -66,25 +66,14 @@ static char const * const OptionsTagKey = "Options";
                 [self.fotoBar.aiCarregando startAnimating];
                 [self.view addSubview:self.fotoBar];
                 
-                NSString* legenda = [NSString stringWithFormat:URL_SHARE, foto.moldura.legenda];
-                
                 if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionUpload]])
                 {
-                    [self uploadImage:data foto:foto moldura:foto.moldura];
+                    [self uploadImage:polaroid foto:foto moldura:foto.moldura legenda:legenda];
                 }
-                else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionLifePics]])
+                else
                 {
-                    [self compartilhaLifePics:data legenda:legenda];
+                    [self compartilha:polaroid legenda:legenda];
                 }
-                else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionFacebook]])
-                {
-                    [self compartilhaFacebook:data legenda:legenda];
-                }
-                else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionTwitter]])
-                {
-                    [self compartilhaTwitter:data legenda:legenda];
-                }
-                else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionInstagram]]){}
             }
             else
             {
@@ -94,9 +83,33 @@ static char const * const OptionsTagKey = "Options";
     }
 }
 
--(void)uploadImage:(NSData*)imageData foto:(Foto*)foto moldura:(Moldura*)moldura
+-(void)compartilha:(NSData*)data legenda:(NSString*)legenda
 {
-    NSString* legenda = [NSString stringWithFormat:URL_SHARE, moldura.legenda];
+    if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionLifePics]])
+    {
+        [self.options removeObject:[NSNumber numberWithInt:FotoBarOptionLifePics]];
+        [self compartilhaLifePics:data legenda:legenda];
+    }
+    else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionFacebook]])
+    {
+        [self.options removeObject:[NSNumber numberWithInt:FotoBarOptionFacebook]];
+        [self compartilhaFacebook:data legenda:legenda];
+    }
+    else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionTwitter]])
+    {
+        [self.options removeObject:[NSNumber numberWithInt:FotoBarOptionTwitter]];
+        [self compartilhaTwitter:data legenda:legenda];
+    }
+    else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionInstagram]])
+    {}
+    else
+    {
+        [self finalizaOk];
+    }
+}
+
+-(void)uploadImage:(NSData*)imageData foto:(Foto*)foto moldura:(Moldura*)moldura legenda:(NSString*)legenda
+{
     HomeViewController* controller = ((HomeViewController*)self);
     self.fotoBar.lblStatus.text = NSLocalizedString(@"msg_salvando", nil);
     self.fotoBar.pvUpload.hidden = NO;
@@ -116,23 +129,7 @@ static char const * const OptionsTagKey = "Options";
             [foto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (!error)
                 {
-                    if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionLifePics]])
-                    {
-                        [self compartilhaLifePics:imageData legenda:legenda];
-                    }
-                    else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionFacebook]])
-                    {
-                        [self compartilhaFacebook:imageData legenda:legenda];
-                    }
-                    else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionTwitter]])
-                    {
-                        [self compartilhaTwitter:imageData legenda:legenda];
-                    }
-                    else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionInstagram]]){}
-                    else
-                    {
-                        [self finalizaOk];
-                    }
+                    [self compartilha:imageData legenda:legenda];
                 }
                 else
                 {
@@ -156,7 +153,6 @@ static char const * const OptionsTagKey = "Options";
 
 - (void)compartilhaLifePics:(NSData*)imageData legenda:(NSString*)legenda
 {
-    imageData = [AppUtil maskImage:imageData withMask:[UIImage imageNamed:@"logo-marca"]];
     HomeViewController* controller = ((HomeViewController*)self);
     self.fotoBar.lblStatus.text = NSLocalizedString(@"msg_lifepics", nil);
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
@@ -166,19 +162,7 @@ static char const * const OptionsTagKey = "Options";
     [FBRequestConnection startWithGraphPath:@"/518721901572885/feed" parameters:params HTTPMethod:@"POST" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if (!error)
         {
-            if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionFacebook]])
-            {
-                [self compartilhaFacebook:imageData legenda:legenda];
-            }
-            else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionTwitter]])
-            {
-                [self compartilhaTwitter:imageData legenda:legenda];
-            }
-            else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionInstagram]]){}
-            else
-            {
-                [self finalizaOk];
-            }
+            [self compartilha:imageData legenda:legenda];
         }
         else
         {
@@ -190,7 +174,6 @@ static char const * const OptionsTagKey = "Options";
 
 - (void)compartilhaFacebook:(NSData*)imageData legenda:(NSString*)legenda
 {
-    imageData = [AppUtil maskImage:imageData withMask:[UIImage imageNamed:@"logo-marca"]];
     HomeViewController* controller = ((HomeViewController*)self);
     self.fotoBar.lblStatus.text = NSLocalizedString(@"msg_facebook", nil);
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
@@ -200,15 +183,7 @@ static char const * const OptionsTagKey = "Options";
     [FBRequestConnection startWithGraphPath:@"me/photos" parameters:params HTTPMethod:@"POST" completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if (!error)
         {
-            if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionTwitter]])
-            {
-                [self compartilhaTwitter:imageData legenda:legenda];
-            }
-            else if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionInstagram]]){}
-            else
-            {
-                [self finalizaOk];
-            }
+            [self compartilha:imageData legenda:legenda];
         }
         else
         {
@@ -220,7 +195,6 @@ static char const * const OptionsTagKey = "Options";
 
 -(void)compartilhaTwitter:(NSData*)imageData legenda:(NSString*)legenda
 {
-    imageData = [AppUtil maskImage:imageData withMask:[UIImage imageNamed:@"logo-marca"]];
     self.fotoBar.lblStatus.text = NSLocalizedString(@"msg_twitter", nil);
     
     HomeViewController* controller = ((HomeViewController*)self);

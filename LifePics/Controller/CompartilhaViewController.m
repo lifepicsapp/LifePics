@@ -10,6 +10,7 @@
 #import "HomeViewController.h"
 #import "AppUtil.h"
 #import "SocialView.h"
+#import "UITextField+MaxLength.h"
 
 @interface CompartilhaViewController ()
 
@@ -71,24 +72,44 @@
     [alert show];
 }
 
+-(void)enviaComLegenda:(NSString*)legenda
+{
+    HomeViewController* home = (HomeViewController*)self.navigationController.viewControllers[0];
+    [home salva:self.foto compartilha:UIImageJPEGRepresentation([AppUtil imageWithView:self.vwCompartilha], 1.0f) opcoes:self.arrOptions legenda:legenda];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void)alertaLegenda {
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:NSLocalizedString(@"msg_legenda", nil)
+                          message:nil
+                          delegate: self
+                          cancelButtonTitle:NSLocalizedString(@"btn_cancelar", nil)
+                          otherButtonTitles:NSLocalizedString(@"btn_concluido", nil), nil];
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    [alert textFieldAtIndex:0].maxLength = [NSNumber numberWithInt:90];
+    [alert show];
+}
+
 #pragma mark - Metodos IBAction
 
 - (IBAction)finaliza:(UIBarButtonItem *)sender {
     if ([PFUser currentUser])
     {
-        NSMutableArray* arrOptions = [NSMutableArray array];
+        self.arrOptions = [NSMutableArray array];
         
         for (int i = 0; i < self.arrSocial.count; i++) {
             SocialView* cell = (SocialView *)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:i inSection:0]];
             if (cell.swtAtivo.on)
             {
-                [arrOptions addObject:[NSNumber numberWithInt:cell.social.option]];
+                [self.arrOptions addObject:[NSNumber numberWithInt:cell.social.option]];
             }
         }
         
         if (self.onlyShare)
         {
-            if (!arrOptions.count)
+            if (!self.arrOptions.count)
             {
                 UIAlertView *alert = [[UIAlertView alloc]
                                       initWithTitle: NSLocalizedString(@"msg_verificar", nil)
@@ -102,13 +123,21 @@
         }
         else
         {
-            [arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionUpload]];
+            [self.arrOptions addObject:[NSNumber numberWithInt:FotoBarOptionUpload]];
         }
         
-        HomeViewController* home = (HomeViewController*)self.navigationController.viewControllers[0];
-        [home salvaFoto:self.foto opcoes:arrOptions];
-            
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        if (self.arrOptions.count > 1)
+        {
+            [self alertaLegenda];
+        }
+        else if(![self.arrOptions containsObject:FotoBarOptionUpload])
+        {
+            [self alertaLegenda];
+        }
+        else
+        {
+            [self enviaComLegenda:nil];
+        }
     }
     else
     {
@@ -126,7 +155,7 @@
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(collectionView.frame.size.width, collectionView.frame.size.height/self.arrSocial.count);
+    return CGSizeMake(collectionView.frame.size.width/self.arrSocial.count, collectionView.frame.size.height);
 }
 
 #pragma mark - Metodos CollectionView Datasource
@@ -151,26 +180,34 @@
 {
     if (buttonIndex)
     {
-        [AppUtil adicionaLoad:self];
-        self.btnFinaliza.enabled = NO;
-        [PFFacebookUtils logInWithPermissions:@[@"publish_actions"] block:^(PFUser *user, NSError *error) {
-            self.btnFinaliza.enabled = YES;
-            self.navigationItem.rightBarButtonItem = nil;
-            if (!user)
-            {
-                UIAlertView *alert = [[UIAlertView alloc]
-                                      initWithTitle: NSLocalizedString(@"msg_erro", nil)
-                                      message: NSLocalizedString(@"msg_login", nil)
-                                      delegate: nil
-                                      cancelButtonTitle:@"OK"
-                                      otherButtonTitles: nil];
-                [alert show];
-            }
-            else
-            {
-                [self usuarioLogou];
-            }
-        }];
+        if (alertView.alertViewStyle == UIAlertViewStylePlainTextInput)
+        {
+            UITextField* txtComentario = [alertView textFieldAtIndex:0];
+            [self enviaComLegenda:[NSString stringWithFormat:URL_SHARE, txtComentario.text]];
+        }
+        else
+        {
+            [AppUtil adicionaLoad:self];
+            self.btnFinaliza.enabled = NO;
+            [PFFacebookUtils logInWithPermissions:@[@"publish_actions"] block:^(PFUser *user, NSError *error) {
+                self.btnFinaliza.enabled = YES;
+                self.navigationItem.rightBarButtonItem = nil;
+                if (!user)
+                {
+                    UIAlertView *alert = [[UIAlertView alloc]
+                                          initWithTitle: NSLocalizedString(@"msg_erro", nil)
+                                          message: NSLocalizedString(@"msg_login", nil)
+                                          delegate: nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles: nil];
+                    [alert show];
+                }
+                else
+                {
+                    [self usuarioLogou];
+                }
+            }];
+        }
     }
 }
 

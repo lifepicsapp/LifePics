@@ -46,7 +46,9 @@
 "msg_bem_vindo" = "Bienvenido!";
 "msg_momentos" = "Ahora tu puedes compartir los mejores momentos de su vida.";
 "msg_postar" = "Error al publicar foto.";
+"msg_legenda" = "Escribe una leyenda...";
 "btn_logar" = "Hacer Login";
+"btn_concluido" = "Terminado";
 
 //Falhas
 

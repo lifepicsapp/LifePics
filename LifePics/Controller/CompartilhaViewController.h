@@ -14,6 +14,7 @@
 @interface CompartilhaViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIAlertViewDelegate>
 
 @property (strong, nonatomic) NSMutableArray *arrSocial;
+@property (strong, nonatomic) NSMutableArray *arrOptions;
 @property (strong, nonatomic) Foto *foto;
 @property (assign) BOOL onlyShare;
 
@@ -21,5 +22,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imgFoto;
 @property (weak, nonatomic) IBOutlet UILabel *lblLegenda;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnFinaliza;
+@property (weak, nonatomic) IBOutlet UIView *vwCompartilha;
 
 @end

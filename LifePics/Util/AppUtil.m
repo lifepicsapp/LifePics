@@ -53,6 +53,18 @@
     return newImage;
 }
 
++ (UIImage *)imageWithView:(UIView *)view
+{
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 0.0);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    
+    UIImage * img = UIGraphicsGetImageFromCurrentImageContext();
+    
+    UIGraphicsEndImageContext();
+    
+    return img;
+}
+
 + (NSData*) maskImage:(NSData *)imageData withMask:(UIImage *)maskImage {
     UIImage* image = [UIImage imageWithData:imageData];
     UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0);
@@ -60,7 +72,7 @@
     [maskImage drawInRect:CGRectMake(image.size.width - maskImage.size.width, image.size.height - maskImage.size.height, maskImage.size.width, maskImage.size.height)];
     UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    return UIImageJPEGRepresentation(result, 0.0f);
+    return UIImageJPEGRepresentation(result, 1);
 }
 
 + (void)logadoSucesso

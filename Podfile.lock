@@ -3,17 +3,20 @@ PODS:
   - Facebook-iOS-SDK (3.14.1):
     - Bolts
   - ios-image-editor (1.1.3)
+  - M6MaxLength (0.0.1)
   - Parse-iOS-SDK (1.2.19):
     - Facebook-iOS-SDK (~> 3.7)
 
 DEPENDENCIES:
   - ios-image-editor
+  - M6MaxLength
   - Parse-iOS-SDK
 
 SPEC CHECKSUMS:
   Bolts: 91c2af8eae1d44e1dd75946a5b0ae04a43ea43e4
   Facebook-iOS-SDK: e9b3d5ac54ee3e5e693f4eef470b97911b3d076d
   ios-image-editor: 7d2abb5ff6340be783a9744ec65ddcbfbfd8672a
+  M6MaxLength: 0216d51de58b6bd46807fbf1fe43f50231c10669
   Parse-iOS-SDK: 5e1f7e649a02f1cc19e73cc95bd43d7778848314
 
-COCOAPODS: 0.33.0
+COCOAPODS: 0.33.1

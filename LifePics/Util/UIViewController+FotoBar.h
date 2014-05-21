@@ -14,8 +14,8 @@
 @interface UIViewController (FotoBar)
 
 @property (nonatomic, strong) FotoView* fotoBar;
-@property (nonatomic, strong) NSArray* options;
+@property (nonatomic, strong) NSMutableArray* options;
 
--(void)salvaFoto:(Foto*)foto opcoes:(NSArray*)options;
+-(void)salva:(Foto*)foto compartilha:(NSData*)polaroid opcoes:(NSArray*)options legenda:(NSString*)legenda;
 
 @end
