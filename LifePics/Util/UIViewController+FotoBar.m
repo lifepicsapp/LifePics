@@ -123,7 +123,7 @@ static char const * const OptionsTagKey = "Options";
             }
             else
             {
-                [controller.dictImagens removeObjectForKey:foto.objectId];
+                [controller.contextCache removeObjectForKey:foto.objectId];
             }
             
             [foto saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

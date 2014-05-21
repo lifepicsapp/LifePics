@@ -25,7 +25,7 @@
     [AppUtil adicionaLogo:self];
     [AppUtil removeTextoBotaoVoltar:self];
     
-    self.dictImagens = [NSMutableDictionary dictionary];
+    self.contextCache = [[NSCache alloc] init];
     self.accountStore = [[ACAccountStore alloc] init];
     
     UINib *nib = [UINib nibWithNibName:@"MolduraViewGrande" bundle: nil];
@@ -205,7 +205,7 @@
         {
             Foto* foto = [filteredArray objectAtIndex:0];
 
-            UIImage* localImage = [self.dictImagens objectForKey:foto.objectId];
+            UIImage* localImage = [self.contextCache objectForKey:foto.objectId];
             if (localImage)
             {
                 cell.imgFoto.image = localImage;
@@ -216,7 +216,7 @@
                     if (!error)
                     {
                         UIImage* image = [UIImage imageWithData:data];
-                        [self.dictImagens setObject:image forKey:foto.objectId];
+                        [self.contextCache setObject:image forKey:foto.objectId];
                         cell.imgFoto.image = image;
                     }
                     else

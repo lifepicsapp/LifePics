@@ -16,7 +16,7 @@
 @interface HomeViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate,
     UICollectionViewDelegateFlowLayout, UIAlertViewDelegate>
 
-@property (strong, nonatomic) NSMutableDictionary* dictImagens;
+@property (strong, nonatomic) NSCache* contextCache;
 @property (strong, nonatomic) ACAccountStore* accountStore;
 @property (strong, nonatomic) NSArray* arrMolduras;
 @property (strong, nonatomic) NSArray* arrFotos;
