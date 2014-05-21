@@ -256,7 +256,6 @@
     else
     {
         self.foto = [Foto object];
-        self.foto.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
         self.foto.moldura = moldura;
     }
 

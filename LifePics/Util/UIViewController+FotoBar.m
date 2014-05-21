@@ -120,6 +120,7 @@ static char const * const OptionsTagKey = "Options";
             if (!foto.usuario)
             {
                 foto.usuario = [PFUser currentUser];
+                foto.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
             }
             else
             {
