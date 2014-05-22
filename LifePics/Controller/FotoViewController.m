@@ -25,7 +25,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [AppUtil removeTextoBotaoVoltar:self];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+    {
+        [AppUtil removeTextoBotaoVoltar:self];
+    }
     self.navigationItem.title = self.foto.moldura.titulo;
     self.lblLegenda.text = self.foto.moldura.legenda;
     if (self.foto.arquivo)
@@ -139,7 +142,24 @@
         imagePicker.mediaTypes = @[(NSString *) kUTTypeImage];
         imagePicker.delegate = self;
         imagePicker.allowsEditing = NO;
-        imagePicker.navigationBar.barTintColor = [UIColor colorWithRed:13/255.0 green:145/255.0 blue:133/255.0 alpha:0.9];
+        
+        UIColor* color = [UIColor colorWithRed:13/255.0 green:145/255.0 blue:133/255.0 alpha:0.1];
+        UIColor* colorItems = [UIColor whiteColor];
+        
+        imagePicker.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+                                                  colorItems,NSForegroundColorAttributeName,
+                                                  colorItems,NSBackgroundColorAttributeName,nil];
+        
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
+        {
+            imagePicker.navigationBar.tintColor = color;
+            imagePicker.navigationBar.backgroundColor = colorItems;
+        }
+        else
+        {
+            imagePicker.navigationBar.barTintColor = color;
+            imagePicker.navigationBar.tintColor = colorItems;
+        }
         
         if (buttonIndex == 0)
         {
@@ -161,8 +181,14 @@
     viewController.navigationController.navigationBar.titleTextAttributes = [NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName,
                                     [UIColor whiteColor], NSBackgroundColorAttributeName,
                                                                              nil];
-    
-    viewController.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
+    {
+        viewController.navigationController.navigationBar.backgroundColor = [UIColor colorWithRed:13/255.0 green:145/255.0 blue:133/255.0 alpha:0.1];
+    }
+    else
+    {
+        viewController.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    }
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 

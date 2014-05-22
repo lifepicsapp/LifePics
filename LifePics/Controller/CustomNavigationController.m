@@ -23,10 +23,21 @@
                                               colorItems,NSForegroundColorAttributeName,
                                               colorItems,NSBackgroundColorAttributeName,nil];
     
-    self.navigationBar.barTintColor = color;
-    self.navigationBar.tintColor = colorItems;
-    self.toolbar.barTintColor = color;
-    self.toolbar.tintColor = colorItems;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
+    {
+        self.navigationBar.tintColor = color;
+        self.navigationBar.backgroundColor = colorItems;
+        self.toolbar.tintColor = color;
+        self.toolbar.backgroundColor = colorItems;
+        self.navigationBar.backItem.hidesBackButton = NO;
+    }
+    else
+    {
+        self.navigationBar.barTintColor = color;
+        self.navigationBar.tintColor = colorItems;
+        self.toolbar.barTintColor = color;
+        self.toolbar.tintColor = colorItems;
+    }
 }
 
 - (void)didReceiveMemoryWarning

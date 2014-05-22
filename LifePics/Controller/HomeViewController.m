@@ -23,7 +23,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [AppUtil adicionaLogo:self];
-    [AppUtil removeTextoBotaoVoltar:self];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
+    {
+        [AppUtil removeTextoBotaoVoltar:self];
+    }
     
     self.contextCache = [[NSCache alloc] init];
     self.accountStore = [[ACAccountStore alloc] init];

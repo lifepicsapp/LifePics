@@ -45,7 +45,15 @@ static char const * const OptionsTagKey = "Options";
         if (!self.fotoBar)
         {
             self.fotoBar = [[[NSBundle mainBundle] loadNibNamed:@"FotoView" owner:self options:nil] lastObject];
-            self.fotoBar.frame = CGRectMake(0, self.view.frame.size.height - 88, 320, 44);
+            
+            if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
+            {
+                self.fotoBar.frame = CGRectMake(0, self.view.frame.size.height - 44, 320, 44);
+            }
+            else
+            {
+                self.fotoBar.frame = CGRectMake(0, self.view.frame.size.height - 88, 320, 44);
+            }
         }
         else
         {

@@ -22,9 +22,25 @@
         self.cropRect = CGRectMake(0,0,320,320);
         self.minimumScale = 0.2;
         self.maximumScale = 10;
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
+        {
+            [[UIBarButtonItem appearance] setTintColor:[UIColor blackColor]];
+        }
     }
     return self;
 }
+
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
+    {
+        [[UIBarButtonItem appearance] setTintColor:[UIColor colorWithRed:13/255.0 green:145/255.0 blue:133/255.0 alpha:0.1]];
+    }
+}
+
 
 #pragma mark - Hooks
 

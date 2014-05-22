@@ -30,7 +30,14 @@ static char const * const ObjectTagKey = "BarraAviso";
     {
         self.barraAviso = [[[NSBundle mainBundle] loadNibNamed:@"ConexaoView" owner:self options:nil] lastObject];
         self.barraAviso.alpha = 0.0;
-        self.barraAviso.frame = CGRectMake(0, self.view.frame.size.height - 88, 320, 44);
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
+        {
+            self.barraAviso.frame = CGRectMake(0, self.view.frame.size.height - 44, 320, 44);
+        }
+        else
+        {
+            self.barraAviso.frame = CGRectMake(0, self.view.frame.size.height - 88, 320, 44);
+        }
         [self.view addSubview:self.barraAviso];
         
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTap:)];

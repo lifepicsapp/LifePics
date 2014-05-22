@@ -130,7 +130,7 @@
         {
             [self alertaLegenda];
         }
-        else if(![self.arrOptions containsObject:FotoBarOptionUpload])
+        else if(![self.arrOptions containsObject:[NSNumber numberWithInt:FotoBarOptionUpload]])
         {
             [self alertaLegenda];
         }
