@@ -28,14 +28,14 @@
       "orientation" : "portrait",
       "idiom" : "iphone",
       "extent" : "full-screen",
-      "filename" : "balloons480x-1.png",
+      "filename" : "balloons480x.png",
       "scale" : "2x"
     },
     {
       "orientation" : "portrait",
       "idiom" : "iphone",
       "extent" : "full-screen",
-      "filename" : "balloonsx-1.png",
+      "filename" : "balloonsx.png",
       "subtype" : "retina4",
       "scale" : "2x"
     }
