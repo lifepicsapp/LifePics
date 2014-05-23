@@ -211,7 +211,7 @@
             if (!canceled)
             {
                 UIImage* resizedImage = [AppUtil imageWithImage:editedImage scaledToSize:CGSizeMake(256, 256)];
-                NSData* imageData = UIImageJPEGRepresentation(resizedImage, 0.0f);
+                NSData* imageData = UIImageJPEGRepresentation(resizedImage, 1.0f);
                 NSString* imageName = [[AppUtil escapeString:self.foto.moldura.titulo] stringByAppendingString:@".jpg"];
                 
                 self.foto.arquivo = [PFFile fileWithName:imageName data:imageData];

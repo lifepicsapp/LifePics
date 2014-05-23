@@ -72,7 +72,7 @@
     [maskImage drawInRect:CGRectMake(image.size.width - maskImage.size.width, image.size.height - maskImage.size.height, maskImage.size.width, maskImage.size.height)];
     UIImage *result = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
-    return UIImageJPEGRepresentation(result, 1);
+    return UIImageJPEGRepresentation(result, 1.0f);
 }
 
 + (void)logadoSucesso
