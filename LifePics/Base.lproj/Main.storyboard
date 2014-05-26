@@ -466,7 +466,7 @@
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="ZWI-Vf-WTV">
                         <barButtonItem key="rightBarButtonItem" id="eNs-DT-ZXj">
-                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" id="gx4-UH-vEA">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="gx4-UH-vEA">
                                 <rect key="frame" x="233" y="7" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
