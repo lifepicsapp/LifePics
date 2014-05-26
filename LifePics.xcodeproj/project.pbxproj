@@ -12,6 +12,9 @@
 		AF1696A718FC6DAB0020AE7D /* Foto.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1696A618FC6DAB0020AE7D /* Foto.m */; };
 		AF1696AA18FC6F9A0020AE7D /* Moldura.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1696A918FC6F9A0020AE7D /* Moldura.m */; };
 		AF1696AE18FC96990020AE7D /* MolduraView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1696AD18FC96990020AE7D /* MolduraView.m */; };
+		AF2473451933E47300E0694C /* CustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2473441933E47300E0694C /* CustomTabBarController.m */; };
+		AF2473481933F9A900E0694C /* FavoritosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2473471933F9A900E0694C /* FavoritosViewController.m */; };
+		AF24734B1933F9D300E0694C /* BuscaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF24734A1933F9D300E0694C /* BuscaViewController.m */; };
 		AF292ADB1906C98C000FE080 /* FotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF292ADA1906C98C000FE080 /* FotoView.xib */; };
 		AF292AE11906D7C9000FE080 /* FotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF292AE01906D7C9000FE080 /* FotoView.m */; };
 		AF292AEA1906DB0F000FE080 /* UIViewController+FotoBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AF292AE91906DB0F000FE080 /* UIViewController+FotoBar.m */; };
@@ -50,6 +53,12 @@
 		AF1696A918FC6F9A0020AE7D /* Moldura.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Moldura.m; sourceTree = "<group>"; };
 		AF1696AC18FC96990020AE7D /* MolduraView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MolduraView.h; sourceTree = "<group>"; };
 		AF1696AD18FC96990020AE7D /* MolduraView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MolduraView.m; sourceTree = "<group>"; };
+		AF2473431933E47300E0694C /* CustomTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTabBarController.h; sourceTree = "<group>"; };
+		AF2473441933E47300E0694C /* CustomTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTabBarController.m; sourceTree = "<group>"; };
+		AF2473461933F9A900E0694C /* FavoritosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritosViewController.h; sourceTree = "<group>"; };
+		AF2473471933F9A900E0694C /* FavoritosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritosViewController.m; sourceTree = "<group>"; };
+		AF2473491933F9D300E0694C /* BuscaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuscaViewController.h; sourceTree = "<group>"; };
+		AF24734A1933F9D300E0694C /* BuscaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuscaViewController.m; sourceTree = "<group>"; };
 		AF292ADA1906C98C000FE080 /* FotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FotoView.xib; sourceTree = "<group>"; };
 		AF292ADF1906D7C9000FE080 /* FotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FotoView.h; sourceTree = "<group>"; };
 		AF292AE01906D7C9000FE080 /* FotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FotoView.m; sourceTree = "<group>"; };
@@ -204,6 +213,8 @@
 		AFBE9A7418FB844E0001C35E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				AF2473431933E47300E0694C /* CustomTabBarController.h */,
+				AF2473441933E47300E0694C /* CustomTabBarController.m */,
 				AFDDF3A118FDFDEE00EFC010 /* CustomNavigationController.h */,
 				AFDDF3A218FDFDEE00EFC010 /* CustomNavigationController.m */,
 				AFDDF39518FD85C900EFC010 /* CropViewController.h */,
@@ -216,6 +227,10 @@
 				AFDDF39F18FDE9A500EFC010 /* FotoViewController.m */,
 				AFB4E80F19031D7100AB8D1E /* CompartilhaViewController.h */,
 				AFB4E81019031D7100AB8D1E /* CompartilhaViewController.m */,
+				AF2473461933F9A900E0694C /* FavoritosViewController.h */,
+				AF2473471933F9A900E0694C /* FavoritosViewController.m */,
+				AF2473491933F9D300E0694C /* BuscaViewController.h */,
+				AF24734A1933F9D300E0694C /* BuscaViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -348,10 +363,12 @@
 				AFDDF39B18FDC63D00EFC010 /* AppUtil.m in Sources */,
 				AF1696AA18FC6F9A0020AE7D /* Moldura.m in Sources */,
 				AF1696A718FC6DAB0020AE7D /* Foto.m in Sources */,
+				AF2473451933E47300E0694C /* CustomTabBarController.m in Sources */,
 				AFBE9A5518FB22AC0001C35E /* LoginViewController.m in Sources */,
 				AFDDF39718FD85C900EFC010 /* CropViewController.m in Sources */,
 				AFB4E81119031D7100AB8D1E /* CompartilhaViewController.m in Sources */,
 				AFB4E81A19036EF600AB8D1E /* UIViewController+QuedaConexao.m in Sources */,
+				AF2473481933F9A900E0694C /* FavoritosViewController.m in Sources */,
 				AFDDF3A318FDFDEE00EFC010 /* CustomNavigationController.m in Sources */,
 				AF292AE11906D7C9000FE080 /* FotoView.m in Sources */,
 				AF1696AE18FC96990020AE7D /* MolduraView.m in Sources */,
@@ -362,6 +379,7 @@
 				AFDDF3A018FDE9A500EFC010 /* FotoViewController.m in Sources */,
 				AFB4E8141903297E00AB8D1E /* SocialView.m in Sources */,
 				AF1696A318FC65B90020AE7D /* HomeViewController.m in Sources */,
+				AF24734B1933F9D300E0694C /* BuscaViewController.m in Sources */,
 				AF292AEA1906DB0F000FE080 /* UIViewController+FotoBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -435,7 +453,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "C1FB6E7F-D2A2-455D-8678-ACFACF7D54FD";
+				PROVISIONING_PROFILE = "E975B5F6-17ED-4DC2-9466-22787FE66002";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -469,7 +487,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
-				PROVISIONING_PROFILE = "C1FB6E7F-D2A2-455D-8678-ACFACF7D54FD";
+				PROVISIONING_PROFILE = "E975B5F6-17ED-4DC2-9466-22787FE66002";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -523,7 +541,7 @@
 					Social,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C1FB6E7F-D2A2-455D-8678-ACFACF7D54FD";
+				PROVISIONING_PROFILE = "E975B5F6-17ED-4DC2-9466-22787FE66002";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -576,7 +594,7 @@
 					Social,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "C1FB6E7F-D2A2-455D-8678-ACFACF7D54FD";
+				PROVISIONING_PROFILE = "E975B5F6-17ED-4DC2-9466-22787FE66002";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

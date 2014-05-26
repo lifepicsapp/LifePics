@@ -110,16 +110,8 @@
 
 #pragma mark - Metodos IBAction
 
-- (IBAction)mudaTamanho:(UIBarButtonItem *)sender {
+- (IBAction)mudaTamanho:(UISegmentedControl *)sender {
     self.fotosGrandes = !self.fotosGrandes;
-    if (self.fotosGrandes)
-    {
-        sender.image = [UIImage imageNamed:@"grid"];
-    }
-    else
-    {
-        sender.image = [UIImage imageNamed:@"icon-polaroid"];
-    }
     
     [self.collectionView reloadData];
 }

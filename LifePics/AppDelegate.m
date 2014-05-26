@@ -32,10 +32,10 @@
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])
     {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UINavigationController* navigation = [storyboard instantiateViewControllerWithIdentifier:@"Home"];
-        HomeViewController* controller = (HomeViewController*)navigation.viewControllers[0];
+        UITabBarController* tabBar = [storyboard instantiateViewControllerWithIdentifier:@"Home"];
+        HomeViewController* controller = ((UINavigationController*)tabBar.viewControllers[0]).viewControllers[0];
         controller.abriuLogado = YES;
-        self.window.rootViewController = navigation;
+        self.window.rootViewController = tabBar;
     }
     
     return YES;

@@ -84,6 +84,18 @@
 - (IBAction)sobe:(UIBarButtonItem *)sender {
     [self escolheFoto];
 }
+- (IBAction)pressImage:(UILongPressGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateBegan)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: NSLocalizedString(@"msg_atencao", nil)
+                              message: NSLocalizedString(@"msg_deletar", nil)
+                              delegate: self
+                              cancelButtonTitle:NSLocalizedString(@"btn_cancelar", nil)
+                              otherButtonTitles:NSLocalizedString(@"msg_sim", nil), nil];
+        [alert show];
+    }
+}
 
 - (IBAction)remove:(UIBarButtonItem *)sender {
     UIAlertView *alert = [[UIAlertView alloc]
