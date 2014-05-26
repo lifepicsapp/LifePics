@@ -36,7 +36,7 @@ static char const * const OptionsTagKey = "Options";
     objc_setAssociatedObject(self, OptionsTagKey, newObjectTag, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
--(void)salva:(Foto*)foto compartilha:(NSData*)polaroid opcoes:(NSArray*)options legenda:(NSString*)legenda
+-(void)salva:(Foto*)foto compartilha:(NSData*)imageData opcoes:(NSArray*)options legenda:(NSString*)legenda
 {
     if (options)
     {
@@ -76,11 +76,11 @@ static char const * const OptionsTagKey = "Options";
                 
                 if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionUpload]])
                 {
-                    [self uploadImage:polaroid foto:foto moldura:foto.moldura legenda:legenda];
+                    [self uploadImage:imageData foto:foto moldura:foto.moldura legenda:legenda];
                 }
                 else
                 {
-                    [self compartilha:polaroid legenda:legenda];
+                    [self compartilha:imageData legenda:legenda];
                 }
             }
             else

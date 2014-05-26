@@ -16,6 +16,6 @@
 @property (nonatomic, strong) FotoView* fotoBar;
 @property (nonatomic, strong) NSMutableArray* options;
 
--(void)salva:(Foto*)foto compartilha:(NSData*)polaroid opcoes:(NSArray*)options legenda:(NSString*)legenda;
+-(void)salva:(Foto*)foto compartilha:(NSData*)imageData opcoes:(NSArray*)options legenda:(NSString*)legenda;
 
 @end

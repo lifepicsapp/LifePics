@@ -23,5 +23,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblLegenda;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnFinaliza;
 @property (weak, nonatomic) IBOutlet UIView *vwCompartilha;
+@property (weak, nonatomic) IBOutlet UIImageView *imgPolaroid;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *sgFormato;
 
 @end

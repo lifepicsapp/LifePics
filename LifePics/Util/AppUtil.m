@@ -65,8 +65,7 @@
     return img;
 }
 
-+ (NSData*) maskImage:(NSData *)imageData withMask:(UIImage *)maskImage {
-    UIImage* image = [UIImage imageWithData:imageData];
++ (NSData*) maskImage:(UIImage *)image withMask:(UIImage *)maskImage {
     UIGraphicsBeginImageContextWithOptions(image.size, NO, 0.0);
     [image drawInRect:CGRectMake(0, 0, image.size.width, image.size.height)];
     [maskImage drawInRect:CGRectMake(image.size.width - maskImage.size.width, image.size.height - maskImage.size.height, maskImage.size.width, maskImage.size.height)];

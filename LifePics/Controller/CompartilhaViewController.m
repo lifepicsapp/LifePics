@@ -72,10 +72,31 @@
     [alert show];
 }
 
+- (void)verificaFormato {
+    if (self.sgFormato.selectedSegmentIndex)
+    {
+        [self enviaComLegenda:[NSString stringWithFormat:URL_SHARE, self.foto.moldura.legenda]];
+    }
+    else
+    {
+        [self alertaLegenda];
+    }
+}
+
 -(void)enviaComLegenda:(NSString*)legenda
 {
+    NSData* imageData;
+    if (self.sgFormato.selectedSegmentIndex)
+    {
+        imageData = [AppUtil maskImage:self.imgFoto.image withMask:[UIImage imageNamed:@"logo-icon"]];
+    }
+    else
+    {
+        imageData = UIImageJPEGRepresentation([AppUtil imageWithView:self.vwCompartilha], 1.0f);
+    }
+    
     HomeViewController* home = (HomeViewController*)self.navigationController.viewControllers[0];
-    [home salva:self.foto compartilha:UIImageJPEGRepresentation([AppUtil imageWithView:self.vwCompartilha], 1.0f) opcoes:self.arrOptions legenda:legenda];
+    [home salva:self.foto compartilha:imageData opcoes:self.arrOptions legenda:legenda];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
@@ -93,6 +114,12 @@
 }
 
 #pragma mark - Metodos IBAction
+
+- (IBAction)trocaFormato:(UISegmentedControl *)sender {
+    BOOL isPolaroid = sender.selectedSegmentIndex == 0;
+    self.imgPolaroid.hidden = !isPolaroid;
+    self.lblLegenda.hidden = !isPolaroid;
+}
 
 - (IBAction)finaliza:(UIBarButtonItem *)sender {
     if ([PFUser currentUser])
@@ -128,11 +155,11 @@
         
         if (self.arrOptions.count > 1)
         {
-            [self alertaLegenda];
+            [self verificaFormato];
         }
         else if(![self.arrOptions containsObject:[NSNumber numberWithInt:FotoBarOptionUpload]])
         {
-            [self alertaLegenda];
+            [self verificaFormato];
         }
         else
         {
