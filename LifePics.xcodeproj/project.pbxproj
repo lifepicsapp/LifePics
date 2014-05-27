@@ -15,6 +15,7 @@
 		AF2473451933E47300E0694C /* CustomTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2473441933E47300E0694C /* CustomTabBarController.m */; };
 		AF2473481933F9A900E0694C /* FavoritosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2473471933F9A900E0694C /* FavoritosViewController.m */; };
 		AF24734B1933F9D300E0694C /* BuscaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF24734A1933F9D300E0694C /* BuscaViewController.m */; };
+		AF24734E1935420800E0694C /* CadastroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF24734D1935420800E0694C /* CadastroViewController.m */; };
 		AF292ADB1906C98C000FE080 /* FotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AF292ADA1906C98C000FE080 /* FotoView.xib */; };
 		AF292AE11906D7C9000FE080 /* FotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF292AE01906D7C9000FE080 /* FotoView.m */; };
 		AF292AEA1906DB0F000FE080 /* UIViewController+FotoBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AF292AE91906DB0F000FE080 /* UIViewController+FotoBar.m */; };
@@ -33,6 +34,7 @@
 		AFBE9A5218FB22AC0001C35E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFBE9A5018FB22AC0001C35E /* Main.storyboard */; };
 		AFBE9A5518FB22AC0001C35E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBE9A5418FB22AC0001C35E /* LoginViewController.m */; };
 		AFBE9A5718FB22AC0001C35E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFBE9A5618FB22AC0001C35E /* Images.xcassets */; };
+		AFC7E86619354F5F00124540 /* PerfilView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC7E86519354F5F00124540 /* PerfilView.m */; };
 		AFD25FA9192065CA0075DD88 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFD25FA7192065CA0075DD88 /* Localizable.strings */; };
 		AFDDF39418FD828900EFC010 /* CropView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDDF39318FD828900EFC010 /* CropView.xib */; };
 		AFDDF39718FD85C900EFC010 /* CropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDDF39618FD85C900EFC010 /* CropViewController.m */; };
@@ -59,6 +61,8 @@
 		AF2473471933F9A900E0694C /* FavoritosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritosViewController.m; sourceTree = "<group>"; };
 		AF2473491933F9D300E0694C /* BuscaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuscaViewController.h; sourceTree = "<group>"; };
 		AF24734A1933F9D300E0694C /* BuscaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuscaViewController.m; sourceTree = "<group>"; };
+		AF24734C1935420800E0694C /* CadastroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CadastroViewController.h; sourceTree = "<group>"; };
+		AF24734D1935420800E0694C /* CadastroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CadastroViewController.m; sourceTree = "<group>"; };
 		AF292ADA1906C98C000FE080 /* FotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FotoView.xib; sourceTree = "<group>"; };
 		AF292ADF1906D7C9000FE080 /* FotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FotoView.h; sourceTree = "<group>"; };
 		AF292AE01906D7C9000FE080 /* FotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FotoView.m; sourceTree = "<group>"; };
@@ -89,6 +93,8 @@
 		AFBE9A5418FB22AC0001C35E /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		AFBE9A5618FB22AC0001C35E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AFBE9A7318FB83FA0001C35E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AFC7E86419354F5F00124540 /* PerfilView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerfilView.h; sourceTree = "<group>"; };
+		AFC7E86519354F5F00124540 /* PerfilView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerfilView.m; sourceTree = "<group>"; };
 		AFD25FA8192065CA0075DD88 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AFD25FAA192065D90075DD88 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AFDC76AE1920660F00AD57BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -145,6 +151,8 @@
 				AF292AE01906D7C9000FE080 /* FotoView.m */,
 				AFA090DC1907655D009518FE /* ConexaoView.h */,
 				AFA090DD1907655D009518FE /* ConexaoView.m */,
+				AFC7E86419354F5F00124540 /* PerfilView.h */,
+				AFC7E86519354F5F00124540 /* PerfilView.m */,
 				AFDDF39C18FDE08000EFC010 /* MolduraViewGrande.xib */,
 				AFDDF39318FD828900EFC010 /* CropView.xib */,
 				AF292ADA1906C98C000FE080 /* FotoView.xib */,
@@ -231,6 +239,8 @@
 				AF2473471933F9A900E0694C /* FavoritosViewController.m */,
 				AF2473491933F9D300E0694C /* BuscaViewController.h */,
 				AF24734A1933F9D300E0694C /* BuscaViewController.m */,
+				AF24734C1935420800E0694C /* CadastroViewController.h */,
+				AF24734D1935420800E0694C /* CadastroViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -361,10 +371,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				AFDDF39B18FDC63D00EFC010 /* AppUtil.m in Sources */,
+				AFC7E86619354F5F00124540 /* PerfilView.m in Sources */,
 				AF1696AA18FC6F9A0020AE7D /* Moldura.m in Sources */,
 				AF1696A718FC6DAB0020AE7D /* Foto.m in Sources */,
 				AF2473451933E47300E0694C /* CustomTabBarController.m in Sources */,
 				AFBE9A5518FB22AC0001C35E /* LoginViewController.m in Sources */,
+				AF24734E1935420800E0694C /* CadastroViewController.m in Sources */,
 				AFDDF39718FD85C900EFC010 /* CropViewController.m in Sources */,
 				AFB4E81119031D7100AB8D1E /* CompartilhaViewController.m in Sources */,
 				AFB4E81A19036EF600AB8D1E /* UIViewController+QuedaConexao.m in Sources */,

@@ -19,7 +19,7 @@
     [super viewDidLoad];
     
     UIColor* color = [UIColor colorWithRed:13/255.0 green:145/255.0 blue:133/255.0 alpha:1.0];
-    UIColor* colorItems = [UIColor whiteColor];
+//    UIColor* colorItems = [UIColor whiteColor];
     
     if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0)
     {

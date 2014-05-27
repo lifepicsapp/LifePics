@@ -8,6 +8,7 @@
 
 #import "BuscaViewController.h"
 #import "AppUtil.h"
+#import <Parse/Parse.h>
 
 @interface BuscaViewController ()
 
@@ -24,6 +25,15 @@
     {
         [AppUtil removeTextoBotaoVoltar:self];
     }
+    
+    PFQuery* query = [PFUser query];
+    [query whereKeyExists:@"login"];
+    [query whereKey:@"objectId" notEqualTo:PFUser.currentUser.objectId];
+    query.limit = 8;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        self.arrUsuarios = objects;
+        [self.tableView reloadData];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -32,15 +42,20 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    return self.arrUsuarios.count;
 }
-*/
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"CellUsuario";
+    
+    PFUser *user = [self.arrUsuarios objectAtIndex:indexPath.item];
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    cell.textLabel.text = [user valueForKey:@"login"];
+    return cell;
+}
 
 @end

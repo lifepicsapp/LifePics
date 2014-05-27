@@ -51,8 +51,17 @@
         }
         else
         {
-            [AppUtil logadoSucesso];
-            [self performSegueWithIdentifier:@"sgHome" sender:nil];
+            NSString* login = [[PFUser currentUser] valueForKey:@"login"];
+            if(!login || [login isEqualToString:@""])
+            {
+                [self performSegueWithIdentifier:@"sgCadastro" sender:nil];
+            }
+            else
+            {
+                [AppUtil logadoSucesso];
+                [self performSegueWithIdentifier:@"sgHome" sender:nil];
+            }
+            
         }
     }];
 }

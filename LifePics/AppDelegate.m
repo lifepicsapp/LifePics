@@ -32,10 +32,18 @@
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])
     {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UITabBarController* tabBar = [storyboard instantiateViewControllerWithIdentifier:@"Home"];
-        HomeViewController* controller = ((UINavigationController*)tabBar.viewControllers[0]).viewControllers[0];
-        controller.abriuLogado = YES;
-        self.window.rootViewController = tabBar;
+        NSString* login = [[PFUser currentUser] valueForKey:@"login"];
+        if(!login || [login isEqualToString:@""])
+        {
+            self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"Cadastro"];
+        }
+        else
+        {
+            UITabBarController* tabBar = [storyboard instantiateViewControllerWithIdentifier:@"Home"];
+            HomeViewController* controller = ((UINavigationController*)tabBar.viewControllers[0]).viewControllers[0];
+            controller.abriuLogado = YES;
+            self.window.rootViewController = tabBar;
+        }
     }
     
     return YES;

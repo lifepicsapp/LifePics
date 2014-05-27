@@ -18,11 +18,15 @@
 
 @property (strong, nonatomic) NSCache* contextCache;
 @property (strong, nonatomic) ACAccountStore* accountStore;
-@property (strong, nonatomic) NSArray* arrMolduras;
-@property (strong, nonatomic) NSArray* arrFotos;
+@property (strong, nonatomic) NSMutableArray* arrMolduras;
+@property (strong, nonatomic) NSMutableArray* arrFotos;
+@property (strong, nonatomic) UIRefreshControl* refreshTop;
+@property (strong, nonatomic) UIRefreshControl* refreshBottom;
 @property (strong, nonatomic) Foto *foto;
 @property (assign) BOOL fotosGrandes;
 @property (assign) BOOL abriuLogado;
+@property (assign) BOOL recarrega;
+@property (assign) int qtdAtual;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 

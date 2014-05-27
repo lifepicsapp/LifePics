@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BuscaViewController : UIViewController
+@interface BuscaViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+@property (strong, nonatomic) NSArray* arrUsuarios;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end

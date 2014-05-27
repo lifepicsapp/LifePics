@@ -9,7 +9,9 @@
 #import "HomeViewController.h"
 #import <Parse/Parse.h>
 #import "MolduraView.h"
+#import "PerfilView.h"
 #import "FotoViewController.h"
+#import <CCBottomRefreshControl/UIScrollView+BottomRefreshControl.h>
 #import "AppUtil.h"
 
 @interface HomeViewController ()
@@ -18,10 +20,12 @@
 
 @implementation HomeViewController
 
+const int PAGINACAO = 15;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     [AppUtil adicionaLogo:self];
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
     {
@@ -30,10 +34,22 @@
     
     self.contextCache = [[NSCache alloc] init];
     self.accountStore = [[ACAccountStore alloc] init];
+    self.arrMolduras = [NSMutableArray array];
+    self.arrFotos = [NSMutableArray array];
+    
+    self.refreshTop = [UIRefreshControl new];
+    [self.refreshTop addTarget:self action:@selector(carrega:) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView addSubview:self.refreshTop];
+    
+    self.refreshBottom = [UIRefreshControl new];
+    [self.refreshBottom addTarget:self action:@selector(carregaMais) forControlEvents:UIControlEventValueChanged];
+    self.collectionView.bottomRefreshControl = self.refreshBottom;
     
     UINib *nib = [UINib nibWithNibName:@"MolduraViewGrande" bundle: nil];
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:@"CellMolduraGrande"];
     
+    self.collectionView.contentOffset = CGPointMake(0, -self.refreshTop.frame.size.height);
+    [self.refreshTop beginRefreshing];
     [self carrega:0.0];
 }
 
@@ -53,28 +69,59 @@
 
 #pragma mark - Metodos de Classe
 
+-(void)carregaMais
+{
+    [self carregaMolduras:0.0];
+}
+
 - (void)carrega:(float)delay
 {
-    [AppUtil adicionaLoad:self];
-    
+    self.recarrega = YES;
+    [self carregaMolduras:delay];
+}
+
+- (void)atualizaColecao
+{
+    [self.refreshTop endRefreshing];
+    [self.refreshBottom endRefreshing];
+    [self.collectionView reloadData];
+    if (self.recarrega)
+    {
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:0 inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:NO];
+    }
+    else
+    {
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.arrMolduras.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionNone animated:YES];
+    }
+    self.recarrega = NO;
+}
+
+- (void)carregaMolduras:(float)delay
+{
     PFQuery* query = [Moldura query];
     query.cachePolicy = kPFCachePolicyNetworkElseCache;
+    query.limit = PAGINACAO;
+    query.skip = self.recarrega? 0 : self.arrMolduras.count;
     [query whereKey:@"tipo" equalTo:@"free"];
     [query includeKey:@"tema"];
     [query includeKey:@"frase"];
+    [query orderByAscending:@"createdAt"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(atualiza:)];
         if (!error)
         {
             [self removeAviso];
-            self.arrMolduras = objects;
             if ([PFUser currentUser])
             {
-                [self carregaFotos:delay];
+                [self carregaFotos:delay molduras:objects];
             }
             else
             {
-                [self.collectionView reloadData];
+                if (self.recarrega)
+                {
+                    [self.arrMolduras removeAllObjects];
+                }
+                [self.arrMolduras addObjectsFromArray:objects];
+                [self atualizaColecao];
             }
         }
         else
@@ -84,27 +131,32 @@
     }];
 }
 
-- (void)carregaFotos:(float)delay
+- (void)carregaFotos:(float)delay molduras:(NSArray*)molduras
 {
-    [AppUtil adicionaLoad:self];
     PFQuery* queryFoto = [Foto query];
     queryFoto.cachePolicy = kPFCachePolicyNetworkElseCache;
     [queryFoto whereKey:@"usuario" equalTo:[PFUser currentUser]];
+    [queryFoto whereKey:@"moldura" containedIn:molduras];
     [queryFoto includeKey:@"moldura"];
     [queryFoto includeKey:@"moldura.tema"];
     [queryFoto includeKey:@"moldura.frase"];
     [queryFoto findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(atualiza:)];
         if (!error)
         {
             [self removeAviso];
-            self.arrFotos = objects;
+            if (self.recarrega)
+            {
+                [self.arrMolduras removeAllObjects];
+                [self.arrFotos removeAllObjects];
+            }
+            [self.arrMolduras addObjectsFromArray:molduras];
+            [self.arrFotos addObjectsFromArray:objects];
         }
         else
         {
             [self adicionaAviso:NSLocalizedString(@"msg_foto", nil) delay:delay];
         }
-        [self.collectionView reloadData];
+        [self atualizaColecao];
     }];
 }
 
@@ -114,11 +166,6 @@
     self.fotosGrandes = !self.fotosGrandes;
     
     [self.collectionView reloadData];
-}
-
-- (IBAction)atualiza:(UIBarButtonItem *)sender
-{
-    [self carrega:0.0];
 }
 
 - (IBAction)desloga:(UIBarButtonItem *)sender {
@@ -171,6 +218,19 @@
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return self.arrMolduras.count;
+}
+
+-(UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionReusableView *reusableview = nil;
+    
+    if (kind == UICollectionElementKindSectionHeader) {
+        PerfilView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CellPerfilHeader" forIndexPath:indexPath];
+        headerView.user = PFUser.currentUser;
+        reusableview = headerView;
+    }
+    
+    return reusableview;
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
