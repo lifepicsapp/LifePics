@@ -8,6 +8,8 @@
 
 #import "CadastroViewController.h"
 #import <Parse/Parse.h>
+#import "Usuario.h"
+#import "Foto.h"
 
 @interface CadastroViewController ()
 
@@ -51,10 +53,27 @@
 }
 
 - (IBAction)continua:(UIButton *)sender {
-    PFUser* user = [PFUser currentUser];
-    [user setValue:self.txtLogin.text forKey:@"login"];
-    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        [self performSegueWithIdentifier:@"sgLoginCadastro" sender:nil];
+    Usuario* usuario = [Usuario current];
+    
+    PFQuery* queryFoto = [Foto query];
+    [queryFoto whereKey:@"usuario" equalTo:usuario.user];
+    [queryFoto findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error)
+        {
+            PFACL* ACL = [PFACL ACLWithUser:usuario.user];
+            [ACL setPublicReadAccess:YES];
+            for (Foto* foto in objects)
+            {
+                foto.ACL = ACL;
+            }
+            
+            [PFObject saveAllInBackground:objects block:^(BOOL succeeded, NSError *error) {
+                usuario.login = self.txtLogin.text;
+                [usuario.user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }];
+            }];
+        }
     }];
 }
 

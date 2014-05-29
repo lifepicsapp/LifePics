@@ -8,9 +8,10 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
-#import "HomeViewController.h"
+#import "AlbumViewController.h"
 #import "Foto.h"
 #import "Moldura.h"
+#import "Usuario.h"
 #import "AppUtil.h"
 
 @implementation AppDelegate
@@ -21,6 +22,7 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [Foto registerSubclass];
     [Moldura registerSubclass];
+    
     [Parse setApplicationId:@"Qtku8mihBi4W1RUrlpHfTgpT4tLXcWjQMoCSQctH"
                   clientKey:@"hCakOFPtlsE5Nuo3xd5eW1rKCkyYnKu9c8386VBb"];
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound];
@@ -29,18 +31,19 @@
     
     [PFFacebookUtils initializeFacebook];
     
-    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]])
+    Usuario* usuario = [Usuario current];
+    
+    if (usuario.user && [PFFacebookUtils isLinkedWithUser:usuario.user])
     {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        NSString* login = [[PFUser currentUser] valueForKey:@"login"];
-        if(!login || [login isEqualToString:@""])
+        if(!usuario.login)
         {
             self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"Cadastro"];
         }
         else
         {
             UITabBarController* tabBar = [storyboard instantiateViewControllerWithIdentifier:@"Home"];
-            HomeViewController* controller = ((UINavigationController*)tabBar.viewControllers[0]).viewControllers[0];
+            AlbumViewController* controller = ((UINavigationController*)tabBar.viewControllers[0]).viewControllers[0];
             controller.abriuLogado = YES;
             self.window.rootViewController = tabBar;
         }

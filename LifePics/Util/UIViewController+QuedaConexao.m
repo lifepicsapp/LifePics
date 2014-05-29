@@ -36,7 +36,7 @@ static char const * const ObjectTagKey = "BarraAviso";
         }
         else
         {
-            self.barraAviso.frame = CGRectMake(0, self.view.frame.size.height - 88, 320, 44);
+            self.barraAviso.frame = CGRectMake(0, self.view.frame.size.height - 93, 320, 44);
         }
         [self.view addSubview:self.barraAviso];
         

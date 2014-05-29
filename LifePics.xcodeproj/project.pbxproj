@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		95E6FDD87F684E718961F6A7 /* libPods-LifePics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F33B5ACC9F04B3585BDF564 /* libPods-LifePics.a */; };
-		AF1696A318FC65B90020AE7D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1696A218FC65B90020AE7D /* HomeViewController.m */; };
+		AF1696A318FC65B90020AE7D /* AlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1696A218FC65B90020AE7D /* AlbumViewController.m */; };
 		AF1696A718FC6DAB0020AE7D /* Foto.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1696A618FC6DAB0020AE7D /* Foto.m */; };
 		AF1696AA18FC6F9A0020AE7D /* Moldura.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1696A918FC6F9A0020AE7D /* Moldura.m */; };
 		AF1696AE18FC96990020AE7D /* MolduraView.m in Sources */ = {isa = PBXBuildFile; fileRef = AF1696AD18FC96990020AE7D /* MolduraView.m */; };
@@ -35,6 +35,8 @@
 		AFBE9A5518FB22AC0001C35E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFBE9A5418FB22AC0001C35E /* LoginViewController.m */; };
 		AFBE9A5718FB22AC0001C35E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFBE9A5618FB22AC0001C35E /* Images.xcassets */; };
 		AFC7E86619354F5F00124540 /* PerfilView.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC7E86519354F5F00124540 /* PerfilView.m */; };
+		AFC7E8691936433100124540 /* ConfiguracaoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC7E8681936433100124540 /* ConfiguracaoViewController.m */; };
+		AFC7E86C1936748500124540 /* Usuario.m in Sources */ = {isa = PBXBuildFile; fileRef = AFC7E86B1936748500124540 /* Usuario.m */; };
 		AFD25FA9192065CA0075DD88 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = AFD25FA7192065CA0075DD88 /* Localizable.strings */; };
 		AFDDF39418FD828900EFC010 /* CropView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDDF39318FD828900EFC010 /* CropView.xib */; };
 		AFDDF39718FD85C900EFC010 /* CropViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AFDDF39618FD85C900EFC010 /* CropViewController.m */; };
@@ -47,8 +49,8 @@
 /* Begin PBXFileReference section */
 		4F33B5ACC9F04B3585BDF564 /* libPods-LifePics.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LifePics.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91FED1E67E45434788613BD7 /* Pods-LifePics.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifePics.xcconfig"; path = "Pods/Pods-LifePics.xcconfig"; sourceTree = "<group>"; };
-		AF1696A118FC65B80020AE7D /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
-		AF1696A218FC65B90020AE7D /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		AF1696A118FC65B80020AE7D /* AlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumViewController.h; sourceTree = "<group>"; };
+		AF1696A218FC65B90020AE7D /* AlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumViewController.m; sourceTree = "<group>"; };
 		AF1696A518FC6DAB0020AE7D /* Foto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Foto.h; sourceTree = "<group>"; };
 		AF1696A618FC6DAB0020AE7D /* Foto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Foto.m; sourceTree = "<group>"; };
 		AF1696A818FC6F9A0020AE7D /* Moldura.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Moldura.h; sourceTree = "<group>"; };
@@ -95,6 +97,10 @@
 		AFBE9A7318FB83FA0001C35E /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AFC7E86419354F5F00124540 /* PerfilView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PerfilView.h; sourceTree = "<group>"; };
 		AFC7E86519354F5F00124540 /* PerfilView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PerfilView.m; sourceTree = "<group>"; };
+		AFC7E8671936433100124540 /* ConfiguracaoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfiguracaoViewController.h; sourceTree = "<group>"; };
+		AFC7E8681936433100124540 /* ConfiguracaoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfiguracaoViewController.m; sourceTree = "<group>"; };
+		AFC7E86A1936748500124540 /* Usuario.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Usuario.h; sourceTree = "<group>"; };
+		AFC7E86B1936748500124540 /* Usuario.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Usuario.m; sourceTree = "<group>"; };
 		AFD25FA8192065CA0075DD88 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AFD25FAA192065D90075DD88 /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		AFDC76AE1920660F00AD57BC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -136,6 +142,8 @@
 				AF1696A918FC6F9A0020AE7D /* Moldura.m */,
 				AFB4E81519033CDF00AB8D1E /* Social.h */,
 				AFB4E81619033CDF00AB8D1E /* Social.m */,
+				AFC7E86A1936748500124540 /* Usuario.h */,
+				AFC7E86B1936748500124540 /* Usuario.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -229,8 +237,8 @@
 				AFDDF39618FD85C900EFC010 /* CropViewController.m */,
 				AFBE9A5318FB22AC0001C35E /* LoginViewController.h */,
 				AFBE9A5418FB22AC0001C35E /* LoginViewController.m */,
-				AF1696A118FC65B80020AE7D /* HomeViewController.h */,
-				AF1696A218FC65B90020AE7D /* HomeViewController.m */,
+				AF1696A118FC65B80020AE7D /* AlbumViewController.h */,
+				AF1696A218FC65B90020AE7D /* AlbumViewController.m */,
 				AFDDF39E18FDE9A500EFC010 /* FotoViewController.h */,
 				AFDDF39F18FDE9A500EFC010 /* FotoViewController.m */,
 				AFB4E80F19031D7100AB8D1E /* CompartilhaViewController.h */,
@@ -241,6 +249,8 @@
 				AF24734A1933F9D300E0694C /* BuscaViewController.m */,
 				AF24734C1935420800E0694C /* CadastroViewController.h */,
 				AF24734D1935420800E0694C /* CadastroViewController.m */,
+				AFC7E8671936433100124540 /* ConfiguracaoViewController.h */,
+				AFC7E8681936433100124540 /* ConfiguracaoViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -390,9 +400,11 @@
 				AFBE9A4B18FB22AC0001C35E /* main.m in Sources */,
 				AFDDF3A018FDE9A500EFC010 /* FotoViewController.m in Sources */,
 				AFB4E8141903297E00AB8D1E /* SocialView.m in Sources */,
-				AF1696A318FC65B90020AE7D /* HomeViewController.m in Sources */,
+				AFC7E86C1936748500124540 /* Usuario.m in Sources */,
+				AF1696A318FC65B90020AE7D /* AlbumViewController.m in Sources */,
 				AF24734B1933F9D300E0694C /* BuscaViewController.m in Sources */,
 				AF292AEA1906DB0F000FE080 /* UIViewController+FotoBar.m in Sources */,
+				AFC7E8691936433100124540 /* ConfiguracaoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

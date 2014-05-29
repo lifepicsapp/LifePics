@@ -11,7 +11,7 @@
 #import "MolduraView.h"
 #import "CropViewController.h"
 #import "FotoViewController.h"
-#import "HomeViewController.h"
+#import "AlbumViewController.h"
 #import "CompartilhaViewController.h"
 #import "AppUtil.h"
 
@@ -49,7 +49,6 @@
         NSMutableArray *toolbarButtons = [self.toolbarItems mutableCopy];
         
         [toolbarButtons removeObject:self.btnCompartilhar];
-        [toolbarButtons removeObject:self.btnRemover];
         [self setToolbarItems:toolbarButtons animated:YES];
     }
 }
@@ -76,14 +75,11 @@
 
 - (void)escolheFoto {
     UIActionSheet* actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"msg_escolher", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"btn_cancelar", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"btn_biblioteca", nil), NSLocalizedString(@"btn_camera", nil), nil];
-    [actionSheet showInView:self.view];
+    [actionSheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 #pragma mark - Metodos IBAction
 
-- (IBAction)sobe:(UIBarButtonItem *)sender {
-    [self escolheFoto];
-}
 - (IBAction)pressImage:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan)
     {
@@ -95,16 +91,6 @@
                               otherButtonTitles:NSLocalizedString(@"msg_sim", nil), nil];
         [alert show];
     }
-}
-
-- (IBAction)remove:(UIBarButtonItem *)sender {
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle: NSLocalizedString(@"msg_atencao", nil)
-                          message: NSLocalizedString(@"msg_deletar", nil)
-                          delegate: self
-                          cancelButtonTitle:NSLocalizedString(@"btn_cancelar", nil)
-                          otherButtonTitles:NSLocalizedString(@"msg_sim", nil), nil];
-    [alert show];
 }
 
 - (IBAction)compartilha:(UIBarButtonItem *)sender {
@@ -125,7 +111,7 @@
         [AppUtil adicionaLoad:self];
         [self.foto deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {
-                HomeViewController* home = (HomeViewController*)self.navigationController.viewControllers[0];
+                AlbumViewController* home = (AlbumViewController*)self.navigationController.viewControllers[0];
                 [home carrega:0.0];
                 [self.navigationController popViewControllerAnimated:YES];
                 UIAlertView *alert = [[UIAlertView alloc]

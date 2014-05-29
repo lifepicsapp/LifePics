@@ -8,8 +8,9 @@
 
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
-#import "HomeViewController.h"
+#import "AlbumViewController.h"
 #import "AppUtil.h"
+#import "Usuario.h"
 
 @interface LoginViewController ()
 
@@ -23,6 +24,16 @@
 	// Do any additional setup after loading the view, typically from a nib.
     [self.btnCadastrar setTitle:NSLocalizedString(@"btn_cadastrar", nil) forState:UIControlStateNormal];
     [self.btnFacebook setTitle:NSLocalizedString(@"btn_facebook", nil) forState:UIControlStateNormal];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if ([Usuario current].login)
+    {
+        [self performSegueWithIdentifier:@"sgHomeCadastro" sender:nil];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,8 +62,8 @@
         }
         else
         {
-            NSString* login = [[PFUser currentUser] valueForKey:@"login"];
-            if(!login || [login isEqualToString:@""])
+            Usuario* usuario = [Usuario usuario:user];
+            if(!usuario.login)
             {
                 [self performSegueWithIdentifier:@"sgCadastro" sender:nil];
             }

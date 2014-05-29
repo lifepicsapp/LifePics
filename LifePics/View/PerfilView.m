@@ -10,11 +10,20 @@
 
 @implementation PerfilView
 
--(void)setUser:(PFUser *)user
+-(id)init
 {
-    _user = user;
+    if (self = [super init])
+    {
+        [self.sgTipo setTintColor:[UIColor blackColor]];
+    }
+    return self;
+}
+
+-(void)setUsuario:(Usuario *)usuario
+{
+    _usuario = usuario;
     
-    self.lblNome.text = [NSString stringWithFormat:@"@%@", [_user valueForKey:@"login"]];
+    self.lblNome.text = [NSString stringWithFormat:@"@%@", _usuario.login];
 }
 
 @end

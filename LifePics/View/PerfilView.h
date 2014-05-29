@@ -8,12 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "Usuario.h"
 
 @interface PerfilView : UICollectionReusableView
 
-@property (strong, nonatomic) PFUser *user;
+@property (strong, nonatomic) Usuario *usuario;
 
 @property (weak, nonatomic) IBOutlet UILabel *lblNome;
-
+@property (weak, nonatomic) IBOutlet UISegmentedControl *sgTipo;
 
 @end

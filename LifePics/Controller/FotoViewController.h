@@ -20,7 +20,6 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imgFoto;
 @property (weak, nonatomic) IBOutlet UILabel *lblLegenda;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *btnRemover;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnCompartilhar;
 
 @end

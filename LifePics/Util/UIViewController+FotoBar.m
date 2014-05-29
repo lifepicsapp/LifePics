@@ -7,7 +7,7 @@
 //
 
 #import "UIViewController+FotoBar.h"
-#import "HomeViewController.h"
+#import "AlbumViewController.h"
 #import <objc/runtime.h>
 #import <Accounts/Accounts.h>
 #import <Social/Social.h>
@@ -52,7 +52,7 @@ static char const * const OptionsTagKey = "Options";
             }
             else
             {
-                self.fotoBar.frame = CGRectMake(0, self.view.frame.size.height - 88, 320, 44);
+                self.fotoBar.frame = CGRectMake(0, self.view.frame.size.height - 93, 320, 44);
             }
         }
         else
@@ -118,7 +118,7 @@ static char const * const OptionsTagKey = "Options";
 
 -(void)uploadImage:(NSData*)imageData foto:(Foto*)foto moldura:(Moldura*)moldura legenda:(NSString*)legenda
 {
-    HomeViewController* controller = ((HomeViewController*)self);
+    AlbumViewController* controller = ((AlbumViewController*)self);
     self.fotoBar.lblStatus.text = NSLocalizedString(@"msg_salvando", nil);
     self.fotoBar.pvUpload.hidden = NO;
     
@@ -128,7 +128,9 @@ static char const * const OptionsTagKey = "Options";
             if (!foto.usuario)
             {
                 foto.usuario = [PFUser currentUser];
-                foto.ACL = [PFACL ACLWithUser:[PFUser currentUser]];
+                PFACL* ACL = [PFACL ACLWithUser:[PFUser currentUser]];
+                [ACL setPublicReadAccess:YES];
+                foto.ACL = ACL;
             }
             else
             {
@@ -162,7 +164,7 @@ static char const * const OptionsTagKey = "Options";
 
 - (void)compartilhaLifePics:(NSData*)imageData legenda:(NSString*)legenda
 {
-    HomeViewController* controller = ((HomeViewController*)self);
+    AlbumViewController* controller = ((AlbumViewController*)self);
     self.fotoBar.lblStatus.text = NSLocalizedString(@"msg_lifepics", nil);
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     [params setObject:legenda forKey:@"message"];
@@ -183,7 +185,7 @@ static char const * const OptionsTagKey = "Options";
 
 - (void)compartilhaFacebook:(NSData*)imageData legenda:(NSString*)legenda
 {
-    HomeViewController* controller = ((HomeViewController*)self);
+    AlbumViewController* controller = ((AlbumViewController*)self);
     self.fotoBar.lblStatus.text = NSLocalizedString(@"msg_facebook", nil);
     NSMutableDictionary* params = [[NSMutableDictionary alloc] init];
     [params setObject:legenda forKey:@"message"];
@@ -206,7 +208,7 @@ static char const * const OptionsTagKey = "Options";
 {
     self.fotoBar.lblStatus.text = NSLocalizedString(@"msg_twitter", nil);
     
-    HomeViewController* controller = ((HomeViewController*)self);
+    AlbumViewController* controller = ((AlbumViewController*)self);
     ACAccountType *twitterType = [controller.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
     
     [controller.accountStore requestAccessToAccountsWithType:twitterType options:NULL completion:^(BOOL granted, NSError *error) {
@@ -269,7 +271,7 @@ static char const * const OptionsTagKey = "Options";
     [self removeBar:YES];
     if ([self.options containsObject:[NSNumber numberWithInt:FotoBarOptionUpload]])
     {
-        [((HomeViewController*)self) carrega:1.5];
+        [((AlbumViewController*)self) carrega:1.5];
     }
 }
 

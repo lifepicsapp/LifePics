@@ -1,5 +1,5 @@
 //
-//  HomeViewController.h
+//  AlbumViewController.h
 //  LifePics
 //
 //  Created by Gabriel Moraes on 14/04/14.
@@ -12,9 +12,10 @@
 #import <Accounts/Accounts.h>
 #import "Moldura.h"
 #import "Foto.h"
+#import "Usuario.h"
 
-@interface HomeViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate,
-    UICollectionViewDelegateFlowLayout, UIAlertViewDelegate>
+@interface AlbumViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate,
+    UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) NSCache* contextCache;
 @property (strong, nonatomic) ACAccountStore* accountStore;
@@ -23,6 +24,7 @@
 @property (strong, nonatomic) UIRefreshControl* refreshTop;
 @property (strong, nonatomic) UIRefreshControl* refreshBottom;
 @property (strong, nonatomic) Foto *foto;
+@property (strong, nonatomic) Usuario *usuario;
 @property (assign) BOOL fotosGrandes;
 @property (assign) BOOL abriuLogado;
 @property (assign) BOOL recarrega;

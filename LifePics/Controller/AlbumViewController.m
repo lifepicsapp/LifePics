@@ -1,30 +1,32 @@
 //
-//  HomeViewController.m
+//  AlbumViewController.m
 //  LifePics
 //
 //  Created by Gabriel Moraes on 14/04/14.
 //  Copyright (c) 2014 Gabriel Moraes. All rights reserved.
 //
 
-#import "HomeViewController.h"
+#import "AlbumViewController.h"
 #import <Parse/Parse.h>
 #import "MolduraView.h"
 #import "PerfilView.h"
 #import "FotoViewController.h"
+#import "ConfiguracaoViewController.h"
 #import <CCBottomRefreshControl/UIScrollView+BottomRefreshControl.h>
 #import "AppUtil.h"
 
-@interface HomeViewController ()
-
-@end
-
-@implementation HomeViewController
+@implementation AlbumViewController
 
 const int PAGINACAO = 15;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if (!self.usuario)
+    {
+        self.usuario = [Usuario current];
+    }
     
     [AppUtil adicionaLogo:self];
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
@@ -64,6 +66,11 @@ const int PAGINACAO = 15;
     if ([segue.identifier isEqualToString:@"sgFoto"]) {
         FotoViewController* controller = (FotoViewController*)segue.destinationViewController;
         controller.foto = self.foto;
+    }
+    else
+    {
+        ConfiguracaoViewController* controller = (ConfiguracaoViewController*)segue.destinationViewController;
+        controller.abriuLogado = self.abriuLogado;
     }
 }
 
@@ -110,7 +117,7 @@ const int PAGINACAO = 15;
         if (!error)
         {
             [self removeAviso];
-            if ([PFUser currentUser])
+            if (self.usuario)
             {
                 [self carregaFotos:delay molduras:objects];
             }
@@ -135,7 +142,7 @@ const int PAGINACAO = 15;
 {
     PFQuery* queryFoto = [Foto query];
     queryFoto.cachePolicy = kPFCachePolicyNetworkElseCache;
-    [queryFoto whereKey:@"usuario" equalTo:[PFUser currentUser]];
+    [queryFoto whereKey:@"usuario" equalTo:self.usuario.user];
     [queryFoto whereKey:@"moldura" containedIn:molduras];
     [queryFoto includeKey:@"moldura"];
     [queryFoto includeKey:@"moldura.tema"];
@@ -168,34 +175,6 @@ const int PAGINACAO = 15;
     [self.collectionView reloadData];
 }
 
-- (IBAction)desloga:(UIBarButtonItem *)sender {
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle: NSLocalizedString(@"msg_atencao", nil)
-                          message: NSLocalizedString(@"msg_sair", nil)
-                          delegate: self
-                          cancelButtonTitle:NSLocalizedString(@"btn_cancelar", nil)
-                          otherButtonTitles:NSLocalizedString(@"msg_sim", nil), nil];
-    [alert show];
-}
-
-#pragma mark - Metodos AlertView Delegate
-
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (buttonIndex)
-    {
-        [PFUser logOut];
-        if (!self.abriuLogado)
-        {
-            [self dismissViewControllerAnimated:YES completion:nil];
-        }
-        else
-        {
-            [self performSegueWithIdentifier:@"sgLogin" sender:nil];
-        }
-    }
-}
-
 #pragma mark - Metodos CollectionView FlowLayout
 
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -226,7 +205,7 @@ const int PAGINACAO = 15;
     
     if (kind == UICollectionElementKindSectionHeader) {
         PerfilView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"CellPerfilHeader" forIndexPath:indexPath];
-        headerView.user = PFUser.currentUser;
+        headerView.usuario = self.usuario;
         reusableview = headerView;
     }
     
@@ -299,22 +278,25 @@ const int PAGINACAO = 15;
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    Moldura* moldura = [self.arrMolduras objectAtIndex:indexPath.item];
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"moldura.objectId == %@", moldura.objectId];
-    NSArray *filteredArray = [self.arrFotos filteredArrayUsingPredicate:predicate];
-    
-    if ([filteredArray count] > 0)
+    if (self.usuario.user == [PFUser currentUser])
     {
-        self.foto = [filteredArray objectAtIndex:0];
+        Moldura* moldura = [self.arrMolduras objectAtIndex:indexPath.item];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"moldura.objectId == %@", moldura.objectId];
+        NSArray *filteredArray = [self.arrFotos filteredArrayUsingPredicate:predicate];
+        
+        if ([filteredArray count] > 0)
+        {
+            self.foto = [filteredArray objectAtIndex:0];
+        }
+        else
+        {
+            self.foto = [Foto object];
+            self.foto.moldura = moldura;
+        }
+        
+        [self performSegueWithIdentifier:@"sgFoto" sender:nil];
     }
-    else
-    {
-        self.foto = [Foto object];
-        self.foto.moldura = moldura;
-    }
-
-    [self performSegueWithIdentifier:@"sgFoto" sender:nil];
 }
 
 @end

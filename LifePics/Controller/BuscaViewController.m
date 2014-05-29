@@ -7,6 +7,7 @@
 //
 
 #import "BuscaViewController.h"
+#import "AlbumViewController.h"
 #import "AppUtil.h"
 #import <Parse/Parse.h>
 
@@ -29,7 +30,7 @@
     PFQuery* query = [PFUser query];
     [query whereKeyExists:@"login"];
     [query whereKey:@"objectId" notEqualTo:PFUser.currentUser.objectId];
-    query.limit = 8;
+    query.limit = 10;
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         self.arrUsuarios = objects;
         [self.tableView reloadData];
@@ -42,6 +43,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"sgAlbum"])
+    {
+        AlbumViewController* controller = segue.destinationViewController;
+        controller.usuario = self.usuario;
+    }
+}
+
+#pragma mark - TableView datasource
+
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return @"Usuários recomendados";
+}
+
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.arrUsuarios.count;
@@ -51,11 +68,19 @@
 {
     static NSString *CellIdentifier = @"CellUsuario";
     
-    PFUser *user = [self.arrUsuarios objectAtIndex:indexPath.item];
+    Usuario* usuario = [Usuario usuario:[self.arrUsuarios objectAtIndex:indexPath.item]];
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell.textLabel.text = [user valueForKey:@"login"];
+    cell.textLabel.text = [NSString stringWithFormat:@"@%@", usuario.login];
     return cell;
+}
+
+#pragma mark - TableView delegate
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.usuario = [Usuario usuario:[self.arrUsuarios objectAtIndex:indexPath.item]];
+    [self performSegueWithIdentifier:@"sgAlbum" sender:nil];
 }
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "CompartilhaViewController.h"
-#import "HomeViewController.h"
+#import "AlbumViewController.h"
 #import "AppUtil.h"
 #import "SocialView.h"
 #import "UITextField+MaxLength.h"
@@ -95,7 +95,7 @@
         imageData = UIImageJPEGRepresentation([AppUtil imageWithView:self.vwCompartilha], 1.0f);
     }
     
-    HomeViewController* home = (HomeViewController*)self.navigationController.viewControllers[0];
+    AlbumViewController* home = (AlbumViewController*)self.navigationController.viewControllers[0];
     [home salva:self.foto compartilha:imageData opcoes:self.arrOptions legenda:legenda];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
