@@ -46,10 +46,7 @@
     }
     else
     {
-        NSMutableArray *toolbarButtons = [self.toolbarItems mutableCopy];
-        
-        [toolbarButtons removeObject:self.btnCompartilhar];
-        [self setToolbarItems:toolbarButtons animated:YES];
+        self.btnCompartilhar.enabled = NO;
     }
 }
 
@@ -83,13 +80,16 @@
 - (IBAction)pressImage:(UILongPressGestureRecognizer *)sender {
     if (sender.state == UIGestureRecognizerStateBegan)
     {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle: NSLocalizedString(@"msg_atencao", nil)
-                              message: NSLocalizedString(@"msg_deletar", nil)
-                              delegate: self
-                              cancelButtonTitle:NSLocalizedString(@"btn_cancelar", nil)
-                              otherButtonTitles:NSLocalizedString(@"msg_sim", nil), nil];
-        [alert show];
+        if (self.foto.arquivo)
+        {
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle: NSLocalizedString(@"msg_atencao", nil)
+                                  message: NSLocalizedString(@"msg_deletar", nil)
+                                  delegate: self
+                                  cancelButtonTitle:NSLocalizedString(@"btn_cancelar", nil)
+                                  otherButtonTitles:NSLocalizedString(@"msg_sim", nil), nil];
+            [alert show];
+        }
     }
 }
 
