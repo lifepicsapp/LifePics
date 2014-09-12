@@ -13,8 +13,8 @@
 
 @property (strong, nonatomic) PFUser* user;
 @property (strong, nonatomic) NSString* login;
-@property (strong, nonatomic) NSArray* favoritos;
-@property (strong, nonatomic) NSArray* fans;
+@property (strong, nonatomic) PFRelation* favoritos;
+@property (strong, nonatomic) NSMutableArray* fans;
 
 +(instancetype)usuario:(PFUser*)user;
 +(instancetype)current;

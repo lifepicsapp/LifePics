@@ -26,8 +26,8 @@
 @property (strong, nonatomic) Foto *foto;
 @property (strong, nonatomic) Usuario *usuario;
 @property (assign) BOOL fotosGrandes;
-@property (assign) BOOL abriuLogado;
 @property (assign) BOOL recarrega;
+@property (assign) BOOL seguindo;
 @property (assign) int qtdAtual;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;

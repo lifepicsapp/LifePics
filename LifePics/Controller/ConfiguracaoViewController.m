@@ -18,7 +18,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    NSNumber* parametro = [[NSUserDefaults standardUserDefaults] objectForKey:@"abriuLogado"];
+    self.abriuLogado = parametro.boolValue;
 }
 
 - (void)didReceiveMemoryWarning

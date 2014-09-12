@@ -43,15 +43,6 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"sgAlbum"])
-    {
-        AlbumViewController* controller = segue.destinationViewController;
-        controller.usuario = self.usuario;
-    }
-}
-
 #pragma mark - TableView datasource
 
 -(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -79,8 +70,9 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.usuario = [Usuario usuario:[self.arrUsuarios objectAtIndex:indexPath.item]];
-    [self performSegueWithIdentifier:@"sgAlbum" sender:nil];
+    AlbumViewController* controller = [self.storyboard instantiateViewControllerWithIdentifier:@"Album"];
+    controller.usuario = [Usuario usuario:[self.arrUsuarios objectAtIndex:indexPath.item]];
+    [self.navigationController pushViewController:controller animated:true];
 }
 
 @end

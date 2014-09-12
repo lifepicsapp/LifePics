@@ -34,9 +34,9 @@
     [self.user setObject:login forKey:@"login"];
 }
 
--(NSArray *)favoritos
+-(PFRelation *)favoritos
 {
-    return [self.user objectForKey:@"favoritos"];
+    return [self.user relationForKey:@"favoritos"];
 }
 
 -(void)setFavoritos:(NSArray *)favoritos

@@ -7,6 +7,7 @@
 //
 
 #import "FavoritosViewController.h"
+#import <Parse/Parse.h>
 #import "AppUtil.h"
 
 @interface FavoritosViewController ()
@@ -24,6 +25,15 @@
     {
         [AppUtil removeTextoBotaoVoltar:self];
     }
+    
+    PFQuery* query = [Foto query];
+    [query orderByDescending:@"updatedAt"];
+    query wh
+    [query whereKey:@"favoritos" equalTo:[PFUser currentUser]];
+    query.limit = 10;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        NSLog(@"%@", objects);
+    }];
 }
 
 - (void)didReceiveMemoryWarning

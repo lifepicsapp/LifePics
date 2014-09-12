@@ -26,6 +26,16 @@ const int PAGINACAO = 15;
     if (!self.usuario)
     {
         self.usuario = [Usuario current];
+    } else {
+        PFQuery* query = [[Usuario current].favoritos query];
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (!error) {
+                self.seguindo = [objects containsObject:self.usuario.user];
+            } else {
+                
+            }
+        }];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(favoritaUsuario)];
     }
     
     [AppUtil adicionaLogo:self];
@@ -67,11 +77,6 @@ const int PAGINACAO = 15;
         FotoViewController* controller = (FotoViewController*)segue.destinationViewController;
         controller.foto = self.foto;
     }
-    else
-    {
-        ConfiguracaoViewController* controller = (ConfiguracaoViewController*)segue.destinationViewController;
-        controller.abriuLogado = self.abriuLogado;
-    }
 }
 
 #pragma mark - Metodos de Classe
@@ -85,6 +90,17 @@ const int PAGINACAO = 15;
 {
     self.recarrega = YES;
     [self carregaMolduras:delay];
+}
+
+- (void)favoritaUsuario
+{
+    Usuario* usuario = [Usuario current];
+    if (self.seguindo) {
+        [usuario.favoritos removeObject:self.usuario.user];
+    } else {
+        [usuario.favoritos addObject:self.usuario.user];
+    }
+    [usuario.user saveEventually];
 }
 
 - (void)atualizaColecao

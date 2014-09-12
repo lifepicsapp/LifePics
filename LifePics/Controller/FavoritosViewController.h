@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Foto.h"
 
 @interface FavoritosViewController : UIViewController
 

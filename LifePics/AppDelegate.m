@@ -23,12 +23,10 @@
     [Foto registerSubclass];
     [Moldura registerSubclass];
     
-    [Parse setApplicationId:@"Qtku8mihBi4W1RUrlpHfTgpT4tLXcWjQMoCSQctH"
-                  clientKey:@"hCakOFPtlsE5Nuo3xd5eW1rKCkyYnKu9c8386VBb"];
+    [Parse setApplicationId:@""
+                  clientKey:@""];
     [application registerForRemoteNotificationTypes:UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound];
-    
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-    
     [PFFacebookUtils initializeFacebook];
     
     Usuario* usuario = [Usuario current];
@@ -42,9 +40,9 @@
         }
         else
         {
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:true] forKey:@"abriuLogado"];
+            
             UITabBarController* tabBar = [storyboard instantiateViewControllerWithIdentifier:@"Home"];
-            AlbumViewController* controller = ((UINavigationController*)tabBar.viewControllers[0]).viewControllers[0];
-            controller.abriuLogado = YES;
             self.window.rootViewController = tabBar;
         }
     }

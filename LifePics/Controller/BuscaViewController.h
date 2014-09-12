@@ -11,7 +11,6 @@
 
 @interface BuscaViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (strong, nonatomic) Usuario *usuario;
 @property (strong, nonatomic) NSArray* arrUsuarios;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;

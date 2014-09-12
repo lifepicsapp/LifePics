@@ -12,20 +12,24 @@
 	<dict>
 		<key>A7BB9B58-B7AA-4902-A1CB-04FE488DA4BF</key>
 		<string>https://github.com/lifepicsapp/LifePics.git</string>
+		<key>F28690BBCE0D64EF613843869D403B5907FCA3CD</key>
+		<string>https://github.com/lifepicsapp/LifePics.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>LifePics.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>A7BB9B58-B7AA-4902-A1CB-04FE488DA4BF</key>
+		<string>../../LifePics</string>
+		<key>F28690BBCE0D64EF613843869D403B5907FCA3CD</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/lifepicsapp/LifePics.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>A7BB9B58-B7AA-4902-A1CB-04FE488DA4BF</string>
+	<string>F28690BBCE0D64EF613843869D403B5907FCA3CD</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
@@ -35,6 +39,14 @@
 			<string>A7BB9B58-B7AA-4902-A1CB-04FE488DA4BF</string>
 			<key>IDESourceControlWCCName</key>
 			<string>LifePics</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F28690BBCE0D64EF613843869D403B5907FCA3CD</string>
+			<key>IDESourceControlWCCName</key>
+			<string>lifepics-ios</string>
 		</dict>
 	</array>
 </dict>
